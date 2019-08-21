@@ -1,0 +1,16 @@
+.submenu{
+	height: 0px;
+	position: absolute;
+	overflow: hidden;
+	transition: height .2s;
+	-webkit-transition: height .2s;
+	-moz-transition: height .2s;
+	-o-transition: height .2s;
+}
+.submenu li {
+	display: inline-block;
+}
+
+.topMenuLi:hover .submenu {
+	height: 40px;
+}
