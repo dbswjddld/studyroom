@@ -1,25 +1,26 @@
-<!--  [윤정 190821] datatables를 이용해서 관리자-예약내역 출력하기  -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix='c'%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix='c'%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>study room reservation</title>
 	
-	
+	<!--  [윤정 190821] datatables를 이용해서 관리자-예약내역 출력하기  -->
 	<link rel = "stylesheet" href = "https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 	<script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script src = "https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	
+	
 	<script>
 	$(document).ready(function() {
 	    $('#table').DataTable( {
-	        "ajax": 'AdminReservationList'
+	        "ajax": '../AdminReservationList'
 	    } );
 	} );
 	</script>
-	
 	
 </head>
 <body>
