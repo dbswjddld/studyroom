@@ -1,16 +1,20 @@
-.submenu{
-	height: 0px;
-	position: absolute;
-	overflow: hidden;
-	transition: height .2s;
-	-webkit-transition: height .2s;
-	-moz-transition: height .2s;
-	-o-transition: height .2s;
-}
-.submenu li {
-	display: inline-block;
+.submenu { 
+	list-style : none;
+	display: none; 
+	position: absolute; 
+	z-index: 99; 
+	text-align: center; 
+	background: #fafafa;
 }
 
-.topMenuLi:hover .submenu {
-	height: 40px;
+.submenu > li { 
+	margin: 0px;
+	padding: 0px;
+}
+
+.submenu > li > a { 
+	display: inline-block; 
+	padding: 0px 0px; 
+	color: black; 
+	width: 120px ; 
 }
