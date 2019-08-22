@@ -21,7 +21,10 @@ import co.yedam.studyroom.command.MemberLoginOk;
 import co.yedam.studyroom.command.MyReservation;
 import co.yedam.studyroom.command.MyReservationSearch;
 import co.yedam.studyroom.command.Qna;
+import co.yedam.studyroom.command.QnaDel;
 import co.yedam.studyroom.command.QnaRead;
+import co.yedam.studyroom.command.QnaUpdate;
+import co.yedam.studyroom.command.QnaWrite;
 import co.yedam.studyroom.command.ReservationPage;
 import co.yedam.studyroom.command.ReservationAdmin;
 import co.yedam.studyroom.command.ReservationCancel;
@@ -63,13 +66,23 @@ public class FController extends HttpServlet {
 		map.put("/MemberJoinOk.do", new MemberJoinOk()); //회원가입
 		map.put("/MemberEditLogin.do", new MemberEditLogin()); //회원정보수정 로그인 화면 보내기
 		map.put("/MemberEdit.do", new MemberEdit()); //회원정보수정 페이지 보내기
-		// 동우  //////왜안됨???????????????????????????????? 나도 안됨
+
+		
+		// 동우
 		map.put("/Qna.do",new Qna());	//문의게시판리스트  //20190820 09:46 곽동우
+		map.put("/Qna.do",new Qna());			//문의게시판리스트  //20190820 09:46 곽동우
 		map.put("/QnaRead.do",new QnaRead());	//문의게시판내용  //20190819 17:55 곽동우
+		map.put("/QnaDel.do",new QnaDel());		//문의 게시글 삭제	//0822	곽동우
+		map.put("/QnaUpdate.do",new QnaUpdate());	//문의 게시글 삭제	//0822	곽동우
+		map.put("/QnaWrite.do", new QnaWrite()); //문의 게시글쓰기		//0822 곽동우
+		
+
+		
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");		// 20190822 곽동우
 		String uri = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String path = uri.substring(contextPath.length());
