@@ -1,6 +1,5 @@
 package co.yedam.studyroom.dto;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class BoardDto {

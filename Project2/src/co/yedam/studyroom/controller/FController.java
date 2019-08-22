@@ -1,7 +1,6 @@
 package co.yedam.studyroom.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.ServletConfig;
@@ -20,7 +19,9 @@ import co.yedam.studyroom.command.MemberLoginOk;
 import co.yedam.studyroom.command.MyReservation;
 import co.yedam.studyroom.command.MyReservationSearch;
 import co.yedam.studyroom.command.Qna;
+import co.yedam.studyroom.command.QnaDel;
 import co.yedam.studyroom.command.QnaRead;
+import co.yedam.studyroom.command.QnaUpdate;
 import co.yedam.studyroom.command.ReservationPage;
 import co.yedam.studyroom.command.ReservationAdmin;
 import co.yedam.studyroom.command.ReservationCancel;
@@ -28,7 +29,6 @@ import co.yedam.studyroom.command.ReservationCancelAdmin;
 import co.yedam.studyroom.command.ReservationContents;
 import co.yedam.studyroom.command.ReservationContentsAdmin;
 import co.yedam.studyroom.common.Command;
-import net.sf.json.JSONArray;
 
 @WebServlet("/FController")
 public class FController extends HttpServlet {
@@ -65,6 +65,8 @@ public class FController extends HttpServlet {
 		// 동우 
 		map.put("/Qna.do",new Qna());	//문의게시판리스트  //20190820 09:46 곽동우
 		map.put("/QnaRead.do",new QnaRead());	//문의게시판내용  //20190819 17:55 곽동우
+		map.put("/QnaDel.do",new QnaDel());	//문의 게시글 삭제	//0822	곽동우
+		map.put("/QnaUpdate.do",new QnaUpdate());	//문의 게시글 삭제	//0822	곽동우
 		
 
 		

@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
 
 import co.yedam.studyroom.common.DAO;
 import co.yedam.studyroom.dto.BoardDto;
@@ -51,7 +49,6 @@ public class BoardDao {
 	public BoardDto boardSelect(int bno) {
 		String sql = "select bno, subject, content, id, bdate from board where bno = ?";	//TO_CHAR(TO_DATE(bdate), 'yyyy/mm/dd HH24:mi:ss') as bdate
 		dto = null;
-		SimpleDateFormat sd = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
 		
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -70,6 +67,23 @@ public class BoardDao {
 		}
 		return dto;
 	}	// boardSelect end
+	
+	//0822 문의게시글 삭제 곽동우
+	public int boardDelete(int bno) {
+		int n = 0;
+		String sql = "delete board where bno=?";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, bno);
+			n = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return n;
+	}
+	
+	
 
 //	DB 닫는 메소드
 	public void close() {
