@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import co.yedam.studyroom.common.Command;
 import co.yedam.studyroom.common.HttpRes;
@@ -18,7 +19,11 @@ public class MyReservation implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
 		ReservationDao dao = new ReservationDao();
-		list = dao.myList("asdf"); // 괄호에 아이디!
+		
+		// mid 세션 가져오기
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("mid");
+		list = dao.myList(id);
 		
 		request.setAttribute("list", list);
 
