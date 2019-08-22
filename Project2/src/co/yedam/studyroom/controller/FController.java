@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import co.yedam.studyroom.command.Index;
 import co.yedam.studyroom.command.Logout;
+import co.yedam.studyroom.command.MemberEdit;
+import co.yedam.studyroom.command.MemberEditLogin;
 import co.yedam.studyroom.command.MemberJoin;
 import co.yedam.studyroom.command.MemberJoinOk;
 import co.yedam.studyroom.command.MemberLogin;
@@ -59,8 +61,9 @@ public class FController extends HttpServlet {
 		map.put("/Logout.do", new Logout()); //로그아웃
 		map.put("/MemberJoin.do", new MemberJoin()); //회원가입 화면으로 보내기
 		map.put("/MemberJoinOk.do", new MemberJoinOk()); //회원가입
-	
-		// 동우  //////왜안됨????????????????????????????????
+		map.put("/MemberEditLogin.do", new MemberEditLogin()); //회원정보수정 로그인 화면 보내기
+		map.put("/MemberEdit.do", new MemberEdit()); //회원정보수정 페이지 보내기
+		// 동우  //////왜안됨???????????????????????????????? 나도 안됨
 		map.put("/Qna.do",new Qna());	//문의게시판리스트  //20190820 09:46 곽동우
 		map.put("/QnaRead.do",new QnaRead());	//문의게시판내용  //20190819 17:55 곽동우
 	}
