@@ -1,6 +1,7 @@
 package co.yedam.studyroom.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.ServletConfig;
@@ -27,6 +28,7 @@ import co.yedam.studyroom.command.ReservationCancelAdmin;
 import co.yedam.studyroom.command.ReservationContents;
 import co.yedam.studyroom.command.ReservationContentsAdmin;
 import co.yedam.studyroom.common.Command;
+import net.sf.json.JSONArray;
 
 @WebServlet("/FController")
 public class FController extends HttpServlet {
@@ -60,13 +62,17 @@ public class FController extends HttpServlet {
 		map.put("/MemberJoin.do", new MemberJoin()); //회원가입 화면으로 보내기
 		map.put("/MemberJoinOk.do", new MemberJoinOk()); //회원가입
 	
-		// 동우  //////왜안됨????????????????????????????????
+		// 동우 
 		map.put("/Qna.do",new Qna());	//문의게시판리스트  //20190820 09:46 곽동우
 		map.put("/QnaRead.do",new QnaRead());	//문의게시판내용  //20190819 17:55 곽동우
+		
+
+		
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");		// 20190822 곽동우
 		String uri = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String path = uri.substring(contextPath.length());

@@ -1,6 +1,9 @@
 package co.yedam.studyroom.command;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +13,7 @@ import co.yedam.studyroom.common.Command;
 import co.yedam.studyroom.common.HttpRes;
 import co.yedam.studyroom.dao.BoardDao;
 import co.yedam.studyroom.dto.BoardDto;
+import net.sf.json.JSONArray;
 
 public class QnaRead implements Command {
 	/*
@@ -27,7 +31,10 @@ public class QnaRead implements Command {
 								//여기 게시글에 달린 댓글추가?
 		request.setAttribute("dto", dto);
 		String viewPage = "jsp/qnaread.jsp";
+
 		HttpRes.forward(request, response, viewPage);
+		
+		
 	}
 
 }

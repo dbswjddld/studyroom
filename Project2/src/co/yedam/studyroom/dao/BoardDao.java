@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import co.yedam.studyroom.common.DAO;
@@ -36,7 +38,7 @@ public class BoardDao {
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
 				dto.setId(rs.getString("id"));
-				dto.setBdate(rs.getDate("bdate"));
+				dto.setBdate(rs.getTimestamp("bdate"));
 				list.add(dto);
 			}
 		} catch (Exception e) {
@@ -45,10 +47,12 @@ public class BoardDao {
 		return list;
 	}// boardList end
 	
-	//20190821 10:51 곽동우 // 클릭한 게시글 조회 
+	//20190822 15:36 곽동우 // 클릭한 게시글 조회 
 	public BoardDto boardSelect(int bno) {
-		String sql = "select * from board where bno=?";
+		String sql = "select bno, subject, content, id, bdate from board where bno = ?";	//TO_CHAR(TO_DATE(bdate), 'yyyy/mm/dd HH24:mi:ss') as bdate
 		dto = null;
+		SimpleDateFormat sd = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
+		
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, bno);
@@ -59,7 +63,7 @@ public class BoardDao {
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
 				dto.setId(rs.getString("id"));
-				dto.setBdate(rs.getDate("bdate"));
+				dto.setBdate(rs.getTimestamp("bdate"));//date 넣어야됨
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
