@@ -83,6 +83,8 @@ public class BoardDao {
 		return n;
 	}
 	
+	//0822 문의 게시글 입력
+	
 	
 
 //	DB 닫는 메소드

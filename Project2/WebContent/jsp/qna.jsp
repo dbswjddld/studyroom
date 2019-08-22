@@ -17,14 +17,18 @@
 			form.submit();
 		}
 		
-		function memberCheck(id){
-			if(id != null){
+		function qnaWrite(id){
+			//if(id != null){
 				document.btn.action="QnaWrite.do";
 				document.btn.method="post"; 
+								
+				document.btn.sid.value = "dong";//테스트용 아이디 세션작업되면 "dong" 수정해야함
+				
 				document.btn.submit();
-			}else{
-				alert("로그인 해야합니다")
-			}
+				
+			//}else{
+			//	alert("로그인 해야합니다")
+			//}
 		}
 	</script>
 </head>
@@ -56,8 +60,9 @@
 			<div></div>
 			
 			</form>	<!-- 개선? -->
-			<form name="btn" id="btn" action="">
-				<button type="button" id="wb" name="wb" onclick="memberCheck(${sid })">글쓰기</button>	<!-- sid 는 세션id -->
+			<form name="btn" id="btn">
+				<button type="button" id="wb" name="wb" onclick="qnaWrite(${sid })">글쓰기</button>	<!-- sid 는 세션id -->
+				<input type="hidden" id="sid" name="sid">
 			</form>
 		
 	</div>
