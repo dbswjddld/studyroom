@@ -20,6 +20,7 @@
 		<c:if test = "${mid == null }">
 			<div><h3> 정상적으로 로그아웃 되었습니다.</h3></div>
 		</c:if>
+		asdfasdasf
 	</div>
 </body>
 </html>
