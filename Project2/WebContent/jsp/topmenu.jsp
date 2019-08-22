@@ -34,7 +34,9 @@
             <nav id="topMenu">
                 <ul>
                     <li class="topMenuLi"><a href="ReservationPage.do">예약하기</a></li>
+                    
                     <li class="topMenuLi"><a href="Qna.do">문의게시판</a></li>	<!-- 20190820 16:31 곽동우 -->
+                    
                     <li class="topMenuLi"><a href="#">마이페이지</a>
                     	<ul class = "submenu">
                     		<li><a href = "MyReservation.do">예약 내역</a></li>
@@ -42,7 +44,11 @@
                     		<li><a href = "MemberEditLogin.do">회원 정보 수정</a></li>
                     	</ul>
                     </li>
+                    
                     <li class="topMenuLi"><a href="#">이용안내</a></li>
+                    
+                    <!-- [190822 윤정] 관리자만 관리자메뉴 볼 수 있게-->
+                    <c:if test = "${mgrant == 'A'}">
                     <li class="topMenuLi"><a href="#">관리자메뉴</a>
                     	<ul class = "submenu">
                     		<li><a href = "#">회원 목록</a></li>
@@ -50,10 +56,13 @@
                     		<li><a href = "#">스터디룸 관리</a></li>
                     	</ul>
                     </li>
+                    </c:if>
+                    
                     <c:if test = "${mid == null }">
                     <li class="topMenuLi"><a href="MemberLogin.do">로그인</a></li>
                     <li class="topMenuLi"><a href="Logout.do">회원가입</a></li>
                     </c:if>
+                    
                     <c:if test = "${mid != null }">
                     <li class="topMenuLi"><a href="MemberJoin.do">로그아웃</a></li>
                     </c:if>
