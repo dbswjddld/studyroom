@@ -9,14 +9,17 @@
 	<jsp:include page = "topmenu.jsp"></jsp:include>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
-
+		$(document).ready(function (){
+			var requestPage = "";
+			
+		}); //end
 	</script>
 </head>
 <body>
 	<header class="major"></header>
 	<div align="center">
-		<h2 id="title" name="title">제목 :</h2>
-		<h4 id="contents" name="contents" ></h4>
+		<h2 id="title">제목 :</h2>
+		<h4 id="contents"></h4>
 		<!-- 댓글추가 --><hr>댓글자리<br>
 		
 	</div>

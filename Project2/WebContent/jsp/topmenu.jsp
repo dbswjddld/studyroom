@@ -17,10 +17,16 @@
     <link rel="stylesheet" href="css/style-xlarge.css">
     <link rel="stylesheet" href="css/topmenu-style.css">
     
+    
+    <!--  20190822 곽동우 에러떠서 막아둠
+    
     <link rel="stylesheet" href="../css/skel.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/style-xlarge.css">
     <link rel="stylesheet" href="../css/topmenu-style.css">
+    
+    -->
+    
 </head>
 <body id="top">
         <header id="header" class="skel-layers-fixed">
