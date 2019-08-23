@@ -96,9 +96,9 @@ public class MemberDao {
 		
 	}
 
-	public int update(MemberDto dto) {
+	public int update(MemberDto dto) { //회원정보수정
 		int n = 0;
-		String sql = "update member set pw = ?, email = ?, tel = ? emailres = ? where id = ?";
+		String sql = "update member set pw = ?, email = ?, tel = ?, emailres = ? where id = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, dto.getPw());
@@ -112,7 +112,7 @@ public class MemberDao {
 		}
 		return n;
 	}
-	public MemberDto serach(MemberDto dto) {
+	public MemberDto serach(MemberDto dto) { 
 		MemberDto output = null;
 		String sql = "SELECT * FROM member WHERE id = ? and pw = ?";
 		try {
@@ -123,8 +123,10 @@ public class MemberDao {
 			if(rs.next()) {
 				output = new MemberDto();
 				output.setId(rs.getString("id"));
+				output.setPw(rs.getString("pw"));
 				output.setEmail(rs.getString("email"));
 				output.setEmailres(rs.getString("emailres"));
+				System.out.println("비밀번호 입력했을때 emailres : " + rs.getString("emailres"));
 				output.setTel(rs.getString("tel"));
 			}
 		}catch (SQLException e) {

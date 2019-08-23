@@ -37,9 +37,9 @@
 			</div>
 			<div class="9u skel-cell-important">
 				<div class = "resContents">
-	<h3>로그인</h3>
+	<h3>회원정보수정</h3>
 	<script>fail(${result})</script>
-	<form action = "MemberEdit.do" method="post" name = "frm">
+	<form action = "MemberEditFrm.do" method="post" name = "frm">
 		<table border = "1" cellpadding = "5">
 			<tr>
 				<th width = "150">아이디</th>
