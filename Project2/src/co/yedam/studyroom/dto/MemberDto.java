@@ -57,6 +57,12 @@ public class MemberDto {
 	public void setEmailres(String emailres) {
 		this.emailres = emailres;
 	}
+
+	@Override
+	public String toString() {
+		return "MemberDto [id=" + id + ", pw=" + pw + ", email=" + email + ", tel=" + tel + ", grant=" + grant
+				+ ", emailres=" + emailres + "]";
+	}
 	
 	
 }

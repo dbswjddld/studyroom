@@ -14,6 +14,7 @@ import co.yedam.studyroom.command.Index;
 import co.yedam.studyroom.command.Logout;
 import co.yedam.studyroom.command.MemberEdit;
 import co.yedam.studyroom.command.MemberEditLogin;
+import co.yedam.studyroom.command.MemberEditUpdate;
 import co.yedam.studyroom.command.MemberJoin;
 import co.yedam.studyroom.command.MemberJoinOk;
 import co.yedam.studyroom.command.MemberLogin;
@@ -67,7 +68,8 @@ public class FController extends HttpServlet {
 		map.put("/MemberJoin.do", new MemberJoin()); //회원가입 화면으로 보내기
 		map.put("/MemberJoinOk.do", new MemberJoinOk()); //회원가입
 		map.put("/MemberEditLogin.do", new MemberEditLogin()); //회원정보수정 로그인 화면 보내기
-		map.put("/MemberEdit.do", new MemberEdit()); //회원정보수정 페이지 보내기
+		map.put("/MemberEditFrm.do", new MemberEdit()); //회원정보수정 페이지 보내기
+		map.put("/MemberEdit.do", new MemberEditUpdate());
 
 		
 		// 동우

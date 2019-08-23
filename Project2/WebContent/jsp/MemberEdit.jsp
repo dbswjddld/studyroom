@@ -4,15 +4,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+	<meta charset="EUC-KR">
+	<title>Insert title here</title>
+	<script src = "https://code.jquery.com/jquery-3.4.1.js"></script>
+   <script>
+   $(document).ready(function(){
+      // 체크박스 value Y 또는 N으로 설정
+      $("#good").change(function(){ // 체크박스 바뀔때마다 실행
+         if($("#good").prop("checked")) { // 체크박스가 체크되어있으면
+            $("#good").val("Y"); // 체크박스의 value를 Y로 바꾸기
+         } else { // 아니면 (체크 안되어있으면)
+            $("#good").val("N"); // 체크박스의 value를 N으로 바꾸기
+         }
+  		console.log($("#good").val()); // ok
+      });
+   });
+   </script>
 </head>
 <body>
 <jsp:include page = "topmenu.jsp"></jsp:include>
 <section id="main" class="wrapper style1">
 <header class="major">
 	<h2>마이페이지</h2>
-	<p> 회원정보수정</p>
 </header>
 	<div class="container">
 		<div class="row">
@@ -28,38 +41,39 @@
 			<div class="9u skel-cell-important">
 				<div align = "center">
 	<jsp:include page = "topmenu.jsp"></jsp:include>
-	<h3>회원가입</h3>
-	<form action = "MemberEdit.do" method="post" name = "frm" onsubmit = "return formCheck()">
+	<h3>회원정보수정</h3>
+	<form action = "MemberEdit.do" method="post" name = "frm">
 		<table border = "1" cellpadding = "5">
 			<tr>
 				<th width = "150">아이디 *</th>
 				<td width = "400">
-					<input type = "text" name = "id" value = "${mid }" readonly="readonly">
+					<input type = "text" name = "id" value = "${result.id }" readonly="readonly">
 					<input type = "hidden" name = "chk" >
 				</td>
 			</tr>
 			<tr>
 				<th>새로운 비밀번호 *</th>
-				<td><input type = "text" name = "pw"></td>
+				<td><input type = "password" name = "pw" value = "${result.pw }"></td>
 			</tr>
 			<tr>
 				<th>새로운 비밀번호 확인 *</th>
-				<td><input type = "text" name = "pw"></td>
+				<td><input type = "password" name = "pw" value = "${result.pw }"></td>
 			</tr>			
 			<tr>
 				<th>이메일 *</th>
 				<td><input type = "text" name = "email" value = "${result.email }">
 				입력한 이메일은 ID 또는 PW 찾을때 이용됩니다.<br>
-				이메일로 문의사항을 받아보시겠습니까?<input type="checkbox" id="good" name="name"><label for="good"></label></td>
+				이메일로 문의사항을 받아보시겠습니까?<input type="checkbox" id="good" name="emailres" value = "Y">
+				<label for="good"></label></td>
 			</tr>
 			<tr>
 				<th>전화번호</th>
-				<td><input type = "text" name = "tel" value = "${reslut.tel }"></td>
+				<td><input type = "text" name = "tel" value = "${result.tel }"></td>
 			</tr>
 		</table>
 		<br>
 		<input type = "submit" value = "회원정보수정" > &nbsp;&nbsp;
-		<input type = "button" value = "취소" onclick = "location.href = 'index.jsp'">
+		<input type = "button" value = "회원탈퇴" onclick = "location.href = 'index.jsp'">
 	</form>
 	</div>
 			</div>
