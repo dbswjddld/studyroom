@@ -136,4 +136,36 @@ public class MemberDao {
 		}
 		return output;
 	}
+	
+	public int Withdrawal(MemberDto dto) { //회원정보수정
+		int n = 0;
+		String sql = "update member set pw = ?, email = ?, tel = ?, emailres = ? where id = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dto.getPw());
+			psmt.setString(2, dto.getEmail());
+			psmt.setString(3, dto.getTel());
+			psmt.setString(4, dto.getEmailres());
+			psmt.setString(5, dto.getId());
+			n = psmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return n;
+	}
+	
+//	public int (String id) { //회원 삭제
+//		int n = 0;
+//		String sql = "delete from member where id = ?";
+//		try {
+//			psmt = conn.prepareStatement(sql);
+//			psmt.setString(1, id);
+//			n = psmt.executeUpdate();
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close();
+//		}
+//		return n;
+//	}
 }
