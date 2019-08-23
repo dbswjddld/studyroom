@@ -21,7 +21,7 @@
 					<ul class="alt">
 						<li><a href="MyReservation.do">예약 내역</a></li>
 						<li><a href="#">내 문의 내역</a></li>
-						<li><a href="#">회원 정보 수정</a></li>
+						<li><a href="MemberEditLogin.do">회원 정보 수정</a></li>
 					</ul>
 				</section>
 			</div>
