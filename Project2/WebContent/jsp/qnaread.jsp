@@ -13,7 +13,7 @@
 			var text = document.getElementById("content");
 			var result = text.value.replace(/(\n|\r\n)/g, '<br>');
 			document.getElementById("content1").innerHTML = result
-	}
+	};
 
 	
 	function qnaUpdate(n){

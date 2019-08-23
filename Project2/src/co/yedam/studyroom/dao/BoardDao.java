@@ -143,6 +143,24 @@ public class BoardDao {
 			}
 			return n;
 		}
+		
+	//0823 총게시글수
+		public int boardCount() {
+			int n = 0;
+			String sql = "select count(*) as count from board";
+			try {
+				psmt = conn.prepareStatement(sql);
+				rs = psmt.executeQuery();
+				if(rs.next()) {
+					n = rs.getInt("count");
+				}
+				System.out.println(n);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}//close() 추가??
+			
+			return n;
+		}
 	
 
 //	DB 닫는 메소드

@@ -3,10 +3,10 @@ package co.yedam.studyroom.common;
 public class Paging {
 	
 	//20190823 곽동우 페이지 처리
-	private int page;//현재 페이지
+	private int page = 1;//현재 페이지	 oo
 	private int totalPage;  //총 페이지수
-	private int countPage;	//화면에 page 몇개 보일건지
-	private int countList;	//게시글 몇개 뿌릴거?
+	private int countPage = 5;	//화면에 page 몇개 보일건지 oo
+	private int countList = 10;	//게시글 몇개 뿌릴거(기본10)?	oo
 	private int totalCount; //총게시글수
 	private int startPage;	//화면에 보이는 시작페이지
 	private int endPage; 	//화면에 보이는 마지막 페이지
@@ -24,6 +24,62 @@ public class Paging {
 	
 	public void endPage() {
 		this.endPage = startPage+countPage-1;
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public int getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public int getCountPage() {
+		return countPage;
+	}
+
+	public void setCountPage(int countPage) {
+		this.countPage = countPage;
+	}
+
+	public int getCountList() {
+		return countList;
+	}
+
+	public void setCountList(int countList) {
+		this.countList = countList;
+	}
+
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+
+	public int getStartPage() {
+		return startPage;
+	}
+
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
+	}
+
+	public int getEndPage() {
+		return endPage;
+	}
+
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
 	}
 	
 	
