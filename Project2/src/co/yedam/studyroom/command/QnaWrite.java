@@ -21,11 +21,16 @@ public class QnaWrite implements Command {
 		String id = request.getParameter("id");
 		String subject = request.getParameter("subject");
 		String content = request.getParameter("content");
-	
+		
+		int bno = dao.getBoardNo();
+		dto.setBno(bno);
+		
 		dto.setId(id);
 		dto.setSubject(subject);
 		dto.setContent(content);
+		
 		dao.boardInsert(dto);
+		
 		response.sendRedirect("Qna.do");
 //		String viewPage = "Qna.do";					// 새로고침하면 계속들어감
 //		HttpRes.forward(request, response, viewPage);

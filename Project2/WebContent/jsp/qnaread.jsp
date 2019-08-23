@@ -9,15 +9,21 @@
 <!-- 20190819 17:50 곽동우 문의게시판 첫화면 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
+	window.onload = function(){		//db읽어온 텍스트 \n  -> <br> 바꿈
+			var text = document.getElementById("content");
+			var result = text.value.replace(/(\n|\r\n)/g, '<br>');
+			document.getElementById("content1").innerHTML = result
+	}
+
 	
 	function qnaUpdate(n){
 		var form = document.frm;
 		form.bno.value = n;
-		form.action="QnaUpdate.do";
+		form.action="QnaUpdatePage.do";
 		form.submit();
 	}
 	
-	function qnaDel(n){		//안됨 bno값이 안넘어감
+	function qnaDel(n){
 		var form = document.frm;
 		form.bno.value = n;		// form. 은 name
 		form.action="QnaDel.do";
@@ -27,7 +33,7 @@
 		}
 		form.submit();
 	}
-	
+
 	
 /*	
 	$(document).ready(function (){
@@ -67,14 +73,17 @@ $(function() {
 	<header class="major"></header>
 	<div align="center">
 		<form id="frm" name="frm">
-			<h2 id="title">제목 :${dto.subject } 
-			<font size="3">문의번호:${dto.bno }</font></h2>
-					<input type="hidden" name="bno" id="bno">	
+			<h2 id="title">제목 :${dto.subject }
+				<input type="hidden" name="subject" id="subject" value="${dto.subject }">
+				<font size="3">문의번호:${dto.bno }</font></h2>
+				<input type="hidden" name="bno" id="bno" value="${dto.bno }">	
 			<h4>작성자:${dto.id }</h4>
+			<input type="hidden" name="id" id="id" value="${dto.id }">
 			<h6>작성일:<fmt:formatDate value="${dto.bdate}" pattern="yyyy.MM.dd HH:mm:ss" /></h6>
 			<div>
 				<hr align="center" width="30%">
-				<h4 id="contents">${dto.content }</h4>
+				<h4 id="content1">${dto.content }</h4>
+				<input type="hidden" name="content" id="content" value="${dto.content }">
 			</div>
 			<!-- 댓글추가 --><hr>댓글자리<br>
 			<button type="button" id="requestBtn">테스트</button>

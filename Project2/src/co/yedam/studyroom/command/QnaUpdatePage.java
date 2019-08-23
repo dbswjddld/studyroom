@@ -7,28 +7,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.yedam.studyroom.common.Command;
-import co.yedam.studyroom.dao.BoardDao;
+import co.yedam.studyroom.common.HttpRes;
 import co.yedam.studyroom.dto.BoardDto;
 
-public class QnaUpdate implements Command {
+public class QnaUpdatePage implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		String subject = request.getParameter("subject");
-		String content = request.getParameter("content");
-		int bno = Integer.parseInt(request.getParameter("bno"));
-		
-		BoardDao dao = new BoardDao();
 		BoardDto dto = new BoardDto();
-		dto.setBno(bno);
-		dto.setSubject(subject);
-		dto.setContent(content);
-		dao.boardUpdate(dto);
 		
-		response.sendRedirect("Qna.do");
-//		String viewPage = "Qna.do";
-//		HttpRes.forward(request, response, viewPage);
+		String content = request.getParameter("content");
+		String subject = request.getParameter("subject");
+		String id = request.getParameter("id");
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		dto.setBno(bno);
+		dto.setContent(content);
+		dto.setSubject(subject);
+		dto.setId(id);
+		
+		request.setAttribute("dto", dto);
+		String viewPage = "jsp/qnaupdatepage.jsp";
+		HttpRes.forward(request, response, viewPage);
+		
 		
 	}
 
