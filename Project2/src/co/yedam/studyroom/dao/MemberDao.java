@@ -95,4 +95,43 @@ public class MemberDao {
 		return result;
 		
 	}
+
+	public int update(MemberDto dto) {
+		int n = 0;
+		String sql = "update member set pw = ?, email = ?, tel = ? emailres = ? where id = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dto.getPw());
+			psmt.setString(2, dto.getEmail());
+			psmt.setString(3, dto.getTel());
+			psmt.setString(4, dto.getEmailres());
+			psmt.setString(5, dto.getId());
+			n = psmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return n;
+	}
+	public MemberDto serach(MemberDto dto) {
+		MemberDto output = null;
+		String sql = "SELECT * FROM member WHERE id = ? and pw = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dto.getId());
+			psmt.setString(2, dto.getPw());
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				output = new MemberDto();
+				output.setId(rs.getString("id"));
+				output.setEmail(rs.getString("email"));
+				output.setEmailres(rs.getString("emailres"));
+				output.setTel(rs.getString("tel"));
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return output;
+	}
 }

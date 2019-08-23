@@ -9,13 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import co.yedam.studyroom.common.Command;
 import co.yedam.studyroom.common.HttpRes;
 
-public class MemberEditLogin implements Command {
+public class QnaWrite implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		String viewPage = "jsp/MemberEditLogin.jsp";
-		HttpRes.forward(request, response, viewPage);
+		String sid = request.getParameter("sid");
 		
+		request.setAttribute("sid", sid);	//탑메뉴에있을건데 쓸필요있나?
+		String viewPage = "jsp/qnawrite.jsp";
+		
+		HttpRes.forward(request, response, viewPage);
 	}
 
 }

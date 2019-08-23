@@ -27,7 +27,10 @@ public class QnaRead implements Command {
 								//여기 게시글에 달린 댓글추가?
 		request.setAttribute("dto", dto);
 		String viewPage = "jsp/qnaread.jsp";
+
 		HttpRes.forward(request, response, viewPage);
+		
+		
 	}
 
 }
