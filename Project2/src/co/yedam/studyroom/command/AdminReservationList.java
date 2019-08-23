@@ -28,6 +28,7 @@ public class AdminReservationList extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+				
 		ReservationDao dao = new ReservationDao();
 		ArrayList<ReservationDto> list = dao.adminList();
 		JSONArray ary = new JSONArray();
@@ -38,9 +39,9 @@ public class AdminReservationList extends HttpServlet {
 			ary = new JSONArray();
 			ary.add(dto.getRname());
 			ary.add(dto.getId());
-			ary.add(dto.getUsedate());
-			ary.add(dto.getStarttime());
-			ary.add(dto.getEndtime());
+			ary.add("" + dto.getUsedate()); // String 타입으로 만들기
+			ary.add("" + dto.getStarttime());
+			ary.add("" + dto.getEndtime());
 			ary.add(dto.getStatus());
 			orig.add(ary);
 		}
