@@ -14,6 +14,7 @@ import co.yedam.studyroom.command.Index;
 import co.yedam.studyroom.command.Logout;
 import co.yedam.studyroom.command.MemberEdit;
 import co.yedam.studyroom.command.MemberEditLogin;
+import co.yedam.studyroom.command.MemberEditUpdate;
 import co.yedam.studyroom.command.MemberJoin;
 import co.yedam.studyroom.command.MemberJoinOk;
 import co.yedam.studyroom.command.MemberLogin;
@@ -25,6 +26,7 @@ import co.yedam.studyroom.command.QnaDel;
 import co.yedam.studyroom.command.QnaRead;
 import co.yedam.studyroom.command.QnaUpdate;
 import co.yedam.studyroom.command.QnaWrite;
+import co.yedam.studyroom.command.QnaWritePage;
 import co.yedam.studyroom.command.ReservationPage;
 import co.yedam.studyroom.command.ReservationAdmin;
 import co.yedam.studyroom.command.ReservationCancel;
@@ -65,7 +67,8 @@ public class FController extends HttpServlet {
 		map.put("/MemberJoin.do", new MemberJoin()); //회원가입 화면으로 보내기
 		map.put("/MemberJoinOk.do", new MemberJoinOk()); //회원가입
 		map.put("/MemberEditLogin.do", new MemberEditLogin()); //회원정보수정 로그인 화면 보내기
-		map.put("/MemberEdit.do", new MemberEdit()); //회원정보수정 페이지 보내기
+		map.put("/MemberEditFrm.do", new MemberEdit()); //회원정보수정 페이지 보내기
+		map.put("/MemberEdit.do", new MemberEditUpdate());
 
 		
 		// 동우
@@ -74,6 +77,7 @@ public class FController extends HttpServlet {
 		map.put("/QnaDel.do",new QnaDel());		//문의 게시글 삭제	//0822	곽동우
 		map.put("/QnaUpdate.do",new QnaUpdate());	//문의 게시글 삭제	//0822	곽동우
 		map.put("/QnaWrite.do", new QnaWrite()); //문의 게시글쓰기		//0822 곽동우
+		map.put("/QnaWritePage.do", new QnaWritePage()); //문의 게시글쓰기폼 이동 //0823 곽동우
 		
 
 		

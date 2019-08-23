@@ -11,27 +11,26 @@ import co.yedam.studyroom.common.HttpRes;
 import co.yedam.studyroom.dao.MemberDao;
 import co.yedam.studyroom.dto.MemberDto;
 
-public class MemberEdit implements Command {
+public class MemberEditUpdate implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		MemberDto dto = new MemberDto();
-		dto.setId((String)request.getSession().getAttribute("mid"));
-		dto.setPw((String)request.getParameter("pw"));
-
+		dto.setId(request.getParameter("id"));
+		dto.setPw(request.getParameter("pw"));
+		dto.setEmail(request.getParameter("email"));
+		dto.setEmailres(request.getParameter("emailres"));
+		System.out.println("email res : " + request.getParameter("emailres"));
+		
+		dto.setTel(request.getParameter("tel"));
+		
 		MemberDao dao = new MemberDao();
-		MemberDto result = dao.serach(dto);
+		int result = dao.update(dto);
 		
-		
-		String viewPage;
-		if(result == null) {
-			request.setAttribute("result", "fail");
-			viewPage = "jsp/MemberEditLogin.jsp";
-		}else {
-			request.setAttribute("result", result);
-			viewPage = "jsp/MemberEdit.jsp";
-		}
-		
+//		request.setAttribute("result", result);
+		String viewPage = "jsp/MemberEditLogin.jsp";
 		HttpRes.forward(request, response, viewPage);
+		
 	}
+
 }

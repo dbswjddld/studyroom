@@ -41,6 +41,8 @@ public class BoardDao {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			close();
 		}
 		return list;
 	}// boardList end
@@ -64,6 +66,8 @@ public class BoardDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close();
 		}
 		return dto;
 	}	// boardSelect end
@@ -79,12 +83,46 @@ public class BoardDao {
 			n = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close();
 		}
 		return n;
 	}
+//	//0823 게시글 번호 가져오기    필요없음
+//	public int getBoardNo() {
+//		int n = 0;
+//		String sql = "select max(bno) as bno from board";
+//		try {
+//			psmt = conn.prepareStatement(sql);
+//			rs = psmt.executeQuery();
+//			if(rs.next()) {
+//				n = rs.getInt("bno");
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return n;
+//		
+//	}
 	
 	//0822 문의 게시글 입력
-	
+	public int boardInsert(BoardDto dto) {
+
+		int n = 0;
+		String sql = "insert into board values((select max(bno) from board)+1, ?, ?, ?,sysdate)";//
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dto.getSubject());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getId());
+			n = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return n;
+	}
 	
 
 //	DB 닫는 메소드
