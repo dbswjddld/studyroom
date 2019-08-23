@@ -1,13 +1,13 @@
 package co.yedam.studyroom.dto;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class BoardDto {
 	private int bno;
 	private String subject;
 	private String content;
 	private String id;
-	private Date bdate;
+	private Timestamp bdate;
 	
 	public BoardDto() {}
 
@@ -43,11 +43,11 @@ public class BoardDto {
 		this.id = id;
 	}
 
-	public Date getBdate() {
+	public Timestamp getBdate() {
 		return bdate;
 	}
 
-	public void setBdate(Date bdate) {
+	public void setBdate(Timestamp bdate) {
 		this.bdate = bdate;
 	}
 	
