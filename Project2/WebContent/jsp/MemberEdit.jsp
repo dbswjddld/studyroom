@@ -7,7 +7,19 @@
 	<meta charset="EUC-KR">
 	<title>Insert title here</title>
 	<script src = "https://code.jquery.com/jquery-3.4.1.js"></script>
-
+   <script>
+   $(document).ready(function(){
+      // 체크박스 value Y 또는 N으로 설정
+      $("#good").change(function(){ // 체크박스 바뀔때마다 실행
+         if($("#good").prop("checked")) { // 체크박스가 체크되어있으면
+            $("#good").val("Y"); // 체크박스의 value를 Y로 바꾸기
+         } else { // 아니면 (체크 안되어있으면)
+            $("#good").val("N"); // 체크박스의 value를 N으로 바꾸기
+         }
+  		console.log($("#good").val()); // ok
+      });
+   });
+   </script>
 </head>
 <body>
 <jsp:include page = "topmenu.jsp"></jsp:include>
