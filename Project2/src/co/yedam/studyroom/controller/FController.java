@@ -25,6 +25,7 @@ import co.yedam.studyroom.command.QnaDel;
 import co.yedam.studyroom.command.QnaRead;
 import co.yedam.studyroom.command.QnaUpdate;
 import co.yedam.studyroom.command.QnaWrite;
+import co.yedam.studyroom.command.QnaWritePage;
 import co.yedam.studyroom.command.ReservationPage;
 import co.yedam.studyroom.command.ReservationAdmin;
 import co.yedam.studyroom.command.ReservationCancel;
@@ -74,6 +75,7 @@ public class FController extends HttpServlet {
 		map.put("/QnaDel.do",new QnaDel());		//문의 게시글 삭제	//0822	곽동우
 		map.put("/QnaUpdate.do",new QnaUpdate());	//문의 게시글 삭제	//0822	곽동우
 		map.put("/QnaWrite.do", new QnaWrite()); //문의 게시글쓰기		//0822 곽동우
+		map.put("/QnaWritePage.do", new QnaWritePage()); //문의 게시글쓰기폼 이동 //0823 곽동우
 		
 
 		

@@ -19,7 +19,7 @@
 		
 		function qnaWrite(id){
 			//if(id != null){
-				document.btn.action="QnaWrite.do";
+				document.btn.action="QnaWritePage.do";
 				document.btn.method="post"; 
 								
 				document.btn.sid.value = "dong";//테스트용 아이디 세션작업되면 "dong" 수정해야함
