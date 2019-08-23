@@ -55,15 +55,20 @@
 					<c:if test = "${dto.status==0}">
 					예약 취소
 					</c:if>
-					<c:if test = "${dto.status==null}">
-					예약 완료<br>
-					<form name = "frm" method = "post">
-						<input type = "hidden" name = "rno" value = "${dto.rno}">
-						<input type = "button" value = "예약취소" onclick = "cancel()">
-					</form>
+					<c:if test = "${empty dto.status}">
+					예약 완료
 					</c:if>
 					
+					<form name = "frm" method = "post">
+						<c:if test = "${empty dto.status}">	<!-- 예약완료 상태면 예약취소 버튼 보이게 -->
+							<input type = "hidden" name = "rno" value = "${dto.rno}">
+							<input type = "button" value = "예약취소" onclick = "cancel()">
+						</c:if>
+						<input type = "button" value = "목록" onclick = "history.back()">
+					</form>
+					
 			</div>
+			
 		</div>
 	</div>
 </section>

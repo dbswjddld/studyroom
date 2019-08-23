@@ -48,15 +48,15 @@ public class FController extends HttpServlet {
 		// 여기다 각자 map.put(... , ...); 만들어넣기
 		
 		// 윤정
-		map.put("/Index.do", new Index()); // [윤정] 메인 화면으로 이동
-		map.put("/ReservationAdmin.do", new ReservationAdmin()); // [윤정]관리자 - 예약관리 페이지로 이동
-		map.put("/ReservationContentsAdmin.do", new ReservationContentsAdmin()); // [윤정] 관리자 - 예약관리 - 컨텐츠
-		map.put("/ReservationCancelAdmin.do", new ReservationCancelAdmin()); // [윤정] 관리자 - 예약관리 - 컨텐츠 - 예약취소 눌렀을 때
-		map.put("/MyReservation.do", new MyReservation());	// [윤정]마이페이지 - 예약내역 - 전체 페이지로 이동
-		map.put("/MyReservationSearch.do", new MyReservationSearch()); // [윤정]마이페이지 - 예약내역- 취소
-		map.put("/ReservationContents.do", new ReservationContents()); // [윤정]마이페이지 - 예약 상세보기
-		map.put("/ReservationCancel.do", new ReservationCancel()); // [윤정]마이페이지 - 예약 취소하기\
-		map.put("/ReservationPage.do", new ReservationPage()); // [윤정] 예약하기 페이지로 이동
+		map.put("/Index.do", new Index()); // 메인 화면으로 이동
+		map.put("/ReservationAdmin.do", new ReservationAdmin()); // 관리자 - 예약관리 페이지로 이동
+		map.put("/ReservationContentsAdmin.do", new ReservationContentsAdmin()); // 관리자 - 예약관리 - 컨텐츠
+		map.put("/ReservationCancelAdmin.do", new ReservationCancelAdmin()); // 관리자 - 예약관리 - 컨텐츠 - 예약취소 눌렀을 때
+		map.put("/MyReservation.do", new MyReservation());	// 마이페이지 - 예약내역 - 전체 페이지로 이동
+		map.put("/MyReservationSearch.do", new MyReservationSearch()); // 마이페이지 - 예약내역 - 검색
+		map.put("/ReservationContents.do", new ReservationContents()); // 마이페이지 - 예약 상세보기
+		map.put("/ReservationCancel.do", new ReservationCancel()); // 마이페이지 - 예약 취소하기
+		map.put("/ReservationPage.do", new ReservationPage()); // 예약하기 페이지로 이동
 
 		
 		// 무겸

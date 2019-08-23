@@ -22,7 +22,13 @@ public class ReservationAdmin implements Command {
 
 		request.setAttribute("list", list);
 
-		String viewPage = "jsp/admin_reservationList.jsp";
+		String viewPage = "jsp/admin_reservationList.jsp";	// 기존 방식
+
+		
+//		String viewPage = "jsp/admin_reservaion_datatables.jsp"; // DataTables 이용 (잘 안됨..)
+		
+		
+		System.out.println(viewPage);
 		HttpRes.forward(request, response, viewPage);
 
 	}
