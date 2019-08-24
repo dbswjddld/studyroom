@@ -5,7 +5,7 @@ public class Paging {
 	//20190823 곽동우 페이지 처리
 	private int page = 1;//현재 페이지	 oo
 	private int totalPage;  //총 페이지수
-	private int countPage = 5;	//화면에 page 몇개 보일건지 oo
+	private int countPage = 5;	//화면에 page블럭 몇개 보일건지 oo
 	private int countList = 10;	//게시글 몇개 뿌릴거(기본10)?	oo
 	private int totalCount; //총게시글수
 	private int startPage;	//화면에 보이는 시작페이지
@@ -23,8 +23,25 @@ public class Paging {
 	}
 	
 	public void endPage() {
-		this.endPage = startPage+countPage-1;
+		int endPage =  startPage+countPage-1;
+		
+		if(endPage > this.totalPage) {	//endpage 가 totalpage 보다 크면 totalpage값으로 
+			this.endPage = this.totalPage;
+		} else {
+			this.endPage = endPage;
+		}
 	}
+	
+	//한번호출로 값 다처리되는거?
+	public void run(int totalCount) {
+		setTotalCount(totalCount);
+		totalPage();
+		startPage();
+		endPage();
+	}
+	
+	
+	
 
 	public int getPage() {
 		return page;

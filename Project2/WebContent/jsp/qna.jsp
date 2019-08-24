@@ -59,8 +59,14 @@
 				</c:forEach>
 			</table>
 			<div></div>
-			
 			</form>	<!-- 개선? -->
+			
+			<form name="pagebtn" id="pagebtn" action="Qna.do">
+				<c:forEach  begin="${startPage }" end="${endPage }" step="1" varStatus="page" >
+					<button id="page" name="page" type="submit" value="${page.current}" onclick="form.submit()">${page.current }</button>
+				</c:forEach>
+			</form>
+			
 			<form name="btn" id="btn">
 				<button type="button" id="wb" name="wb" onclick="qnaWrite(${sid })">글쓰기</button>	<!-- sid 는 세션id -->
 				<input type="hidden" id="sid" name="sid">

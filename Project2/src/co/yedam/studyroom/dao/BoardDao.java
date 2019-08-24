@@ -154,13 +154,40 @@ public class BoardDao {
 				if(rs.next()) {
 					n = rs.getInt("count");
 				}
-				System.out.println(n);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}//close() 추가??
 			
 			return n;
 		}
+		
+	//0825 현재 페이지 게시글만
+		public ArrayList<BoardDto> curPageBoard(int startbno, int endbno) {
+			String sql = "select * from board where bno between ? and ?";
+			dto = null;
+			ArrayList<BoardDto> list = new ArrayList<>();
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, startbno);
+				psmt.setInt(2, endbno);
+				rs = psmt.executeQuery();
+				while (rs.next()) {
+					dto = new BoardDto();
+					dto.setBno(rs.getInt("bno"));
+					dto.setSubject(rs.getString("subject"));
+					dto.setContent(rs.getString("content"));
+					dto.setId(rs.getString("id"));
+					dto.setBdate(rs.getTimestamp("bdate"));
+					list.add(dto);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+//			finally {
+//				close();
+//			}
+			return list;
+		}// boardList end
 	
 
 //	DB 닫는 메소드
