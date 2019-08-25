@@ -61,6 +61,11 @@ public class FController extends HttpServlet {
 		map.put("/ReservationPage.do", new ReservationPage()); // 예약하기 페이지로 이동
 
 		
+		
+		
+		
+		
+		
 		// 무겸
 		map.put("/MemberLogin.do", new MemberLogin());// 로그인 화면으로 보내기
 		map.put("/MemberLoginOk.do", new MemberLoginOk());// 로그인 버튼 눌렀을때 DB입력
@@ -72,6 +77,12 @@ public class FController extends HttpServlet {
 		map.put("/MemberEdit.do", new MemberEditUpdate());
 
 		
+		
+		
+		
+		
+		
+		
 		// 동우
 		map.put("/Qna.do",new Qna());	//문의게시판리스트  //20190820 09:46 곽동우
 		map.put("/QnaRead.do",new QnaRead());	//문의게시판내용  //20190819 17:55 곽동우
@@ -80,6 +91,12 @@ public class FController extends HttpServlet {
 		map.put("/QnaWrite.do", new QnaWrite()); //문의 게시글쓰기		//0822 곽동우
 		map.put("/QnaWritePage.do", new QnaWritePage()); //문의 게시글쓰기폼 이동 //0823 곽동우
 		map.put("/QnaUpdatePage.do", new QnaUpdatePage());	//문의 게시글 수정페이지 이동 //0823 곽동우
+		
+		
+		
+		
+		
+		
 		
 
 		

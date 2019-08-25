@@ -15,16 +15,7 @@
 		document.getElementById("date").min = new Date().toISOString().substring(0, 10); // 전날 선택하지 못하게 (최솟값 오늘)
 		document.getElementById("date").value = new Date().toISOString().substring(0, 10); // 달력 디폴트를 오늘로 설정
 		
-		
-		
-		/* 
-		// 우측화면 상단에 선택한 날짜 출력
-		var reqdate = new Date();
-		var year = reqdate.getFullYear();
-		var month = reqdate.getMonth() + 1;
-		var date = reqdate.getDate();
-		$(".date_select").html(year + "년 " + month + "월 " + date + "일").attr("style","font-size:24px"); 
-		 */
+		date_change();
 		
 		/* 
 		-- rnum(방코드) rname id usedate starttime endtime rno(예약번호) status reqdate
@@ -35,7 +26,13 @@
 	})
 	
 	function date_change(){
-		
+		var input = $("#date").val(); // 입력한 날짜
+		$(".date_select").html(input); // 우측에 날짜 출력 (YYYY-MM-DD)
+				
+		// 날짜 선택 안했을 때 (x 눌렀을 때)
+		if(input == ""){
+			console.log("날짜를 선택하세요");
+		}
 	}
 	</script>
 	<style>
