@@ -11,22 +11,18 @@ import co.yedam.studyroom.common.HttpRes;
 import co.yedam.studyroom.dao.MemberDao;
 import co.yedam.studyroom.dto.MemberDto;
 
-public class MemberEditUpdate implements Command {
+public class MemberWithdrawal implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		MemberDto dto = new MemberDto();
 		dto.setId(request.getParameter("id"));
-		dto.setPw(request.getParameter("pw"));
-		dto.setEmail(request.getParameter("email"));
-		dto.setEmailres(request.getParameter("emailres"));
-		dto.setTel(request.getParameter("tel"));
 		
 		MemberDao dao = new MemberDao();
-		int result = dao.update(dto);
+		int result = dao.Withdrawal(dto);
 		
-		//request.setAttribute("result", result);
-		String viewPage = "jsp/MemberEditLogin.jsp";
+		request.setAttribute("result", result);
+		String viewPage = "jsp/MemberWithdrawal.jsp";
 		HttpRes.forward(request, response, viewPage);
 		
 	}
