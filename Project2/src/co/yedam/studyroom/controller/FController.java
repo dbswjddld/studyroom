@@ -37,6 +37,7 @@ import co.yedam.studyroom.command.ReservationCancel;
 import co.yedam.studyroom.command.ReservationCancelAdmin;
 import co.yedam.studyroom.command.ReservationContents;
 import co.yedam.studyroom.command.ReservationContentsAdmin;
+import co.yedam.studyroom.command.ReservationInsert;
 import co.yedam.studyroom.common.Command;
 
 @WebServlet("/FController")
@@ -62,7 +63,7 @@ public class FController extends HttpServlet {
 		map.put("/ReservationContents.do", new ReservationContents()); // 마이페이지 - 예약 상세보기
 		map.put("/ReservationCancel.do", new ReservationCancel()); // 마이페이지 - 예약 취소하기
 		map.put("/ReservationPage.do", new ReservationPage()); // 예약하기 페이지로 이동
-		
+		map.put("/ReservationInsert.do", new ReservationInsert()); // 예약하기 DB처리하기
 		
 		
 		

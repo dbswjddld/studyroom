@@ -19,16 +19,17 @@ public class MemberLoginOk implements Command {
 		MemberDto dto = new MemberDto();
 		dto.setId(request.getParameter("id"));
 		dto.setPw(request.getParameter("pw"));
+		dto.setGrant(request.getParameter("grant"));
 		
 		MemberDao dao = new MemberDao();
 		
 		MemberDto loginResult = new MemberDto();
 		loginResult = dao.login(dto);
+		
 		// id,pw가 일치하면 name에 사용자의 id와 이름이 저장되고, 
 		//아니면 null
-		
 		String viewPage;
-		if(loginResult == null) {
+		if(loginResult.getGrant().equals("X") || loginResult == null) {
 			request.setAttribute("result", "fail");
 			viewPage = "jsp/MemberLogin.jsp";
 		}else {
@@ -38,6 +39,7 @@ public class MemberLoginOk implements Command {
 			viewPage = "jsp/MemberLoginResult.jsp";
 			//로그인 결과 페이지에 사용자의 이름 넘겨주기
 		}
+		
 		HttpRes.forward(request, response, viewPage);
 	}
 
