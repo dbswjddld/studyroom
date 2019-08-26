@@ -42,7 +42,7 @@
 			</div>
 			<div class="9u skel-cell-important">
 				<div class = "resContents">
-				<div>대충 방 사진</div>
+				
 				<font size = "6">${dto.rname}</font><br>
 				<b>이용 날짜: ${dto.usedate}</b><br>
 				<b>이용 시간 : ${dto.starttime} ~ ${dto.endtime}</b><br>

@@ -46,6 +46,7 @@ public class AdminReservationList extends HttpServlet {
 			orig.add(ary);
 		}
 		obj.put("data", orig);
+		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().print(obj);
 	}
 }

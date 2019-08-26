@@ -56,7 +56,9 @@
 				<th>이메일 *</th>
 				<td><input type = "text" name = "email" required>
 				입력한 이메일은 ID 또는 PW 찾을때 이용됩니다.<br>
-				이메일로 문의사항을 받아보시겠습니까?<input type="checkbox" id="good" name="name"><label for="good"></label></td>
+				이메일로 문의사항을 받아보시겠습니까?
+				<input type="radio" id="goodyes" name="emailres" value = "Y" checked>Yes<label for="goodyes"></label>
+				<input type="radio" id="goodno" name="emailres" value = "N">NO<label for="goodno"></label></td>
 			</tr>
 			<tr>
 				<th>전화번호</th>

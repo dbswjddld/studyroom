@@ -17,6 +17,15 @@
 		
 		date_change();
 		
+		$(".time_select").hide();
+		
+		// 시작시간 9시부터 20시까지 선택가능
+		for(var i = 9; i < 21; i++){
+			$option = $("<option>").val(i).text(i + "시");
+			$("#start").append($option);
+		}
+		select_end();
+		
 		/* 
 		-- rnum(방코드) rname id usedate starttime endtime rno(예약번호) status reqdate
 		INSERT INTO reservation (rnum, rname, id, usedate, starttime, endtime, rno, status, reqdate)
@@ -28,10 +37,30 @@
 	function date_change(){
 		var input = $("#date").val(); // 입력한 날짜
 		$(".date_select").html(input); // 우측에 날짜 출력 (YYYY-MM-DD)
-				
+		$(".roominfo").show();
+		$(".time_select").hide();
+	}
+	
+	function select(num, name){
 		// 날짜 선택 안했을 때 (x 눌렀을 때)
-		if(input == ""){
-			console.log("날짜를 선택하세요");
+		if($("#date").val() == "") {
+			alert("날짜를 선택하세요");
+		} else {
+			$("#rnum").val(num);
+			$("#rname").val(name);
+			$(".show").text(name);
+			$(".roominfo").hide();
+			$(".time_select").show();
+		}
+	}
+	
+	// 시작시간을 바꾸면 종료시간 바꾸기
+	function select_end(){
+		$("#end").empty();
+		var start = $("#start").val();
+		for(var i = parseInt(start) + 1; i <= 21; i++){
+			$option = $("<option>").val(i).text(i + "시");
+			$("#end").append($option);
 		}
 	}
 	</script>
@@ -54,21 +83,35 @@
 	<div class = "row">
 		<!-- 왼쪽 달력 나온느 부분 -->
 		<div class = "3u">
-			<input type = "Date" name = "date" id = "date" onchange = "date_change()">
+			<form id = "frm" action = "ReservationPage2.do" method = "post">
+				<input type = "Date" name = "usedate" id = "date" onchange = "date_change()">
+				<input type = "hidden" name = "rnum" id = "rnum">
+				<input type = "hidden" name = "rname" id = "rname">
+			</form>
 		</div>
 		
 		<!-- 오른쪽 방 정보 -->
 		<div class = "9u">
 			<!-- 선택한 날짜 출력 -->
 			<div class = "date_select" align = "center"></div>
-			<br>
+			<hr>
 			
 			<!-- 방 정보 출력 -->
+			<div class = "roominfo">
 			<c:forEach items="${room}" var="room">
-				<div class = "roomlist">
+				<div class = "roomlist" onclick = "select(${room.rnum}, '${room.rname}')">
 					<h2>${room.rname}</h2>
 				</div>
 			</c:forEach>
+			</div>
+			
+			<!-- 시간 선택 -->
+			<div class = "time_select">
+				<div class = "show"></div>
+				시작 시간 : <select id = "start" onchange = "select_end()"></select><br>
+				종료 시간 : <select id = "end"></select><br>
+				
+			</div>
 		</div>
 	</div>
 	</div>
