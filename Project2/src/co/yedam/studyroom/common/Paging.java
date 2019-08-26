@@ -6,7 +6,7 @@ public class Paging {
 	private int page = 1;//현재 페이지	 oo
 	private int totalPage;  //총 페이지수
 	private int countPage = 5;	//화면에 page블럭 몇개 보일건지 oo
-	private int countList = 10;	//게시글 몇개 뿌릴거(기본10)?	oo
+	private int countList;	//게시글 몇개 뿌릴거(기본10)?	oo
 	private int totalCount; //총게시글수
 	private int startPage;	//화면에 보이는 시작페이지
 	private int endPage; 	//화면에 보이는 마지막 페이지

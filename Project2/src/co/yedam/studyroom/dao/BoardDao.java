@@ -175,7 +175,7 @@ public class BoardDao {
 					"    from (\r\n" + 
 					"        select *\r\n" + 
 					"        from board\r\n" + 
-					"        order by bno ) A\r\n" + 
+					"        order by bno desc ) A\r\n" + 
 					"    where rownum <=? ) B\r\n" + 
 					"where B.rnum >= ?";
 			dto = null;

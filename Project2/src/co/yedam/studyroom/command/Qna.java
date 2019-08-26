@@ -31,7 +31,7 @@ public class Qna implements Command {
 		}else {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		System.out.println(request.getParameter("page"));
+//		System.out.println(request.getParameter("page"));
 		int countList = 0;
 		//게시글 몇개 보일건지 확인
 		
@@ -52,19 +52,21 @@ public class Qna implements Command {
 //		System.out.println(startbno + "처음게시글");
 		
 		
-		System.out.println(p.getCountList());
+//		System.out.println(p.getCountList());
 		p.run(dao.boardCount());
 		
 		list = dao.curPageBoard(startbno,endbno);
 		
-		System.out.println("현제페이지"+p.getPage());
-		System.out.println("총페이지"+p.getTotalPage()); //총페이지
-		System.out.println("시작페이지 "+p.getStartPage() +"마지막페이지 "+ p.getEndPage());
+//		System.out.println("현재페이지"+p.getPage());
+//		System.out.println("총페이지"+p.getTotalPage()); //총페이지
+//		System.out.println("시작페이지 "+p.getStartPage() +"마지막페이지 "+ p.getEndPage());
 		
 		/////page정보 실어줌
-		request.setAttribute("page", p.getPage());
-		request.setAttribute("startPage", p.getStartPage());
-		request.setAttribute("endPage", p.getEndPage());
+		request.setAttribute("page", p.getPage());				//지금페이지
+		request.setAttribute("startPage", p.getStartPage());	//페이지목록 시작번호
+		request.setAttribute("endPage", p.getEndPage());		//페이지목록 끝번호
+		request.setAttribute("countPage", p.getCountPage());
+		request.setAttribute("totalPage", p.getTotalPage());	
 		
 ///////////////////////////////////페이지테스트중 end
 		

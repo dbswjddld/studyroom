@@ -63,13 +63,17 @@
 			
 			<!-- 페이지목록 -->
 			<form name="pagebtn" id="pagebtn" action="Qna.do">
-				
+				<c:if test= "${page gt countPage}" >
+					<button id="page" name="page" type="submit" onclick="form.submit()" value="${startPage-1}">이전</button>
+				</c:if>
 				<c:forEach  begin="${startPage }" end="${endPage }" step="1" varStatus="page" >
 					<button id="page" name="page" type="submit" value="${page.current}" onclick="form.submit()">${page.current }</button>
 				</c:forEach>
 				
 				<!--  수정해야딤  -->
-				<button id="page" name="page" type="submit" onclick="form.submit()" value="${endPage+1}">다음</button>
+				<c:if test= "${(totalPage-1)/5*5 ge page}" >
+					<button id="page" name="page" type="submit" onclick="form.submit()" value="${endPage+1}">다음</button>
+				</c:if>
 			</form>
 			
 			<form name="btn" id="btn">

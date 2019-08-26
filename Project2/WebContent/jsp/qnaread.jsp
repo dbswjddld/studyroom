@@ -38,15 +38,11 @@
 		  
 		  xhttp.open("GET", url, true);
 		  xhttp.send();
+		  
+		$("#replyup").on("click", function(){
+			console.log("hihihihihihihi");
+		});
 
-	
-	function onupdate(cno){
-		cno;
-	}
-	
-	function ondelete(){
-		
-	}
 	
 	//댓글달기버튼 클릭하면
 	$("#replyInsert").on("click", function(){
@@ -60,29 +56,33 @@
                 replycontent: $("#replycontent").val()	//댓글내용
             },
 			success: function(result){
-				console.log(result);
-				$("#commentstb").append(
-                        $("<tr>").append(
-                            $("<td>").text($("#id").val()),
-                            $("<td>").text($("#replycontent").val()),
-                            $("<td>").text($("sysdate").val()),		//dao에서 sysdate받아와야?
-                            $("<td>").html($("<button>").text("수정").click(onupdate)),	//버튼추가	//수정해야
-                            $("<td>").html($("<button>").text("삭제").click(ondelete))				//됩니다
-                        )
-                    );
-                    $("#replycontent").val("");
-			}
-		})
-		
-		
-		
-	});
+				if(result > 0){
+					console.log(result);
+					$("#commentstb").append(
+	                        $("<tr>").append(
+	                            $("<td>").text($("#id").val()),
+	                            $("<td>").text($("#replycontent").val()),
+	                            $("<td>").text($("sysdate").val()),		//dao에서 sysdate받아와야?
+	                            $("<td>").html($("<button>").text("수정").click(onupdate)),	//버튼추가	//수정해야
+	                            $("<td>").html($("<button>").text("삭제").click(ondelete))				//됩니다
+	                        )
+	                    );
+	                    $("#replycontent").val("");
+					}
+				}
+			})
+		});
 	
 	});
 	
-	
-	
-	
+//	function onupdate(n){
+//		console.log("update");
+//		alert("fdsg");
+//	}
+//	
+//	function ondelete(){
+//		
+//	}
 	
 	
 	
@@ -103,7 +103,7 @@
 		var form = document.frm;
 		form.bno.value = n;		// form. 은 name
 		form.action="QnaDel.do";
-		var check = confirm(n+"정말 삭제하시겠습니까?");
+		var check = confirm("정말 삭제하시겠습니까?");
 		if(!check){
 			return false;
 		}
