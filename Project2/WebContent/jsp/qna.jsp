@@ -22,7 +22,7 @@
 				document.btn.action="QnaWritePage.do";
 				document.btn.method="post"; 
 								
-				document.btn.sid.value = "dong";//테스트용 아이디 세션작업되면 "dong" 수정해야함
+				document.btn.sid.value = "${mid}";//테스트용 아이디 세션작업되면 "dong" 수정해야함
 				
 				document.btn.submit();
 				

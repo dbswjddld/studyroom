@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import co.yedam.studyroom.common.DAO;
-import co.yedam.studyroom.dto.BoardDto;
 import co.yedam.studyroom.dto.CommentsDto;
 
 /**
@@ -55,7 +54,43 @@ public class CommentsDao {
 			return list;
 		}// boardList end
 		
+		public int insertComments(CommentsDto comments) {
+			int r = 0;
+			String sql = "insert into comments (bno, cno, id, reply, cdate)"
+					+ " values(?, ?, ?, ?, sysdate)";
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, comments.getBno());
+				psmt.setInt(2, comments.getCno());
+				psmt.setString(3, comments.getId());
+				psmt.setString(4, comments.getReply());
+				r = psmt.executeUpdate();
+				System.out.println(r + " row inserted.");
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return r;
+		}
 		
+		
+		//0826 곽동우 새댓글 번호 가져오기
+		public int getCommentsNo() {
+			int n = 0;
+			String sql = "select max(cno)+1 as cno from comments";
+			try {
+				psmt = conn.prepareStatement(sql);
+				rs = psmt.executeQuery();
+				if(rs.next()) {
+					n = rs.getInt("cno");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return n;
+			
+		}
+
 
 
 }

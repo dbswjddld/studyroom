@@ -16,9 +16,9 @@
 		    if (this.readyState == 4 && this.status == 200) {  	//4 응답완료 되고 성공이면// this.status ==		500서버오류	
 		    	
 		       var list = JSON.parse(this.responseText);	//this.responseText 응답결과
-		     	var str = "<table border>";
+		     	var str = "<table id='commentstb' border>";
 		    	for(i=0; i<list.length; i++){
-		    		str += "<tr>" 
+		    		str += "<tr id="+list[i].cno+">" 
 		    		      + "<td>" + list[i].id + "</td>" 
 		    		      + "<td>" + list[i].reply + "</td>" 
 		    		      + "<td>" + list[i].cdate + "</td>" 
@@ -38,7 +38,7 @@
 		  
 		  xhttp.open("GET", url, true);
 		  xhttp.send();
-		});
+
 	
 	function onupdate(cno){
 		cno;
@@ -48,25 +48,37 @@
 		
 	}
 	
-	
+	//댓글달기버튼 클릭하면
 	$("#replyInsert").on("click", function(){
-		var requestPage = "${pageContext.request.contextPath}/FController";
+		var requestPage = "${pageContext.request.contextPath}/ReplyInsert.do";
+		console.log(requestPage);
 		$.ajax({
 			url: requestPage,
 			data: {
-                action: "ReplyInsert.do",
                 bno: $("#bno").val(),		//게시글번호
                 id: $("#id").val() 					,		//작성자id
                 replycontent: $("#replycontent").val()	//댓글내용
             },
 			success: function(result){
 				console.log(result);
+				$("#commentstb").append(
+                        $("<tr>").append(
+                            $("<td>").text($("#id").val()),
+                            $("<td>").text($("#replycontent").val()),
+                            $("<td>").text($("sysdate").val()),		//dao에서 sysdate받아와야?
+                            $("<td>").html($("<button>").text("수정").click(onupdate)),	//버튼추가	//수정해야
+                            $("<td>").html($("<button>").text("삭제").click(ondelete))				//됩니다
+                        )
+                    );
+                    $("#replycontent").val("");
 			}
 		})
 		
+		
+		
 	});
 	
-	
+	});
 	
 	
 	
@@ -136,12 +148,9 @@
 				<h3>댓글표현</h3>
 			</div>
 			
-			<textarea name="replycontent" rows="2" cols="10" placeholder="댓글"></textarea>
-			<button type="button" id="replyInsert" onclick="">댓글달기</button><br>
-			
-			
-			
-			<button type="button" id="requestBtn" onclick="loadReply()">테스트</button>
+			<textarea id="replycontent" name="replycontent" rows="2" cols="10" placeholder="댓글"></textarea>
+			<button type="button" id="replyInsert">댓글달기</button><br>
+		
 			<button type="button" onclick="qnaUpdate(${dto.bno})">수정</button>
 			<button type="button" onclick="qnaDel(${dto.bno})">삭제</button>
 			<button type="button" onclick="location.href='Qna.do'">목록</button>	<!-- 게시글 들어오기 전 페이지로이동 -->
