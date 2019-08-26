@@ -47,6 +47,7 @@ public class StudyroomDao {
 			while(rs.next()) {
 				dto = new StudyroomDto();
 				dto.setRname(rs.getString("rname"));
+				dto.setRnum(rs.getInt("rnum"));
 				dto.setRinfo(rs.getString("rinfo"));
 				list.add(dto);
 			}

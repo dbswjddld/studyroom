@@ -20,7 +20,7 @@ public class MemberEditUpdate implements Command {
 		dto.setPw(request.getParameter("pw"));
 		dto.setEmail(request.getParameter("email"));
 		dto.setEmailres(request.getParameter("emailres"));
-		System.out.println("email res : " + request.getAttribute("emailres")); // null
+		System.out.println("email res : " + request.getParameter("emailres")); // null
 		
 		
 		dto.setTel(request.getParameter("tel"));
