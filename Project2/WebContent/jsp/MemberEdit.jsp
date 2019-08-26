@@ -10,14 +10,12 @@
    <script>
    $(document).ready(function(){
       // 체크박스 value Y 또는 N으로 설정
-      $("#good").change(function(){ // 체크박스 바뀔때마다 실행
-         if($("#good").prop("checked")) { // 체크박스가 체크되어있으면
-            $("#good").val("Y"); // 체크박스의 value를 Y로 바꾸기
-         } else { // 아니면 (체크 안되어있으면)
-            $("#good").val("N"); // 체크박스의 value를 N으로 바꾸기
-         }
-  		console.log($("#good").val()); // ok
-      });
+      var x = "${result.emailres}"; // Y 또는 N
+      if(x == 'Y') {
+    	  $("#goodyes").attr("checked", true);
+      } else {
+    	  $("#goodno").attr("checked", true);
+      }
    });
    </script>
 </head>
@@ -34,7 +32,7 @@
 					<ul class="alt">
 						<li><a href="MyReservation.do">예약 내역</a></li>
 						<li><a href="#">내 문의 내역</a></li>
-						<li><a href="#">회원 정보 수정</a></li>
+						<li><a href="MemberEditLogin.do">회원 정보 수정</a></li>
 					</ul>
 				</section>
 			</div>
@@ -63,8 +61,9 @@
 				<th>이메일 *</th>
 				<td><input type = "text" name = "email" value = "${result.email }">
 				입력한 이메일은 ID 또는 PW 찾을때 이용됩니다.<br>
-				이메일로 문의사항을 받아보시겠습니까?<input type="checkbox" id="good" name="emailres" value = "Y">
-				<label for="good"></label></td>
+				이메일로 문의사항을 받아보시겠습니까?
+				<input type="radio" id="goodyes" name="emailres" value = "Y">Yes<label for="goodyes"></label>
+				<input type="radio" id="goodno" name="emailres" value = "N">NO<label for="goodno"></label></td>
 			</tr>
 			<tr>
 				<th>전화번호</th>
@@ -73,7 +72,7 @@
 		</table>
 		<br>
 		<input type = "submit" value = "회원정보수정" > &nbsp;&nbsp;
-		<input type = "button" value = "회원탈퇴" onclick = "location.href = 'index.jsp'">
+		<input type = "button" value = "회원탈퇴" onclick = "location.href = 'MemberWithdrawal.do?id=${result.id}'">
 	</form>
 	</div>
 			</div>

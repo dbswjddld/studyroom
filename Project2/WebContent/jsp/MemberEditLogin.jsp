@@ -36,7 +36,7 @@
 				</section>
 			</div>
 			<div class="9u skel-cell-important">
-				<div class = "resContents">
+				<div class = "resContents" align = "center">
 	<h3>회원정보수정</h3>
 	<script>fail(${result})</script>
 	<form action = "MemberEditFrm.do" method="post" name = "frm">

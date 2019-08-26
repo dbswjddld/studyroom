@@ -67,7 +67,7 @@ public class MemberDao {
 			psmt.setString(3, dto.getEmail());
 			psmt.setString(4, dto.getTel());
 			psmt.setString(5, "U");
-			psmt.setString(6, "Y");
+			psmt.setString(6, dto.getEmailres());
 			n = psmt.executeUpdate();
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -137,16 +137,13 @@ public class MemberDao {
 		return output;
 	}
 	
-	public int Withdrawal(MemberDto dto) { //회원정보수정
+	public int Withdrawal(MemberDto dto) { //회원정보삭제
 		int n = 0;
-		String sql = "update member set pw = ?, email = ?, tel = ?, emailres = ? where id = ?";
+		String sql = "update member set mgrant = ? where id = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, dto.getPw());
-			psmt.setString(2, dto.getEmail());
-			psmt.setString(3, dto.getTel());
-			psmt.setString(4, dto.getEmailres());
-			psmt.setString(5, dto.getId());
+			psmt.setString(1, "X");
+			psmt.setString(2, dto.getId());
 			n = psmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
