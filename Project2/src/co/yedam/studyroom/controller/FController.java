@@ -29,7 +29,6 @@ import co.yedam.studyroom.command.QnaUpdatePage;
 import co.yedam.studyroom.command.QnaWrite;
 import co.yedam.studyroom.command.QnaWritePage;
 import co.yedam.studyroom.command.ReservationPage;
-import co.yedam.studyroom.command.ReservationPage2;
 import co.yedam.studyroom.command.ReservationAdmin;
 import co.yedam.studyroom.command.ReservationCancel;
 import co.yedam.studyroom.command.ReservationCancelAdmin;
@@ -60,7 +59,7 @@ public class FController extends HttpServlet {
 		map.put("/ReservationContents.do", new ReservationContents()); // 마이페이지 - 예약 상세보기
 		map.put("/ReservationCancel.do", new ReservationCancel()); // 마이페이지 - 예약 취소하기
 		map.put("/ReservationPage.do", new ReservationPage()); // 예약하기 페이지로 이동
-		map.put("/ReservationPage2.do", new ReservationPage2()); // 예약하기 - 시간 선택 페이지로 이동
+		
 		
 		
 		
