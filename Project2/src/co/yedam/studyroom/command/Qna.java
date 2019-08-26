@@ -50,10 +50,12 @@ public class Qna implements Command {
 		int startbno = endbno-(p.getCountList()-1);		//시작게시글
 //		System.out.println(endbno + "끝게시글");
 //		System.out.println(startbno + "처음게시글");
-		list = dao.curPageBoard(startbno,endbno);
+		
 		
 		System.out.println(p.getCountList());
 		p.run(dao.boardCount());
+		
+		list = dao.curPageBoard(startbno,endbno);
 		
 		System.out.println("현제페이지"+p.getPage());
 		System.out.println("총페이지"+p.getTotalPage()); //총페이지

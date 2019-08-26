@@ -10,6 +10,12 @@ import java.util.ArrayList;
 import co.yedam.studyroom.common.DAO;
 import co.yedam.studyroom.dto.BoardDto;
 
+/**
+ * 
+ * @author 곽동우 20180826
+ * 	
+ *
+ */
 public class BoardDao {
 	private Connection conn;
 	private PreparedStatement psmt;
@@ -42,7 +48,7 @@ public class BoardDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			close();
+			DAO.close(conn, psmt, rs);
 		}
 		return list;
 	}// boardList end
@@ -67,7 +73,7 @@ public class BoardDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			close();
+			DAO.close(conn, psmt, rs);
 		}
 		return dto;
 	}	// boardSelect end
@@ -84,7 +90,7 @@ public class BoardDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			close();
+			DAO.close(conn, psmt, rs);
 		}
 		return n;
 	}
@@ -120,7 +126,7 @@ public class BoardDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			close();
+			DAO.close(conn, psmt, rs);
 		}
 		return n;
 	}
@@ -139,7 +145,7 @@ public class BoardDao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally {
-				close();
+				DAO.close(conn, psmt, rs);
 			}
 			return n;
 		}
@@ -163,13 +169,21 @@ public class BoardDao {
 		
 	//0825 현재 페이지 게시글만
 		public ArrayList<BoardDto> curPageBoard(int startbno, int endbno) {
-			String sql = "select * from board where bno between ? and ?";
+			String sql =    "select *\r\n" + 
+					"  from\r\n" + 
+					"    (select rownum as rnum, A.*\r\n" + 
+					"    from (\r\n" + 
+					"        select *\r\n" + 
+					"        from board\r\n" + 
+					"        order by bno ) A\r\n" + 
+					"    where rownum <=? ) B\r\n" + 
+					"where B.rnum >= ?";
 			dto = null;
 			ArrayList<BoardDto> list = new ArrayList<>();
 			try {
 				psmt = conn.prepareStatement(sql);
-				psmt.setInt(1, startbno);
-				psmt.setInt(2, endbno);
+				psmt.setInt(1, endbno);
+				psmt.setInt(2, startbno);
 				rs = psmt.executeQuery();
 				while (rs.next()) {
 					dto = new BoardDto();
@@ -183,25 +197,10 @@ public class BoardDao {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-//			finally {
-//				close();
-//			}
+			finally {
+				DAO.close(conn, psmt, rs);
+			}
 			return list;
 		}// boardList end
 	
-
-//	DB 닫는 메소드
-	public void close() {
-		try {
-			if (rs != null)
-				rs.close();
-			if (psmt != null)
-				psmt.close();
-			if (conn != null)
-				conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
 }

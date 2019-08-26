@@ -61,10 +61,15 @@
 			<div></div>
 			</form>	<!-- 개선? -->
 			
+			<!-- 페이지목록 -->
 			<form name="pagebtn" id="pagebtn" action="Qna.do">
+				
 				<c:forEach  begin="${startPage }" end="${endPage }" step="1" varStatus="page" >
 					<button id="page" name="page" type="submit" value="${page.current}" onclick="form.submit()">${page.current }</button>
 				</c:forEach>
+				
+				<!--  수정해야딤  -->
+				<button id="page" name="page" type="submit" onclick="form.submit()" value="${endPage+1}">다음</button>
 			</form>
 			
 			<form name="btn" id="btn">
