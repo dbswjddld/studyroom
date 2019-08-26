@@ -6,7 +6,7 @@ import java.sql.Time;
 public class ReservationDto {
 	private String rname; // 방 이름
 	private String id; // 예약한사람 아이드
-	private Date usedate; // 이용할 날짜
+	private String usedate; // 이용할 날짜
 	private Time starttime; // 이용 시작 시간
 	private Time endtime;
 	private int rno; // 예약 번호
@@ -32,11 +32,11 @@ public class ReservationDto {
 		this.id = id;
 	}
 
-	public Date getUsedate() {
+	public String getUsedate() {
 		return usedate;
 	}
 
-	public void setUsedate(Date date) {
+	public void setUsedate(String date) {
 		this.usedate = date;
 	}
 

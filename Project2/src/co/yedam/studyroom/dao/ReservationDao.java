@@ -48,7 +48,7 @@ public class ReservationDao {
 			while(rs.next()) {
 				dto = new ReservationDto();
 				dto.setId(rs.getString(1));
-				dto.setUsedate(rs.getDate(2));
+				dto.setUsedate(rs.getString(2));
 				dto.setStarttime(rs.getTime(3));
 				dto.setEndtime(rs.getTime(4));
 				dto.setRname(rs.getString(5));
@@ -74,7 +74,7 @@ public class ReservationDao {
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				dto = new ReservationDto();
-				dto.setUsedate(rs.getDate(1));
+				dto.setUsedate(rs.getString(1));
 				dto.setStarttime(rs.getTime(2));
 				dto.setEndtime(rs.getTime(3));
 				dto.setRname(rs.getString(4));
@@ -104,7 +104,7 @@ public class ReservationDao {
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				dto = new ReservationDto();
-				dto.setUsedate(rs.getDate(1));
+				dto.setUsedate(rs.getString(1));
 				dto.setStarttime(rs.getTime(2));
 				dto.setEndtime(rs.getTime(3));
 				dto.setRname(rs.getString(4));
@@ -132,7 +132,7 @@ public class ReservationDao {
 			if(rs.next()) {
 				dto = new ReservationDto();
 				dto.setRname(rs.getString(1));
-				dto.setUsedate(rs.getDate(2));
+				dto.setUsedate(rs.getString(2));
 				dto.setStarttime(rs.getTime(3));
 				dto.setEndtime(rs.getTime(4));
 				dto.setStatus(rs.getString(5));
