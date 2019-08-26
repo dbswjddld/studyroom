@@ -1,6 +1,8 @@
 package co.yedam.studyroom.common;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.naming.Context;
@@ -24,5 +26,18 @@ public class DAO { // super dao class
 			e.printStackTrace();
 		}
 		return conn;
+	}
+	
+	public static void close(Connection conn, PreparedStatement psmt, ResultSet rs) {
+		try {
+			if (rs != null)
+				rs.close();
+			if (psmt != null)
+				psmt.close();
+			if (conn != null)
+				conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
