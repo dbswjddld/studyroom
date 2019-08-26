@@ -17,7 +17,7 @@
 		
 		date_change();
 		
-		$(".time_select").hide();
+		select1();
 		
 		// 시작시간 9시부터 20시까지 선택가능
 		for(var i = 9; i < 21; i++){
@@ -34,13 +34,24 @@
 		 */
 	})
 	
-	function date_change(){
-		var input = $("#date").val(); // 입력한 날짜
-		$(".date_select").html(input); // 우측에 날짜 출력 (YYYY-MM-DD)
+	// 방 선택 화면
+	function select1(){
 		$(".roominfo").show();
 		$(".time_select").hide();
 	}
+	// 시간 선택 화면
+	function select2(){
+		$(".roominfo").hide();
+		$(".time_select").show();
+	}
 	
+	function date_change(){
+		var input = $("#date").val(); // 입력한 날짜
+		$(".date_select").html(input); // 우측에 날짜 출력 (YYYY-MM-DD)
+		select1();
+	}
+	
+	// 날짜를 선택했을 때
 	function select(num, name){
 		// 날짜 선택 안했을 때 (x 눌렀을 때)
 		if($("#date").val() == "") {
@@ -49,8 +60,7 @@
 			$("#rnum").val(num);
 			$("#rname").val(name);
 			$(".show").text(name);
-			$(".roominfo").hide();
-			$(".time_select").show();
+			select2();
 		}
 	}
 	
@@ -62,6 +72,13 @@
 			$option = $("<option>").val(i).text(i + "시");
 			$("#end").append($option);
 		}
+	}
+	
+	// 예약하기 버튼 클릭
+	function submitFunc(){
+		$("#starttime").val($("#start").val());
+		$("#endtime").val($("#end").val())
+		$("#frm").submit();
 	}
 	</script>
 	<style>
@@ -83,10 +100,13 @@
 	<div class = "row">
 		<!-- 왼쪽 달력 나온느 부분 -->
 		<div class = "3u">
-			<form id = "frm" action = "ReservationPage2.do" method = "post">
+			<form id = "frm" action = "ReservationInsert.do" method = "post">
 				<input type = "Date" name = "usedate" id = "date" onchange = "date_change()">
 				<input type = "hidden" name = "rnum" id = "rnum">
 				<input type = "hidden" name = "rname" id = "rname">
+				<input type = "hidden" name = "starttime" id = "starttime">
+				<input type = "hidden" name = "endtime" id = "endtime">
+				<input type = "hidden" name = "id" id = "id" value = "${mid}">
 			</form>
 		</div>
 		
@@ -110,7 +130,8 @@
 				<div class = "show"></div>
 				시작 시간 : <select id = "start" onchange = "select_end()"></select><br>
 				종료 시간 : <select id = "end"></select><br>
-				
+				<input type = "button" value = "이전 화면으로" onclick = "select1()">
+				<input type = "button" value = "예약하기" onclick = "submitFunc()">
 			</div>
 		</div>
 	</div>
