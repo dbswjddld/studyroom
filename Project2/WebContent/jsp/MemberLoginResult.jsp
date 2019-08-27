@@ -7,9 +7,12 @@
 	<title>^-^</title>
 </head>
 <body>
-<div align = "center">
-	<jsp:include page = "topmenu.jsp"></jsp:include>
-	<h3>${mid}님 안녕하세요</h3>
-</div>
+	<jsp:include page = "new_menuTop.jsp"></jsp:include>
+	<header>
+		<h1></h1>
+	</header>
+	<div class = "contentbox" align = "center">
+		<h3>${mid}님 안녕하세요</h3>
+	</div>
 </body>
 </html>

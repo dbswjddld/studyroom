@@ -31,10 +31,12 @@
 	</script>
 </head>
 <body>
-	<div align = "center">
-	<jsp:include page = "topmenu.jsp"></jsp:include>
-	<h3>회원가입</h3>
-	<form action = "MemberJoinOk.do" method="post" name = "frm" onsubmit = "return formCheck()">
+	<jsp:include page = "new_menuTop.jsp"></jsp:include>
+	<header>
+		<h1>회원가입</h1>
+	</header>
+	<div class = "contentbox" align = "center">
+		<form action = "MemberJoinOk.do" method="post" name = "frm" onsubmit = "return formCheck()">
 		<table border = "1" cellpadding = "5">
 			<tr>
 				<th width = "150">아이디 *</th>

@@ -17,10 +17,12 @@
 	</script>
 </head>
 <body>
-	<div align = "center">
-	<jsp:include page = "topmenu.jsp"></jsp:include>
-<c:if test = "${login == null }">
-	<h3>로그인</h3>
+	<jsp:include page = "new_menuTop.jsp"></jsp:include>
+	<header>
+		<h1>로그인</h1>
+	</header>
+	<div class = "contentbox">
+	<c:if test = "${login == null }">
 	<script>fail(${result})</script>
 	<form action = "MemberLoginOk.do" method="post" name = "frm">
 		<table border = "1" cellpadding = "5">
@@ -39,10 +41,7 @@
 		<input type = "submit" value = "로그인"> &nbsp;&nbsp;
 		<input type = "button" value = "취소" onclick = "location.href='index.jsp'">
 	</form>
-</c:if>
-<c:if test = "${login != null }">
-	${name } 안뇽 ㅎㅎ
-</c:if>
+	</c:if>
 	</div>
 </body>
 </html>

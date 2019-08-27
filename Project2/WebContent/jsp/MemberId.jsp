@@ -7,6 +7,11 @@
 	<title>* ID 중복확인 *</title>
 </head>
 <body>
+	<jsp:include page = "new_menuTop.jsp"></jsp:include>
+	<header>
+		<h1></h1>
+	</header>
+	<div class = "contentbox" align = "center">
 <%
 	String chk = (String)request.getAttribute("result");
 	// chk 가 1이면 중복
@@ -23,5 +28,6 @@
 <%
 	}
 %>
+</div>
 </body>
 </html>

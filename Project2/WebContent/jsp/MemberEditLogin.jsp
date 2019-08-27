@@ -44,7 +44,7 @@
 			</ul>
 		</nav>
 	</div>
-	<div class = "contentboxRight">
+	<div class = "contentboxRight" align = "center">
 		<form action = "MemberEditFrm.do" method="post" name = "frm">
 		<table border = "1" cellpadding = "5">
 			<tr>

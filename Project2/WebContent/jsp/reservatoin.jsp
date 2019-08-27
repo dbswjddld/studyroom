@@ -9,6 +9,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>study room reservation</title>
+	<style>
+	.contentboxLeft {
+		float :left;
+		width : 200px; /* 왼쪽 사이드바 너비 */
+		padding :10px;
+	}
+	.contentboxRight {
+		float :left;
+		width : 1000px; /* 본문 너비 */
+		padding :15px;
+	}
+	/* 왼쪽 사이드바와 본문 너비의 합은 1200이 되어야 한다 */
+	.contentboxLeft > .sidemenu>ul>li {
+		width :100%;
+	}
+	</style>
 	<script src = "https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script>
 	$(document).ready(function(){
@@ -89,15 +105,11 @@
 	</style>
 </head>
 <body>
-	<jsp:include page = "topmenu.jsp"></jsp:include>
-</body>
-
-<section id="main" class="wrapper style1">
-	<header class="major">
-		<h2>예약하기</h2>
+	<jsp:include page = "new_menuTop.jsp"></jsp:include>
+	<header>
+		<h1>예약하기</h1>
 	</header>
-	<div class="container">
-	<div class = "row">
+	<div class = "contentboxLeft">
 		<!-- 왼쪽 달력 나온느 부분 -->
 		<div class = "3u">
 			<form id = "frm" action = "ReservationInsert.do" method = "post">
@@ -109,9 +121,8 @@
 				<input type = "hidden" name = "id" id = "id" value = "${mid}">
 			</form>
 		</div>
-		
-		<!-- 오른쪽 방 정보 -->
-		<div class = "9u">
+	</div>
+	<div class = "contentboxRight">
 			<!-- 선택한 날짜 출력 -->
 			<div class = "date_select" align = "center"></div>
 			<hr>
@@ -133,8 +144,5 @@
 				<input type = "button" value = "이전 화면으로" onclick = "select1()">
 				<input type = "button" value = "예약하기" onclick = "submitFunc()">
 			</div>
-		</div>
 	</div>
-	</div>
-</section>
 </html>

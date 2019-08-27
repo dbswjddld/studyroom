@@ -12,7 +12,7 @@
 	<header>
 		<h1></h1>
 	</header>
-	<div class = "contentbox">
+	<div class = "contentbox" align = "center">
 		<script>
 			console.log(${mid });
 		</script>
