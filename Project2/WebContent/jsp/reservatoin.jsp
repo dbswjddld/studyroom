@@ -41,14 +41,7 @@
 			$("#start").append($option);
 		}
 		select_end();
-		
-		/* 
-		-- rnum(방코드) rname id usedate starttime endtime rno(예약번호) status reqdate
-		INSERT INTO reservation (rnum, rname, id, usedate, starttime, endtime, rno, status, reqdate)
-		VALUES (2, '6인실', '1234', to_date('2019-08-23','YYYY-MM-DD'), 
-				to_timestamp('9:00','HH24:MI'), to_timestamp('10:00','HH24:MI'),(select max(rno) from reservation)+1, null, sysdate);
-		 */
-	})
+		})
 	
 	// 방 선택 화면
 	function select1(){

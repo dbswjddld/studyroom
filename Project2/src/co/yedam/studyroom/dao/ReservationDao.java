@@ -163,4 +163,35 @@ public class ReservationDao {
 		}
 		return result;
 	}
+
+	// [윤정 0827] 예약하기
+	public int insert(ReservationDto dto) {
+		int result = 0;
+		/* 
+		-- rnum(방코드) rname id usedate starttime endtime rno(예약번호) status reqdate
+		INSERT INTO reservation (rnum, rname, id, usedate, starttime, endtime, rno, status, reqdate)
+		VALUES (2, '6인실', '1234', to_date('2019-08-23','YYYY-MM-DD'), 
+				to_timestamp('9:00','HH24:MI'), to_timestamp('10:00','HH24:MI'),(select max(rno) from reservation)+1, null, sysdate);
+		 */
+		String sql = "INSERT INTO reservation (rnum, rname, id, usedate, starttime, endtime, rno, status, reqdate) "
+				+ "VALUES (?, ?, ?,"
+				+ " to_date('" + dto.getUsedate() + "','YYYY-MM-DD'),"
+				+ " to_timestamp('" + dto.getUsedate() + " " + dto.getStarttime() + "','YYYY-MM-DD HH24'),"
+				+ " to_timestamp('" + dto.getUsedate() + " " + dto.getEndtime() + "','YYYY-MM-DD HH24'), " 
+				+ "(select max(rno) from reservation)+1, '예약완료', sysdate)";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, dto.getRnum());
+			psmt.setString(2, dto.getRname());
+			psmt.setString(3, dto.getId());
+			System.out.println(sql);
+			result = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return result;
+	}
 }
