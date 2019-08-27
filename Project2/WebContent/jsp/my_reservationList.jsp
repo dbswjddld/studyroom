@@ -21,6 +21,9 @@
 	.contentboxLeft > .sidemenu>ul>li {
 		width :100%;
 	}
+	.myResList{
+		padding :10px;
+	}
 	</style>
 	<style>
 	.myResList{
@@ -31,26 +34,26 @@
 	</style>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script>
+	
 	$(document).ready(function(){
-		var result = ${cancelResult};
-		if(result > 0){
+		// 상세내역 - 예약취소 하고 다시 이 페이지로 넘어왔을 때 실행
+		var result = "${cancelResult}";
+		if(result == '1'){
 			alert("예약이 취소되었습니다.");
-		}else if(result == 0){
+		}else if(result == '0'){
 			alert("예약 취소에 실패했습니다.");
 		}
+		
+		// 검색해서 이 페이지로 왔을때, 해당 검색 select option이 selected되게
+		var searchOpt = "${searchOpt}";
+		if(searchOpt.length > 0)
+			$("[value='" + searchOpt + "']").prop("selected", true);
 	});
 	
+	// select로 검색 옵션 선택
 	function listSearch(){
-		var op = document.getElementById("search").options.selectedIndex;
-		if(op == 0){ // 전체
-			location.href = "MyReservation.do";
-		}else if(op == 1){ // 예약완료 
-			location.href = "MyReservationSearch.do?option=null";
-		}else if(op == 2){ // 예약취소
-			location.href = "MyReservationSearch.do?option=0";
-		}else if(op == 3){ // 이용 완료
-			location.href = "MyReservationSearch.do?option=1";
-		}
+		$("#frm").submit();
+		
 	}
 	</script>
 </head>
@@ -71,28 +74,22 @@
 	</div>
 	<div class = "contentboxRight">
 			클릭시 세부정보를 확인할 수 있습니다.
-			<select id = "search">
-				<option>전체</option>
-				<option>예약 완료</option>
-				<option>예약 취소</option>
-				<option>이용 완료</option>
+			<form name = "frm" id = "frm" method = "post" action = "MyReservationSearch.do">
+			<input type = "hidden" name = "id" value = "${mid}">
+			<select name = "search" id = "search" onchange = "listSearch()">
+				<option value = "전체">전체</option>
+				<option value = "예약완료">예약 완료</option>
+				<option value = "예약취소">예약 취소</option>
+				<option value = "이용완료">이용 완료</option>
 			</select>
-			<input type = "button" value = "검색" onclick = "listSearch()">
+			</form>
 			<br>
 			<c:forEach items="${list}" var="dto">
 				<div class = "myResList" onclick = "location.href='ReservationContents.do?rno=${dto.rno}'">
 					<h3>${dto.rname}</h3>
 					${dto.usedate}<br>
 					${dto.starttime}~${dto.endtime}<br>
-					<c:if test = "${dto.status==1}">
-					이용 완료
-					</c:if>
-					<c:if test = "${dto.status==0}">
-					예약 취소
-					</c:if>
-					<c:if test = "${dto.status==null}">
-					예약 완료
-					</c:if>
+					${dto.status}
 				</div>
 				<br>
 			</c:forEach>

@@ -21,6 +21,9 @@
 	.contentboxLeft > .sidemenu>ul>li {
 		width :100%;
 	}
+	.resContents{
+		padding :10px;
+	}
 	</style>
 	<style>
 	.resContents{
@@ -60,17 +63,9 @@
 			<b>이용 날짜: ${dto.usedate}</b><br>
 			<b>이용 시간 : ${dto.starttime} ~ ${dto.endtime}</b><br>
 			예약한 날짜 : ${dto.reqdate}<br>
-			상태 :<c:if test = "${dto.status==1}">
-				이용 완료
-				</c:if>
-				<c:if test = "${dto.status==0}">
-				예약 취소
-				</c:if>
-				<c:if test = "${empty dto.status}">
-				예약 완료<br>
-				</c:if>
-				<form name = "frm" method = "post">
-				<c:if test = "${empty dto.status}">
+			상태 :${dto.status}<br>
+			<form name = "frm" method = "post">
+				<c:if test = "${dto.status == '예약완료'}">
 					<input type = "hidden" name = "rno" value = "${dto.rno}">
 					<input type = "button" value = "예약취소" onclick = "cancel()">
 				</c:if>

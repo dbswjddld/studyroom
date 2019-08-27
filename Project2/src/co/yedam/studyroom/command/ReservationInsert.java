@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.yedam.studyroom.common.Command;
+import co.yedam.studyroom.common.HttpRes;
+import co.yedam.studyroom.dao.ReservationDao;
 import co.yedam.studyroom.dto.ReservationDto;
 
 public class ReservationInsert implements Command {
@@ -18,7 +20,25 @@ public class ReservationInsert implements Command {
 		
 		String id = request.getParameter("id");
 		String usedate = request.getParameter("usedate");
-
+		int rnum = Integer.parseInt(request.getParameter("rnum"));
+		String rname = request.getParameter("rname");
+		String starttime = request.getParameter("starttime");
+		String endtime = request.getParameter("endtime");
+		
+		dto.setId(id);
+		dto.setUsedate(usedate);
+		dto.setRnum(rnum);
+		dto.setRname(rname);
+		dto.setStarttime(starttime);
+		dto.setEndtime(endtime);
+		
+		ReservationDao dao = new ReservationDao();
+		int result = dao.insert(dto);
+		
+		request.setAttribute("result", result);
+		
+		String viewPage = "jsp/ReservationResult.jsp";
+		HttpRes.forward(request, response, viewPage);
 	}
 
 }
