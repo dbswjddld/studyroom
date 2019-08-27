@@ -32,7 +32,7 @@
 	<script>
 	$(document).ready(function() {
 	    $('#table').DataTable( {
-	        "ajax": '../AdminReservationList'
+	        "ajax": 'AdminReservationList'
 	    } );
 	} );
 	</script>

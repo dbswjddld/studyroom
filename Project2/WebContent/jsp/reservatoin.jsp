@@ -118,7 +118,10 @@
 				<input type = "hidden" name = "endtime" id = "endtime">
 				<input type = "hidden" name = "id" id = "id" value = "${mid}">
 			</form>
-			↑ 이용할 날짜를 선택
+			<font size = "3">
+			↑ 이용할 날짜를 선택 후<br>
+			이용할 스터디룸 선택 →
+			</font>
 	</div>
 	<div class = "contentboxRight">
 			<!-- 선택한 날짜 출력 -->

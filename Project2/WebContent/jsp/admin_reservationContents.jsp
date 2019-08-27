@@ -21,6 +21,9 @@
 	.contentboxLeft > .sidemenu>ul>li {
 		width :100%;
 	}
+	.resContents{
+		padding :10px;
+	}
 	</style>
 	<style>
 	.resContents{
