@@ -90,17 +90,15 @@ public class ReservationDao {
 		return list;
 	}
 
-	// [윤정 190819] 마이페이지 - 예약 내역 - 검색옵션 (취소, 이용 완료, 예약 완료) !!!!!!!!!!!!!!수정해야함!!!!!!!!!!!!!!!!
+	// [윤정 190819] 마이페이지 - 예약 내역 - 검색옵션 (취소, 이용 완료, 예약 완료)
 	public ArrayList<ReservationDto> myListSearch(String id, String search) {
 		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
 		String sql = "SELECT usedate, starttime, endtime, rname, status, rno FROM reservation WHERE id = ? AND status = ? ORDER BY usedate DESC";
-		if(search.equals("null")) // 예약완료 상태를 검색할때 (status is null)
-			sql = "SELECT usedate, starttime, endtime, rname, status, rno FROM reservation WHERE id = ? AND status is null ORDER BY usedate DESC";
 		
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
-			if(!search.equals("null")) psmt.setString(2, search);
+			psmt.setString(2, search);
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				dto = new ReservationDto();

@@ -4,7 +4,7 @@ ReservationDto Date, Time 타입 -> String 타입 변경
 할 일
 1 (완료)Reservation 테이블 status 수정 null, 0, 1 -> 예약완료, 예약취소, 이용완료
 2 (완료)예약확인 페이지에 status 부분
-3 내 예약내역 검색
+3 (완료)내 예약내역 검색
 ===========2019.08.26==============
 ReservationDto 의 usedate : Date -> String 타입 변경 (출력할때 포맷 설정하기)
 
