@@ -48,9 +48,9 @@ public class ReservationDao {
 			while(rs.next()) {
 				dto = new ReservationDto();
 				dto.setId(rs.getString(1));
-				dto.setUsedate(rs.getString(2));
-				dto.setStarttime(rs.getString(3));
-				dto.setEndtime(rs.getString(4));
+				dto.setUsedate(rs.getString(2).substring(0,10));
+				dto.setStarttime(rs.getString(3).substring(11,16));
+				dto.setEndtime(rs.getString(4).substring(11,16));
 				dto.setRname(rs.getString(5));
 				dto.setStatus(rs.getString(6));
 				dto.setRno(rs.getInt(7)); // 예약번호
@@ -74,9 +74,9 @@ public class ReservationDao {
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				dto = new ReservationDto();
-				dto.setUsedate(rs.getString(1));
-				dto.setStarttime(rs.getString(2));
-				dto.setEndtime(rs.getString(3));
+				dto.setUsedate(rs.getString(1).substring(0,10));
+				dto.setStarttime(rs.getString(2).substring(11,16));
+				dto.setEndtime(rs.getString(3).substring(11,16));
 				dto.setRname(rs.getString(4));
 				dto.setStatus(rs.getString(5));
 				dto.setRno(rs.getInt(6));
@@ -102,9 +102,9 @@ public class ReservationDao {
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				dto = new ReservationDto();
-				dto.setUsedate(rs.getString(1));
-				dto.setStarttime(rs.getString(2));
-				dto.setEndtime(rs.getString(3));
+				dto.setUsedate(rs.getString(1).substring(0,10));
+				dto.setStarttime(rs.getString(2).substring(11,16));
+				dto.setEndtime(rs.getString(3).substring(11,16));
 				dto.setRname(rs.getString(4));
 				dto.setStatus(rs.getString(5));
 				dto.setRno(rs.getInt(6));
@@ -130,9 +130,9 @@ public class ReservationDao {
 			if(rs.next()) {
 				dto = new ReservationDto();
 				dto.setRname(rs.getString(1));
-				dto.setUsedate(rs.getString(2));
-				dto.setStarttime(rs.getString(3));
-				dto.setEndtime(rs.getString(4));
+				dto.setUsedate(rs.getString(2).substring(0,10));
+				dto.setStarttime(rs.getString(3).substring(11,16));
+				dto.setEndtime(rs.getString(4).substring(11,16));
 				dto.setStatus(rs.getString(5));
 				dto.setReqdate(rs.getString(6));
 				dto.setRnum(rs.getInt(7));
