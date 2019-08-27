@@ -21,6 +21,9 @@
 	.contentboxLeft > .sidemenu>ul>li {
 		width :100%;
 	}
+	td,th {
+		padding :10px 30px;
+	}
 	</style>
 </head>
 <body>
@@ -38,8 +41,8 @@
 			</ul>
 		</nav>
 	</div>
-	<div class = "contentboxRight">
-		<table>
+	<div class = "contentboxRight" align = "center">
+		<table border = "1">
 			<tr>
 				<th>회원아이디</th>
 				<th>이용 날짜</th>
