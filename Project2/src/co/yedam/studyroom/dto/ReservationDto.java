@@ -1,8 +1,5 @@
 package co.yedam.studyroom.dto;
 
-import java.sql.Date;
-import java.sql.Time;
-
 public class ReservationDto {
 	private String rname; // 방 이름
 	private String id; // 예약한사람 아이드
