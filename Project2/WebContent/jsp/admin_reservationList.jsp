@@ -53,16 +53,7 @@
 				<td>${dto.usedate}</td>
 				<td>${dto.starttime} ~ ${dto.endtime}</td>
 				<td>${dto.rname}</td>
-				<td><c:if test = "${dto.status==1}">
-					이용 완료
-					</c:if>
-					<c:if test = "${dto.status==0}">
-					예약 취소
-					</c:if>
-					<c:if test = "${dto.status==null}">
-					예약 완료
-					</c:if>
-				</td>
+				<td>${dto.status}</td>
 			</tr>
 			</c:forEach>
 		</table>

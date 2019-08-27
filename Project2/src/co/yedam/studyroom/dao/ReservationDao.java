@@ -49,8 +49,8 @@ public class ReservationDao {
 				dto = new ReservationDto();
 				dto.setId(rs.getString(1));
 				dto.setUsedate(rs.getString(2));
-				dto.setStarttime(rs.getTime(3));
-				dto.setEndtime(rs.getTime(4));
+				dto.setStarttime(rs.getString(3));
+				dto.setEndtime(rs.getString(4));
 				dto.setRname(rs.getString(5));
 				dto.setStatus(rs.getString(6));
 				dto.setRno(rs.getInt(7)); // 예약번호
@@ -75,8 +75,8 @@ public class ReservationDao {
 			while(rs.next()) {
 				dto = new ReservationDto();
 				dto.setUsedate(rs.getString(1));
-				dto.setStarttime(rs.getTime(2));
-				dto.setEndtime(rs.getTime(3));
+				dto.setStarttime(rs.getString(2));
+				dto.setEndtime(rs.getString(3));
 				dto.setRname(rs.getString(4));
 				dto.setStatus(rs.getString(5));
 				dto.setRno(rs.getInt(6));
@@ -90,7 +90,7 @@ public class ReservationDao {
 		return list;
 	}
 
-	// [윤정 190819] 마이페이지 - 예약 내역 - 검색옵션 (취소, 이용 완료, 예약 완료)
+	// [윤정 190819] 마이페이지 - 예약 내역 - 검색옵션 (취소, 이용 완료, 예약 완료) !!!!!!!!!!!!!!수정해야함!!!!!!!!!!!!!!!!
 	public ArrayList<ReservationDto> myListSearch(String id, String search) {
 		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
 		String sql = "SELECT usedate, starttime, endtime, rname, status, rno FROM reservation WHERE id = ? AND status = ? ORDER BY usedate DESC";
@@ -105,8 +105,8 @@ public class ReservationDao {
 			while(rs.next()) {
 				dto = new ReservationDto();
 				dto.setUsedate(rs.getString(1));
-				dto.setStarttime(rs.getTime(2));
-				dto.setEndtime(rs.getTime(3));
+				dto.setStarttime(rs.getString(2));
+				dto.setEndtime(rs.getString(3));
 				dto.setRname(rs.getString(4));
 				dto.setStatus(rs.getString(5));
 				dto.setRno(rs.getInt(6));
@@ -133,10 +133,10 @@ public class ReservationDao {
 				dto = new ReservationDto();
 				dto.setRname(rs.getString(1));
 				dto.setUsedate(rs.getString(2));
-				dto.setStarttime(rs.getTime(3));
-				dto.setEndtime(rs.getTime(4));
+				dto.setStarttime(rs.getString(3));
+				dto.setEndtime(rs.getString(4));
 				dto.setStatus(rs.getString(5));
-				dto.setReqdate(rs.getDate(6));
+				dto.setReqdate(rs.getString(6));
 				dto.setRnum(rs.getInt(7));
 				dto.setRno(rs.getInt(8));
 			}
@@ -151,7 +151,7 @@ public class ReservationDao {
 	// [윤정 190820] 예약 취소하기
 	public int cancel(int rno) {
 		int result = 0;
-		String sql = "UPDATE reservation SET status = '0' WHERE rno = ?";
+		String sql = "UPDATE reservation SET status = '예약취소' WHERE rno = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, rno);

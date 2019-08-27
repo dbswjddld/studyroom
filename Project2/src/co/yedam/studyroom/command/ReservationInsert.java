@@ -18,7 +18,9 @@ public class ReservationInsert implements Command {
 		
 		String id = request.getParameter("id");
 		String usedate = request.getParameter("usedate");
-
+		int rnum = Integer.parseInt(request.getParameter("rnum"));
+		String rname = request.getParameter("rname");
+		
 	}
 
 }
