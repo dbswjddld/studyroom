@@ -7,7 +7,9 @@
 	<title>study room reservation</title>
 </head>
 <body>
-	<jsp:include page = "topmenu.jsp"></jsp:include>
-	<input type = "checkbox">
+	<jsp:include page = "new_menuTop.jsp"></jsp:include>
+	<div class = "contentbox">
+		
+	</div>
 </body>
 </html>

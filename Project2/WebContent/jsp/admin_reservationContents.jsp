@@ -7,6 +7,22 @@
 	<meta charset="UTF-8">
 	<title>study room reservation</title>
 	<style>
+	.contentboxLeft {
+		float :left;
+		width : 200px; /* 왼쪽 사이드바 너비 */
+		padding :10px;
+	}
+	.contentboxRight {
+		float :left;
+		width : 1000px; /* 본문 너비 */
+		padding :15px;
+	}
+	/* 왼쪽 사이드바와 본문 너비의 합은 1200이 되어야 한다 */
+	.contentboxLeft > .sidemenu>ul>li {
+		width :100%;
+	}
+	</style>
+	<style>
 	.resContents{
 		border : 1px solid gray;
 	}
@@ -23,54 +39,45 @@
 	</script>
 </head>
 <body>
-	<jsp:include page = "topmenu.jsp"></jsp:include>
-
-<section id="main" class="wrapper style1">
-<header class="major">
-	<h2>관리자메뉴</h2>
-	<p>예약관리</p>
-</header>
-	<div class="container">
-		<div class="row">
-			<div class="3u">
-				<section>
-					<ul class="alt">
-						<li><a href="#">회원목록</a></li>
-						<li><a href="ReservationAdmin.do">예약관리</a></li>
-						<li><a href="#">스터디룸 관리</a></li>
-					</ul>
-				</section>
-			</div>
-			<div class="9u skel-cell-important">
-			
-				<div class = "resContents">
-				<div>대충 방 사진</div>
-				<font size = "6">${dto.rname}</font><br>
-				<b>이용 날짜: ${dto.usedate}</b><br>
-				<b>이용 시간 : ${dto.starttime} ~ ${dto.endtime}</b><br>
-				예약한 날짜 : ${dto.reqdate}<br>
-				상태 :<c:if test = "${dto.status==1}">
-					이용 완료
-					</c:if>
-					<c:if test = "${dto.status==0}">
-					예약 취소
-					</c:if>
-					<c:if test = "${empty dto.status}">
-					예약 완료
-					</c:if>
+	<jsp:include page = "new_menuTop.jsp"></jsp:include>
+	<header>
+		<h1>관리자 페이지</h1>
+		<h3>예약 관리</h3>
+	</header>
+	<div class = "contentboxLeft">
+		<nav class = "sidemenu">
+			<ul>
+				<li><a href="MemberList.do">회원목록</a></li>
+				<li><a href="ReservationAdmin.do">예약관리</a></li>
+				<li><a href="Studyroom.do">스터디룸 관리</a></li>
+			</ul>
+		</nav>
+	</div>
+	<div class = "contentboxRight">
+		<div class = "resContents">
+			<div>대충 방 사진</div>
+			<font size = "6">${dto.rname}</font><br>
+			<b>이용 날짜: ${dto.usedate}</b><br>
+			<b>이용 시간 : ${dto.starttime} ~ ${dto.endtime}</b><br>
+			예약한 날짜 : ${dto.reqdate}<br>
+			상태 :<c:if test = "${dto.status==1}">
+				이용 완료
+				</c:if>
+				<c:if test = "${dto.status==0}">
+				예약 취소
+				</c:if>
+				<c:if test = "${empty dto.status}">
+				예약 완료
+				</c:if>
 					
-					<form name = "frm" method = "post">
-						<c:if test = "${empty dto.status}">	<!-- 예약완료 상태면 예약취소 버튼 보이게 -->
-							<input type = "hidden" name = "rno" value = "${dto.rno}">
-							<input type = "button" value = "예약취소" onclick = "cancel()">
-						</c:if>
-						<input type = "button" value = "목록" onclick = "history.back()">
-					</form>
-					
-			</div>
-			
+			<form name = "frm" method = "post">
+				<c:if test = "${empty dto.status}">	<!-- 예약완료 상태면 예약취소 버튼 보이게 -->
+					<input type = "hidden" name = "rno" value = "${dto.rno}">
+					<input type = "button" value = "예약취소" onclick = "cancel()">
+				</c:if>
+				<input type = "button" value = "목록" onclick = "history.back()">
+			</form>
 		</div>
 	</div>
-</section>
 </body>
 </html>

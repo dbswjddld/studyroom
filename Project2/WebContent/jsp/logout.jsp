@@ -8,9 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div align="center">
-		<div><jsp:include page="topmenu.jsp"></jsp:include></div>
-		<div><p></div>
+	<jsp:include page = "new_menuTop.jsp"></jsp:include>
+	<header>
+		<h1></h1>
+	</header>
+	<div class = "contentbox">
 		<script>
 			console.log(${mid });
 		</script>
