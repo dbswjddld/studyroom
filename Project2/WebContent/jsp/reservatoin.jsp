@@ -61,13 +61,14 @@
 		$(".time_select").show();
 	}
 	
+	// 우측화면에 날짜 출력
 	function date_change(){
 		var input = $("#date").val(); // 입력한 날짜
 		$(".date_select").html(input); // 우측에 날짜 출력 (YYYY-MM-DD)
 		select1();
 	}
 	
-	// 날짜를 선택했을 때
+	// 방을 선택했을 때
 	function select(num, name){
 		// 날짜 선택 안했을 때 (x 눌렀을 때)
 		if($("#date").val() == "") {
@@ -92,9 +93,14 @@
 	
 	// 예약하기 버튼 클릭
 	function submitFunc(){
-		$("#starttime").val($("#start").val());
-		$("#endtime").val($("#end").val())
-		$("#frm").submit();
+		var loginCheck = $("#id").val();
+		if(loginCheck.length == 0) { // 로그인 안되어있을때 
+			alert("로그인 해야합니다");
+		} else {
+			$("#starttime").val($("#start").val());
+			$("#endtime").val($("#end").val())
+			$("#frm").submit();
+		}
 	}
 	</script>
 	<style>
@@ -111,7 +117,6 @@
 	</header>
 	<div class = "contentboxLeft">
 		<!-- 왼쪽 달력 나온느 부분 -->
-		<div class = "3u">
 			<form id = "frm" action = "ReservationInsert.do" method = "post">
 				<input type = "Date" name = "usedate" id = "date" onchange = "date_change()">
 				<input type = "hidden" name = "rnum" id = "rnum">
@@ -120,7 +125,6 @@
 				<input type = "hidden" name = "endtime" id = "endtime">
 				<input type = "hidden" name = "id" id = "id" value = "${mid}">
 			</form>
-		</div>
 	</div>
 	<div class = "contentboxRight">
 			<!-- 선택한 날짜 출력 -->
