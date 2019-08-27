@@ -11,7 +11,7 @@
 	<header>
 		<h1>title</h1>
 	</header>
-	<div class = "contentbox">
+	<div class = "contentbox" align = "center">
 		본문
 	</div>
 </body>

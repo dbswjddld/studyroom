@@ -37,7 +37,7 @@
 			</ul>
 		</nav>
 	</div>
-	<div class = "contentboxRight">
+	<div class = "contentboxRight" align = "center">
 		본문은 여기에 작성해주세요!!!!
 	</div>
 </body>
