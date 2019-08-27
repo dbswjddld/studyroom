@@ -118,6 +118,7 @@
 				<input type = "hidden" name = "endtime" id = "endtime">
 				<input type = "hidden" name = "id" id = "id" value = "${mid}">
 			</form>
+			↑ 이용할 날짜를 선택
 	</div>
 	<div class = "contentboxRight">
 			<!-- 선택한 날짜 출력 -->
