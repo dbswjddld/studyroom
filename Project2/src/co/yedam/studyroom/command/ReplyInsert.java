@@ -1,10 +1,14 @@
 package co.yedam.studyroom.command;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
 
 import co.yedam.studyroom.common.Command;
 import co.yedam.studyroom.dao.CommentsDao;
@@ -26,11 +30,15 @@ public class ReplyInsert implements Command {
 		comments.setId(id);
 		comments.setReply(reply);
 		comments.setCno(newCno);
-
-		if (dao.insertComments(comments) > 0) { // 이번호를 다른데 쓸거임
-			response.getWriter().print(newCno); // 새로등록된 cno날려줌
+		
+		int check = dao.insertComments(comments);
+		
+		int cno = comments.getCno();
+		if(check > 0) {
+			List<Map<String, Object>> list = dao.newComments(cno);
+			response.setContentType("text/html; charset=UTF-8");		//한글이포함된경우 반드ㅡ시넣어줘야 한글안깨진다
+			response.getWriter().print(JSONArray.toJSONString(list));	//자바객체 json으로
 		}
-
 	}
 
 }

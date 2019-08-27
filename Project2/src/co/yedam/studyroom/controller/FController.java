@@ -31,6 +31,8 @@ import co.yedam.studyroom.command.QnaUpdatePage;
 import co.yedam.studyroom.command.QnaWrite;
 import co.yedam.studyroom.command.QnaWritePage;
 import co.yedam.studyroom.command.ReplyInsert;
+import co.yedam.studyroom.command.ReplyUpdate;
+import co.yedam.studyroom.command.ReplyUpdateGet;
 import co.yedam.studyroom.command.ReservationPage;
 import co.yedam.studyroom.command.ReservationAdmin;
 import co.yedam.studyroom.command.ReservationCancel;
@@ -98,6 +100,9 @@ public class FController extends HttpServlet {
 		map.put("/QnaUpdatePage.do", new QnaUpdatePage());	//문의 게시글 수정페이지 이동 //0823 곽동우
 		map.put("/GetReply.do", new GetReply());		/// 게시글 댓글 불러옴 // 0826 곽동우 
 		map.put("/ReplyInsert.do", new ReplyInsert());	//댓글달기 	//20190826 곽동우
+		map.put("/replyUpdateGet.do", new ReplyUpdateGet()); //댓글창에 (수정)누르면 내용불러옴  //20190827 곽동우
+		map.put("/replyUpdate.do", new ReplyUpdate());	//    (댓글수정) 버튼 누르면 업데이트됨 //20190827 곽동우
+		
 		
 		
 		
