@@ -35,13 +35,13 @@
 </script>
 </head>
 <body>
-	<jsp:include page = "topmenu.jsp"></jsp:include>
-	
+	<jsp:include page = "new_menuTop.jsp"></jsp:include>
 	<header>
-		이곳은 문의 게시글 <b>수정</b> 페이지	
-		<h2>작성자:${dto.id } 작성번호:${dto.bno }</h2>
+		이곳은 문의 게시글 <b>수정</b> 페이지
+		<h3>작성자:${dto.id } 작성번호:${dto.bno }</h3>
 	</header>
-	<article>
+	<div class = "contentbox">
+		<article>
 		<form id="frm" name="frm" action="QnaUpdate.do" method="post">
 			<input type="hidden" id="id" name="id" value="${dto.id }">
 			<input type="hidden" name="bno" id="bno" value="${dto.bno }">
@@ -51,5 +51,6 @@
 			<button type="button" onclick="location.href='Qna.do'">취소</button>
 		</form>
 	</article>
+	</div>
 </body>
 </html>

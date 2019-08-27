@@ -34,13 +34,11 @@
 	</script>
 </head>
 <body>
-	<jsp:include page = "topmenu.jsp"></jsp:include>
-	
-	<header class="major">
-	문의게시판
+	<jsp:include page = "new_menuTop.jsp"></jsp:include>
+	<header>
+		<h1>문의게시판</h1>
 	</header>
-	
-	<div align="center">
+	<div class = "contentbox" align = "center">
 		<form name="frm" id="frm" action="QnaRead.do">
 			<input type="hidden" name="bno">
 			<table id="list" border="1">

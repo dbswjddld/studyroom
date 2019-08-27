@@ -34,20 +34,21 @@
 </script>
 </head>
 <body>
-	<jsp:include page = "topmenu.jsp"></jsp:include>
-	
+	<jsp:include page = "new_menuTop.jsp"></jsp:include>
 	<header>
 		이곳은 문의 게시글 작성 페이지	
 		<h2>${sid } 반갑다</h2>
 	</header>
-	<article>
+	<div class = "contentbox" align = "center">
+		<article>
 		<form id="frm" name="frm" action="QnaWrite.do" onkeydown="return captureReturnKey(event)" method="post">
 			<input type="hidden" id="id" name="id" value="${sid }">
-			<input type="text" name="subject" id="subject" placeholder="제목을 입력해주세요">
-			<textarea name="content" id="content" rows="10" placeholder="내용을 입력해주세요"></textarea>
+			<input type="text" name="subject" id="subject" placeholder="제목을 입력해주세요"><br>
+			<textarea name="content" id="content" rows="10" placeholder="내용을 입력해주세요"></textarea><br>
 			<button type="button" onclick="bWrite()">등록</button>
 			<button type="button" onclick="location.href='Qna.do'">취소</button>
 		</form>
 	</article>
+	</div>
 </body>
 </html>
