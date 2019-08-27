@@ -24,7 +24,6 @@
 	
 </head>
 <body>
-	<jsp:include page = "topmenu.jsp"></jsp:include>
 
 <section id="main" class="wrapper style1">
 <header class="major">
