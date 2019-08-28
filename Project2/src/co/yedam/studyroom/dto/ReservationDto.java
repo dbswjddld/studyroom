@@ -11,6 +11,11 @@ public class ReservationDto {
 	private String reqdate; // 신청한 날짜
 	private int rnum; // 방 코드
 	
+	int start;
+	int end;
+	// 페이징에 쓰일 것. 현제 페이지의 첫번째(start)와 마지막(end) 레코드
+	
+	
 	public ReservationDto() {}
 
 	public String getRname() {
@@ -83,6 +88,22 @@ public class ReservationDto {
 
 	public void setRnum(int rnum) {
 		this.rnum = rnum;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
 	}
 	
 	
