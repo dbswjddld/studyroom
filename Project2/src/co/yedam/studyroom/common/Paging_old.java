@@ -1,6 +1,6 @@
 package co.yedam.studyroom.common;
 
-public class Paging {
+public class Paging_old {
 	
 	//20190823 곽동우 페이지 처리
 	private int page = 1;//현재 페이지	 oo

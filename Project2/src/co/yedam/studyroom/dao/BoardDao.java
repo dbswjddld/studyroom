@@ -28,30 +28,31 @@ public class BoardDao {
 		conn = DAO.conn();
 	}
 
-	// 20190820 09:52 곽동우 // 게시판 리스트보기
-	public ArrayList<BoardDto> boardList() {
-		String sql = "select * from board order by bno";
-		dto = null;
-		ArrayList<BoardDto> list = new ArrayList<>();
-		try {
-			psmt = conn.prepareStatement(sql);
-			rs = psmt.executeQuery();
-			while (rs.next()) {
-				dto = new BoardDto();
-				dto.setBno(rs.getInt("bno"));
-				dto.setSubject(rs.getString("subject"));
-				dto.setContent(rs.getString("content"));
-				dto.setId(rs.getString("id"));
-				dto.setBdate(rs.getTimestamp("bdate"));
-				list.add(dto);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			DAO.close(conn, psmt, rs);
-		}
-		return list;
-	}// boardList end
+//	// 20190820 09:52 곽동우 // 게시판 리스트보기
+//	public ArrayList<BoardDto> boardList() {
+//		String sql = "select * from board order by bno";
+//		dto = null;
+//		ArrayList<BoardDto> list = new ArrayList<>();
+//		try {
+//			psmt = conn.prepareStatement(sql);
+//			rs = psmt.executeQuery();
+//			while (rs.next()) {
+//				dto = new BoardDto();
+//				dto.setBno(rs.getInt("bno"));
+//				dto.setSubject(rs.getString("subject"));
+//				dto.setContent(rs.getString("content"));
+//				dto.setId(rs.getString("id"));
+//				dto.setBdate(rs.getTimestamp("bdate"));
+//				list.add(dto);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}finally {
+//			DAO.close(conn, psmt, rs);
+//		}
+//		return list;
+//	}// boardList end
+	
 	
 	//20190822 15:36 곽동우 // 클릭한 게시글 조회 
 	public BoardDto boardSelect(int bno) {
@@ -167,6 +168,25 @@ public class BoardDao {
 			return n;
 		}
 		
+		
+		//0828 내가쓴 게시글수 가져오기
+		public int boardCount(String id) {
+			int n = 0;
+			String sql = "select count(*) as count from board where id=? ";
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, id);
+				rs = psmt.executeQuery();
+				if(rs.next()) {
+					n = rs.getInt("count");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}//close() 추가??
+			
+			return n;
+		}
+		
 	//0825 현재 페이지 게시글만
 		public ArrayList<BoardDto> curPageBoard(int startbno, int endbno) {
 			String sql =    "select *\r\n" + 
@@ -202,5 +222,45 @@ public class BoardDao {
 			}
 			return list;
 		}// boardList end
-	
+		
+		
+		
+		//0825 현재 페이지 게시글만
+		public ArrayList<BoardDto> curPageBoard(int startbno, int endbno, String id) {
+			String sql =    "select *\r\n" + 
+					"  from\r\n" + 
+					"    (select rownum as rnum, A.*\r\n" + 
+					"    from (\r\n" + 
+					"        select *\r\n" + 
+					"        from board\r\n" + 
+					"        where id = ?\r\n" +
+					"        order by bno desc ) A\r\n" + 
+					"    where rownum <=? ) B\r\n" + 
+					"where B.rnum >= ?";
+			dto = null;
+			ArrayList<BoardDto> list = new ArrayList<>();
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, id);
+				psmt.setInt(2, endbno);
+				psmt.setInt(3, startbno);
+				rs = psmt.executeQuery();
+				while (rs.next()) {
+					dto = new BoardDto();
+					dto.setBno(rs.getInt("bno"));
+					dto.setSubject(rs.getString("subject"));
+					dto.setContent(rs.getString("content"));
+					dto.setId(rs.getString("id"));
+					dto.setBdate(rs.getTimestamp("bdate"));
+					list.add(dto);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				DAO.close(conn, psmt, rs);
+			}
+			return list;
+		}// boardList end
+
 }

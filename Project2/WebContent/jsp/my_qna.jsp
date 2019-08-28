@@ -38,7 +38,8 @@
 <body>
 	<jsp:include page = "new_menuTop.jsp"></jsp:include>
 	<header>
-		<h1>문의게시판</h1>
+		<h1>마이페이지</h1>
+		<h3>내 문의내역</h3>
 	</header>
 	<div class = "contentbox" align = "center">
 		<form name="frm" id="frm" action="QnaRead.do">
@@ -62,7 +63,7 @@
 			</form>	<!-- 개선? -->
 			
 			<!-- 페이지목록 -->
-			<form name="pagebtn" id="pagebtn" action="Qna.do">
+			<form name="pagebtn" id="pagebtn" action="MyQna.do">
 				<c:if test= "${page gt countPage}" >
 					<button id="page" name="page" type="submit" onclick="form.submit()" value="${startPage-1}">이전</button>
 				</c:if>
@@ -77,7 +78,7 @@
 			</form>
 			
 			<form name="btn" id="btn">
-				<button type="button" id="wb" name="wb" onclick="qnaWrite()">글쓰기</button>	<!-- sid 는 세션id -->
+				<button type="button" id="wb" name="wb" onclick="qnaWrite('${mid }')">글쓰기</button>	<!-- sid 는 세션id -->
 				<input type="hidden" id="sid" name="sid">
 			</form>
 		

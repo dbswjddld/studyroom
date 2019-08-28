@@ -31,7 +31,7 @@ public class CommentsDao {
 	
 	// 20190826 곽동우 // 게시글 댓글 불러오기
 		public ArrayList<Map<String, Object>> commenstList(CommentsDto dto) {
-			String sql = "select * from comments where bno=?";
+			String sql = "select * from comments where bno=? order by cno desc";
 			ArrayList<Map<String, Object>> list = new ArrayList<>();
 			
 			try {
@@ -54,6 +54,7 @@ public class CommentsDao {
 			return list;
 		}// boardList end
 		
+		//댓글달기 
 		public int insertComments(CommentsDto comments) {
 			int r = 0;
 			String sql = "insert into comments (bno, cno, id, reply, cdate)"
@@ -130,6 +131,23 @@ public class CommentsDao {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+			}
+			return n;
+			
+		}
+
+		//댓글삭제하기       0828 곽동우
+		public int deleteComment(int cno) {
+			int n = 0;
+			String sql = "delete comments where cno = ?";
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, cno);
+				n = psmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				DAO.close(conn, psmt, rs);
 			}
 			return n;
 			
