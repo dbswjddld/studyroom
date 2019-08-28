@@ -37,6 +37,7 @@ import co.yedam.studyroom.command.ReplyInsert;
 import co.yedam.studyroom.command.ReplyUpdate;
 import co.yedam.studyroom.command.ReplyUpdateGet;
 import co.yedam.studyroom.command.ReservationPage;
+import co.yedam.studyroom.command.Studyroom;
 import co.yedam.studyroom.command.ReservationAdmin;
 import co.yedam.studyroom.command.ReservationCancel;
 import co.yedam.studyroom.command.ReservationCancelAdmin;
@@ -106,6 +107,7 @@ public class FController extends HttpServlet {
 		map.put("/replyUpdate.do", new ReplyUpdate());	//    (댓글수정) 버튼 누르면 업데이트됨 //20190827 곽동우
 		map.put("/replyDelete.do", new ReplyDelete());	// 댓글삭제함		//0828 곽동우
 		map.put("/MyQna.do", new MyQna());	//내문의게시판 첫화면	//0828 곽동우
+		map.put("/Studyroom.do", new Studyroom());	//관리자 - 스터디룸 관리  //0828 곽동우
 		
 		
 		
