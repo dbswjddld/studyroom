@@ -26,6 +26,15 @@ public class ReservationAdmin implements Command {
 			pageNum = Integer.parseInt(p);
 		}
 		
+		// n건씩 출력
+		String print = request.getParameter("print");
+		int printNum;
+		if(print != null && !print.equals("")) {
+			printNum = Integer.parseInt(p);
+		} else {
+			printNum = 10;
+		}
+		
 		// 검색
 		ReservationDto search = new ReservationDto();
 		String searchOpt = request.getParameter("searchOpt");
@@ -38,8 +47,8 @@ public class ReservationAdmin implements Command {
 		
 		// PagingReservation 정보 저장
 		PagingReservation paging = new PagingReservation();
-		paging.setPageUnit(10); // 한 페이지에 출력할 레코드
-		paging.setPage(pageNum);
+		paging.setPageUnit(printNum); // 한 페이지에 출력할 레코드
+		paging.setPage(10);
 		paging.setTotalRecord(dao.count(search, where));
 		
 		// 페이지에 출력할 레코드 (몇번째부터 몇번째까지)

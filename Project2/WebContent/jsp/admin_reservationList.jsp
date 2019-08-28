@@ -33,7 +33,7 @@
 	<script src = "js/jquery-3.4.1.js"></script>
 	<script>
 	$(function(){
-		$("#btn").on("click", submit);
+		$("#btn").on("click", search);
 		optionChange();
 	});
 	
@@ -52,7 +52,7 @@
 	}
 	
 	// 검색 버튼 클릭
-	function submit(){
+	function search(){
 		var value = $("#show").children().eq(0).val()
 		if($("#searchOpt").val() == 'usedate')
 			var value = value.substr(2,2) + "/" + value.substr(5,2) + "/" + value.substr(8,2);
@@ -131,7 +131,7 @@
 	</div>
 </body>
 <style>
-#searchOpt { width : 90px; }
+select { width : 100px; }
 #show { width :200px; display : inline-block; }
 </style>
 </html>
