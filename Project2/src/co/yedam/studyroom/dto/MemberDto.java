@@ -7,6 +7,8 @@ public class MemberDto {
 	private String tel;
 	private String grant; // 등급 관리자(A) 일반회원(U) 탈퇴회원(X)
 	private String emailres; // 이메일 수신 체크여부  동의(Y) 동의안함(N)
+	int Start;
+	int End;
 	
 	public MemberDto(){}
 
@@ -58,11 +60,28 @@ public class MemberDto {
 		this.emailres = emailres;
 	}
 
+	public int getStart() {
+		return Start;
+	}
+
+	public void setStart(int start) {
+		Start = start;
+	}
+
+	public int getEnd() {
+		return End;
+	}
+
+	public void setEnd(int end) {
+		End = end;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberDto [id=" + id + ", pw=" + pw + ", email=" + email + ", tel=" + tel + ", grant=" + grant
-				+ ", emailres=" + emailres + "]";
+				+ ", emailres=" + emailres + ", Start=" + Start + ", End=" + End + "]";
 	}
 	
+
 	
 }

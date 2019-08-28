@@ -54,7 +54,7 @@
                     <c:if test = "${mgrant == 'A'}">
                     <li class="topMenuLi"><a href="#">관리자메뉴</a>
                     	<ul class = "submenu">
-                    		<li><a href = "#">회원 목록</a></li>
+                    		<li><a href = "MemberList.do">회원 목록</a></li>
                     		<li><a href = "ReservationAdmin.do">예약 관리</a></li>
                     		<li><a href = "#">스터디룸 관리</a></li>
                     	</ul>
