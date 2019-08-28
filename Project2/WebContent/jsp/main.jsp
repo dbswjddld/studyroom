@@ -9,7 +9,6 @@
 <body>
 	<jsp:include page = "new_menuTop.jsp"></jsp:include>
 	<div class = "contentbox">
-		
 	</div>
 </body>
 </html>

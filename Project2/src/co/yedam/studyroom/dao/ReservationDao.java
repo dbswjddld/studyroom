@@ -192,4 +192,29 @@ public class ReservationDao {
 		}
 		return result;
 	}
+	
+	// [윤정 0828] 레코드 건수 조회 (페이징 할때 쓸 것)
+	public int count(ReservationDto search) {
+		int result = 0;
+		String sql = "SELECT count(*) FROM reservation ";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			rs.next();
+			result = rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return result;
+	}
+
+	public ArrayList<ReservationDto> ResvPaging(ReservationDto search) {
+		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
+		
+		String sql = "";
+		
+		return null;
+	}
 }
