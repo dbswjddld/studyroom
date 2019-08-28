@@ -10,22 +10,30 @@
 
 <div class="pagination">
 <ul>
-<c:if test="${paging.startPage>sfunc}(${paging.startPage-1})">이전</a>
+<c:if test="${paging.page>=paging.startPage&&paging.page>paging.pageSize}">
+	<a href="javascript:${jsfunc}(${paging.startPage-1})">
+	이전
+	</a>
+	&nbsp;&nbsp;
 </c:if>
 
 <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i">
 	<c:if test="${i != paging.page}">
 		<!--paging.page :현재 페이지
 			현재 페이지가 아닌 부분 링크걸기-->
-		<li><a href="javascript:${jsfunc}(${i})">${i}</a>
+		<a href="javascript:${jsfunc}(${i})">${i}</a>
 	</c:if>
 	<c:if test="${i == paging.page}">
-		<li class="active" style = "color:red">${i}
+		<span style = "color:red">${i}</span>
 	</c:if>
+	&nbsp;
 </c:forEach>
 
 <c:if test="${paging.endPage<paging.totalPageCount}">
-	<li><a href="javascript:${jsfunc}(${paging.endPage+1})">다음</a>
+	&nbsp;&nbsp;
+	<a href="javascript:${jsfunc}(${paging.endPage+1})">
+	다음
+	</a>
 </c:if>
 </ul>
 </div>
