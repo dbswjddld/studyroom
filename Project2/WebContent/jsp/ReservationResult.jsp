@@ -9,21 +9,16 @@
 	<script>
 	$(function(){
 		var result = ${result};
-		console.log(result);
-		if(result == 1)
-			$(".show").text("예약 성공");
-		else
-			$(".show").text("예약 실패");
+		if(result == 1){
+			alert("예약 성공!");
+			location.replace("MyReservation.do");
+		} else {
+			alert("예약 실패");
+			location.replace("ReservationPage.do");
+		}
 	})
 	</script>
 </head>
 <body>
-	<jsp:include page = "new_menuTop.jsp"></jsp:include>
-	<header>
-		<h1>예약 결과</h1>
-	</header>
-	<div class = "contentbox" align = "center">
-		<h3 class = "show"></h3>
-	</div>
 </body>
 </html>

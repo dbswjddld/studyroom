@@ -183,7 +183,6 @@ public class ReservationDao {
 			psmt.setInt(1, dto.getRnum());
 			psmt.setString(2, dto.getRname());
 			psmt.setString(3, dto.getId());
-			System.out.println(sql);
 			result = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -210,6 +209,7 @@ public class ReservationDao {
 		return result;
 	}
 
+	// [윤정 0828]페이징해서 예약 리스트 출력
 	public ArrayList<ReservationDto> ResvPaging(ReservationDto search) {
 		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
 		
