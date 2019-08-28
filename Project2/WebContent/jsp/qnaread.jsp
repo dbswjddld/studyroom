@@ -28,7 +28,7 @@
                 $tr = $("<tr>").attr("id", r.cno).append(
                    			 $("<td>").text(r.cno),
                    			 $("<td>").text(r.id),
-                   			 $("<td>").text(r.reply).attr("align","left"),
+                   			 $("<td>").text(r.reply),
                   			 $("<td>").text(r.cdate)
                			 )
                 	if(r.id == "${mid}")
