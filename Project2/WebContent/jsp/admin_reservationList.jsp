@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix='c'%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix='c'%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
+<!--tagdir :(태그 경로)에 있는 태그를 쓰겠다
+	prefic :태그 경로를 지칭함 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +27,9 @@
 	td,th {
 		padding :10px 30px;
 	}
+	.pagination{
+		float : left;
+	}
 	</style>
 </head>
 <body>
@@ -42,8 +48,14 @@
 		</nav>
 	</div>
 	<div class = "contentboxRight" align = "center">
+		<!-- 검색 폼 -->
+		<form name = "searchFrm" action = "ReservationAdmin.do">
+			<input type="hidden" name="p" value="1"/>
+		</form>
+	
 		<table border = "1">
 			<tr>
+				<th>예약번호</th>
 				<th>회원아이디</th>
 				<th>이용 날짜</th>
 				<th>시간</th>
@@ -52,6 +64,7 @@
 			</tr>
 			<c:forEach items="${list}" var="dto">
 			<tr onclick = "location.href='ReservationContentsAdmin.do?rno=${dto.rno}'">
+				<td>${dto.rno}</td>
 				<td>${dto.id}</td>
 				<td>${dto.usedate}</td>
 				<td>${dto.starttime} ~ ${dto.endtime}</td>
@@ -60,6 +73,15 @@
 			</tr>
 			</c:forEach>
 		</table>
+		
+		<!-- 페이징 -->
+		<my:yjPaging jsfunc="doList" paging="${paging}"/>
+		<script>
+		function doList(p) {
+			document.searchFrm.p.value = p; // 검색폼에 페이지 값 넣기
+			document.searchFrm.submit(); // 검색폼 실행 (DeptListPagingServ)
+		}
+		</script>
 	</div>
 </body>
 </html>

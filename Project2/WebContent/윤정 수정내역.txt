@@ -8,7 +8,7 @@ SELECT b.*
 FROM (
   SELECT rownum no, a.*
   FROM (
-    SELECT * FROM reservation ORDER BY usedate desc
+    SELECT * FROM reservation !!!조건절!!! ORDER BY usedate desc
     ) a
   ) b
 WHERE no BETWEEN 11 AND 15;

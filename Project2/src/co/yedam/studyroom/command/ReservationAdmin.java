@@ -22,7 +22,7 @@ public class ReservationAdmin implements Command {
 		// 입력한 페이지 받아오기 
 		String p = request.getParameter("p");
 		int pageNum = 1;
-		if(p != null & !p.equals("")) {
+		if(p != null && !p.equals("")) {
 			pageNum = Integer.parseInt(p);
 		}
 		
@@ -32,7 +32,7 @@ public class ReservationAdmin implements Command {
 		
 		// PagingReservation 정보 저장
 		PagingReservation paging = new PagingReservation();
-		paging.setPageUnit(2); // 한 페이지에 출력할 레코드
+		paging.setPageUnit(1); // 한 페이지에 출력할 레코드
 		paging.setPage(pageNum);
 		paging.setTotalRecord(dao.count(search));
 		
@@ -45,14 +45,9 @@ public class ReservationAdmin implements Command {
 		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
 		list = dao.ResvPaging(search);
 		
-		
-		
-		
-		
-		list = dao.adminList();
-
 		request.setAttribute("list", list);
-
+		request.setAttribute("paging", paging);
+		
 		String viewPage = "jsp/admin_reservationList.jsp";	// 기존 방식
 
 		

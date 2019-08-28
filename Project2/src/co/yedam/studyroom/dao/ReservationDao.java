@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import co.yedam.studyroom.common.DAO;
 import co.yedam.studyroom.dto.ReservationDto;
@@ -37,7 +36,7 @@ public class ReservationDao {
 	}
 
 	///////////////// 메소드 ///////////////////////
-	// [윤정 190818] 관리자메뉴 - 예약내역 리스트
+	// [윤정 190818] 관리자메뉴 - 예약내역 리스트 ------ResvPaging으로 대체
 	public ArrayList<ReservationDto> adminList() {
 		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
 		String sql = "SELECT id, usedate, starttime, endtime, rname, status, rno FROM reservation ORDER BY usedate DESC";
@@ -195,17 +194,24 @@ public class ReservationDao {
 	// [윤정 0828] 레코드 건수 조회 (페이징 할때 쓸 것)
 	public int count(ReservationDto search) {
 		int result = 0;
-		String sql = "SELECT count(*) FROM reservation ";
+		
+		// 검색 조건
+		String where = " where 1 = 1 ";
+		// where += " AND * = * " 조건 작성
+		
+		String sql = "SELECT count(*) FROM reservation " + where;
 		try {
 			psmt = conn.prepareStatement(sql);
+			
+			// 조건값 세팅(검색)
+			//int pos = 1;
+			
 			rs = psmt.executeQuery();
 			rs.next();
 			result = rs.getInt(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			close();
-		}
+		} 
 		return result;
 	}
 
@@ -213,8 +219,39 @@ public class ReservationDao {
 	public ArrayList<ReservationDto> ResvPaging(ReservationDto search) {
 		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
 		
-		String sql = "";
+		// 검색조건
+		String where = " where 1 = 1 ";
 		
-		return null;
+		String sql = "SELECT b.* FROM ( SELECT rownum no, a.* FROM ( SELECT * FROM reservation "
+				+ where
+				+ "ORDER BY usedate desc ) a ) b WHERE no BETWEEN ? AND ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			int pos = 1;
+			// 검색조건 값 세팅
+			
+			// BETWEEN ? AND ?
+			psmt.setInt(pos++, search.getStart());
+			psmt.setInt(pos++, search.getEnd());
+			
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				dto = new ReservationDto();
+				dto.setId(rs.getString("id"));
+				dto.setUsedate(rs.getString("usedate").substring(0,10));
+				dto.setStarttime(rs.getString("starttime").substring(11,16));
+				dto.setEndtime(rs.getString("endtime").substring(11,16));
+				dto.setRname(rs.getString("rname"));
+				dto.setStatus(rs.getString("status"));
+				dto.setRno(rs.getInt("rno"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return list;
 	}
 }
