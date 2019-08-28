@@ -175,7 +175,7 @@ public class ReservationDao {
 				+ " to_date('" + dto.getUsedate() + "','YYYY-MM-DD'),"
 				+ " to_timestamp('" + dto.getUsedate() + " " + dto.getStarttime() + "','YYYY-MM-DD HH24'),"
 				+ " to_timestamp('" + dto.getUsedate() + " " + dto.getEndtime() + "','YYYY-MM-DD HH24'), " 
-				+ "(select max(rno) from reservation)+1, '예약완료', sysdate)";
+				+ " r_seq.nextval , '예약완료', sysdate)";
 		
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -192,20 +192,12 @@ public class ReservationDao {
 	}
 	
 	// [윤정 0828] 레코드 건수 조회 (페이징 할때 쓸 것)
-	public int count(ReservationDto search) {
+	public int count(ReservationDto search, String where) {
 		int result = 0;
-		
-		// 검색 조건
-		String where = " where 1 = 1 ";
-		// where += " AND * = * " 조건 작성
 		
 		String sql = "SELECT count(*) FROM reservation " + where;
 		try {
 			psmt = conn.prepareStatement(sql);
-			
-			// 조건값 세팅(검색)
-			//int pos = 1;
-			
 			rs = psmt.executeQuery();
 			rs.next();
 			result = rs.getInt(1);
@@ -216,11 +208,8 @@ public class ReservationDao {
 	}
 
 	// [윤정 0828]페이징해서 예약 리스트 출력
-	public ArrayList<ReservationDto> ResvPaging(ReservationDto search) {
+	public ArrayList<ReservationDto> ResvPaging(ReservationDto search, String where) {
 		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
-		
-		// 검색조건
-		String where = " where 1 = 1 ";
 		
 		String sql = "SELECT b.* FROM ( SELECT rownum no, a.* FROM ( SELECT * FROM reservation "
 				+ where
