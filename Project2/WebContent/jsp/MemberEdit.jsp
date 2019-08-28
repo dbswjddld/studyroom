@@ -50,12 +50,12 @@
 			</ul>
 		</nav>
 	</div>
-	<div class = "contentboxRight" align = "center">
+	<div class = "contentboxRight" align = "lift">
 	<form action = "MemberEdit.do" method="post" name = "frm">
 		<table border = "1" cellpadding = "5">
 			<tr>
-				<th width = "150">아이디 *</th>
-				<td width = "400">
+				<th width = "280">아이디 *</th>
+				<td width = "500">
 					<input type = "text" name = "id" value = "${result.id }" readonly="readonly">
 					<input type = "hidden" name = "chk" >
 				</td>
