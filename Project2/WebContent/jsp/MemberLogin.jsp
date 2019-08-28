@@ -21,10 +21,10 @@
 	<header>
 		<h1>로그인</h1>
 	</header>
-	<div class = "contentbox">
+	<div class = "contentbox" align = "center">
 	<c:if test = "${login == null }">
 	<script>fail(${result})</script>
-	<form action = "MemberLoginOk.do" method="post" name = "frm">
+	<form action = "MemberLoginOk.do" method="post" name = "frm" >
 		<table border = "1" cellpadding = "5">
 			<tr>
 				<th width = "150">아이디</th>

@@ -29,7 +29,7 @@ public class MemberLoginOk implements Command {
 		// id,pw가 일치하면 name에 사용자의 id와 이름이 저장되고, 
 		//아니면 null
 		String viewPage;
-		if(loginResult.getGrant().equals("X") || loginResult == null) {
+		if( loginResult == null || loginResult.getGrant().equals("X")) {
 			request.setAttribute("result", "fail");
 			viewPage = "jsp/MemberLogin.jsp";
 		}else {

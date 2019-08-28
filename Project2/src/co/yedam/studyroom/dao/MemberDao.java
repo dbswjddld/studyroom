@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import co.yedam.studyroom.common.DAO;
 import co.yedam.studyroom.dto.MemberDto;
@@ -14,6 +17,7 @@ public class MemberDao {
 	private ResultSet rs;
 
 	private MemberDto dto;
+	private Statement dao;
 
 //	생성자
 	public MemberDao() {
@@ -126,7 +130,6 @@ public class MemberDao {
 				output.setPw(rs.getString("pw"));
 				output.setEmail(rs.getString("email"));
 				output.setEmailres(rs.getString("emailres"));
-				System.out.println("비밀번호 입력했을때 emailres : " + rs.getString("emailres"));
 				output.setTel(rs.getString("tel"));
 			}
 		}catch (SQLException e) {
@@ -150,7 +153,30 @@ public class MemberDao {
 		}
 		return n;
 	}
-	
+
+	public List<MemberDto> getMemberList() {
+		String sql = "SELECT * FROM member";
+		MemberDto dto = null;		// MemberDto dto =null;
+		List<MemberDto> list = new ArrayList<MemberDto>();  //list<MemberDto>
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				dto = new MemberDto();	//dto = new MemberDto();
+				dto.setId(rs.getString("id"));	//dto.setId(rs.getInt("id?"))
+				dto.setEmail(rs.getString("email"));
+				dto.setTel(rs.getString("tel"));
+				dto.setGrant(rs.getString("mgrant"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
+	}
 //	public int (String id) { //회원 삭제
 //		int n = 0;
 //		String sql = "delete from member where id = ?";
@@ -165,4 +191,6 @@ public class MemberDao {
 //		}
 //		return n;
 //	}
-}
+
+
+
