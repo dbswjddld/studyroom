@@ -36,13 +36,14 @@ public class ReservationAdmin implements Command {
 		paging.setPage(pageNum);
 		paging.setTotalRecord(dao.count(search));
 		
+		// 페이지에 출력할 레코드 (몇번째부터 몇번째까지)
 		search.setStart(paging.getFirst());
 		search.setEnd(paging.getLast());
 		// getFirst, getLast :현재 페이지의 첫번째와 마지막 레코드 번호를 설정 및 반환
 		// start, end :첫번째, 마지막 레코드 (검색할때 쓸것임)
 		
 		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
-		
+		list = dao.ResvPaging(search);
 		
 		
 		
