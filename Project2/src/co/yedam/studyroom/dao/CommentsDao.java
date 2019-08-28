@@ -73,6 +73,50 @@ public class CommentsDao {
 			return r;
 		}
 		
+		//0827 새댓글 가져오기
+		public ArrayList<Map<String, Object>> newComments(int cno) {
+			String sql = "select * from comments where cno = ?";
+			ArrayList<Map<String, Object>> list = new ArrayList<>();
+			
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, cno);
+				rs = psmt.executeQuery();
+				if(rs.next()) {
+					HashMap<String,Object> map = new HashMap<String, Object>();
+					map.put("cno",Integer.toString(rs.getInt("cno")));
+					map.put("id",rs.getString("id"));
+					map.put("reply",rs.getString("reply"));
+					map.put("cdate",rs.getString("cdate"));
+					list.add(map);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return list;
+		}
+		
+		//0827 곽동우
+		//댓글 업데이트
+		public int updateComment(CommentsDto dto) {
+			int n = 0;
+			String sql = "update comments set id=?, reply=?, cdate=sysdate where cno=? ";
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, dto.getId());
+				psmt.setString(2, dto.getReply());
+				//psmt.setString(3, "sysdate");
+				psmt.setInt(3, dto.getCno());
+				n = psmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				//DAO.close(conn, psmt, rs);
+			}
+			System.out.println(n+"댓글업뎃");
+			return n;
+		}
+		
 		
 		//0826 곽동우 새댓글 번호 가져오기
 		public int getCommentsNo() {

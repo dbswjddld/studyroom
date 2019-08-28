@@ -16,15 +16,21 @@ public class MyReservationSearch implements Command {
 	// [윤정 190819] 마이페이지 - 예약내역 - 검색
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String id = request.getParameter("id");
+		String search = request.getParameter("search");
+		
 		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
 		ReservationDao dao = new ReservationDao();
 		
-		String search = request.getParameter("option");
-		list = dao.myListSearch("asdf", search);	////////// !! 아이디
+		if(search.equals("전체")) {
+			list = dao.myList(id);
+		} else {
+			list = dao.myListSearch(id, search);
+		}
 		
-		request.setAttribute("list", list);
-
 		String viewPage = "jsp/my_reservationList.jsp";
+		request.setAttribute("list", list);
+		request.setAttribute("searchOpt", search);
 		HttpRes.forward(request, response, viewPage);
 
 	}

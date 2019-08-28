@@ -48,9 +48,9 @@ public class ReservationDao {
 			while(rs.next()) {
 				dto = new ReservationDto();
 				dto.setId(rs.getString(1));
-				dto.setUsedate(rs.getString(2));
-				dto.setStarttime(rs.getTime(3));
-				dto.setEndtime(rs.getTime(4));
+				dto.setUsedate(rs.getString(2).substring(0,10));
+				dto.setStarttime(rs.getString(3).substring(11,16));
+				dto.setEndtime(rs.getString(4).substring(11,16));
 				dto.setRname(rs.getString(5));
 				dto.setStatus(rs.getString(6));
 				dto.setRno(rs.getInt(7)); // 예약번호
@@ -74,9 +74,9 @@ public class ReservationDao {
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				dto = new ReservationDto();
-				dto.setUsedate(rs.getString(1));
-				dto.setStarttime(rs.getTime(2));
-				dto.setEndtime(rs.getTime(3));
+				dto.setUsedate(rs.getString(1).substring(0,10));
+				dto.setStarttime(rs.getString(2).substring(11,16));
+				dto.setEndtime(rs.getString(3).substring(11,16));
 				dto.setRname(rs.getString(4));
 				dto.setStatus(rs.getString(5));
 				dto.setRno(rs.getInt(6));
@@ -94,19 +94,17 @@ public class ReservationDao {
 	public ArrayList<ReservationDto> myListSearch(String id, String search) {
 		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
 		String sql = "SELECT usedate, starttime, endtime, rname, status, rno FROM reservation WHERE id = ? AND status = ? ORDER BY usedate DESC";
-		if(search.equals("null")) // 예약완료 상태를 검색할때 (status is null)
-			sql = "SELECT usedate, starttime, endtime, rname, status, rno FROM reservation WHERE id = ? AND status is null ORDER BY usedate DESC";
 		
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
-			if(!search.equals("null")) psmt.setString(2, search);
+			psmt.setString(2, search);
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				dto = new ReservationDto();
-				dto.setUsedate(rs.getString(1));
-				dto.setStarttime(rs.getTime(2));
-				dto.setEndtime(rs.getTime(3));
+				dto.setUsedate(rs.getString(1).substring(0,10));
+				dto.setStarttime(rs.getString(2).substring(11,16));
+				dto.setEndtime(rs.getString(3).substring(11,16));
 				dto.setRname(rs.getString(4));
 				dto.setStatus(rs.getString(5));
 				dto.setRno(rs.getInt(6));
@@ -132,11 +130,11 @@ public class ReservationDao {
 			if(rs.next()) {
 				dto = new ReservationDto();
 				dto.setRname(rs.getString(1));
-				dto.setUsedate(rs.getString(2));
-				dto.setStarttime(rs.getTime(3));
-				dto.setEndtime(rs.getTime(4));
+				dto.setUsedate(rs.getString(2).substring(0,10));
+				dto.setStarttime(rs.getString(3).substring(11,16));
+				dto.setEndtime(rs.getString(4).substring(11,16));
 				dto.setStatus(rs.getString(5));
-				dto.setReqdate(rs.getDate(6));
+				dto.setReqdate(rs.getString(6));
 				dto.setRnum(rs.getInt(7));
 				dto.setRno(rs.getInt(8));
 			}
@@ -151,10 +149,41 @@ public class ReservationDao {
 	// [윤정 190820] 예약 취소하기
 	public int cancel(int rno) {
 		int result = 0;
-		String sql = "UPDATE reservation SET status = '0' WHERE rno = ?";
+		String sql = "UPDATE reservation SET status = '예약취소' WHERE rno = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, rno);
+			result = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return result;
+	}
+
+	// [윤정 0827] 예약하기
+	public int insert(ReservationDto dto) {
+		int result = 0;
+		/* 
+		-- rnum(방코드) rname id usedate starttime endtime rno(예약번호) status reqdate
+		INSERT INTO reservation (rnum, rname, id, usedate, starttime, endtime, rno, status, reqdate)
+		VALUES (2, '6인실', '1234', to_date('2019-08-23','YYYY-MM-DD'), 
+				to_timestamp('9:00','HH24:MI'), to_timestamp('10:00','HH24:MI'),(select max(rno) from reservation)+1, null, sysdate);
+		 */
+		String sql = "INSERT INTO reservation (rnum, rname, id, usedate, starttime, endtime, rno, status, reqdate) "
+				+ "VALUES (?, ?, ?,"
+				+ " to_date('" + dto.getUsedate() + "','YYYY-MM-DD'),"
+				+ " to_timestamp('" + dto.getUsedate() + " " + dto.getStarttime() + "','YYYY-MM-DD HH24'),"
+				+ " to_timestamp('" + dto.getUsedate() + " " + dto.getEndtime() + "','YYYY-MM-DD HH24'), " 
+				+ "(select max(rno) from reservation)+1, '예약완료', sysdate)";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, dto.getRnum());
+			psmt.setString(2, dto.getRname());
+			psmt.setString(3, dto.getId());
+			System.out.println(sql);
 			result = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -11,84 +11,166 @@
 	<script>
 	
 	$(document).ready(function () {
-		  var xhttp = new XMLHttpRequest();						//1단계
-		  xhttp.onreadystatechange = function() {				//
-		    if (this.readyState == 4 && this.status == 200) {  	//4 응답완료 되고 성공이면// this.status ==		500서버오류	
-		    	
-		       var list = JSON.parse(this.responseText);	//this.responseText 응답결과
-		     	var str = "<table id='commentstb' border>";
-		    	for(i=0; i<list.length; i++){
-		    		str += "<tr id="+list[i].cno+">" 
-		    		      + "<td>" + list[i].id + "</td>" 
-		    		      + "<td>" + list[i].reply + "</td>" 
-		    		      + "<td>" + list[i].cdate + "</td>" 
-		    		      + "<td>"+"<button name='replyup' onclick='onupdate("+list[i].cno+")'>"+"수정</button>"+"</td>" 
-		    		      + "<td>"+"<button name='replydel' onclick='ondelete("+list[i].cno+")'>"+"삭제</button>"+"</td>"
-		    		      + "</tr>";			
-		    	}
-		      	
-		      	str += "</table>";
-		      	document.getElementById("reply").innerHTML = str;
-		    }
-		  };
-		  
-		  var bno = document.getElementById("bno").value;
-		  var url = "GetReply.do?bno="+bno;
-		  
-		  
-		  xhttp.open("GET", url, true);
-		  xhttp.send();
-		  
-		$("#replyup").on("click", function(){
-			console.log("hihihihihihihi");
-		});
-
+		var requestPage = "${pageContext.request.contextPath}";
+		var bno = document.getElementById("bno").value;
+		$.ajax({
+			url: requestPage+"/GetReply.do?bno="+bno,
+			method: "get",
+			dataType: "json"
+		}).done(function(data){
+			var str = $("<table>").attr("id", "commentstb");
+			$.map(data, function (r, i) {
+                $tr = $("<tr>").attr("id", r.cno).append(
+                    $("<td>").text(r.cno),
+                    $("<td>").text(r.id),
+                    $("<td>").text(r.reply),
+                    $("<td>").text(r.cdate),
+                    $("<td>").html($("<button type='button'>").text("수정").click(onupdate)),	//버튼추가
+                    $("<td>").html($("<button type='button'>").text("삭제").click(ondelete))
+                )
+                str.append($tr);
+            })
+            $("#reply").append(str);
+		})
 	
 	//댓글달기버튼 클릭하면
 	$("#replyInsert").on("click", function(){
-		var requestPage = "${pageContext.request.contextPath}/ReplyInsert.do";
-		console.log(requestPage);
 		$.ajax({
-			url: requestPage,
+			url: requestPage+"/ReplyInsert.do",
 			data: {
                 bno: $("#bno").val(),		//게시글번호
-                id: $("#id").val() 					,		//작성자id
+                id: $("#id").val(),		///작성자id
                 replycontent: $("#replycontent").val()	//댓글내용
             },
+            dataType: "json",
 			success: function(result){
-				if(result > 0){
 					console.log(result);
 					$("#commentstb").append(
 	                        $("<tr>").append(
-	                            $("<td>").text($("#id").val()),
-	                            $("<td>").text($("#replycontent").val()),
-	                            $("<td>").text($("sysdate").val()),		//dao에서 sysdate받아와야?
-	                            $("<td>").html($("<button>").text("수정").click(onupdate)),	//버튼추가	//수정해야
-	                            $("<td>").html($("<button>").text("삭제").click(ondelete))				//됩니다
+	                            $("<td>").text(result[0].cno),
+	                            $("<td>").text(result[0].id),
+	                            $("<td>").text(result[0].reply),		//dao에서 sysdate받아와야?
+	                            $("<td>").text(result[0].cdate),
+	                            $("<td>").html($("<button type='button'>").text("수정").click(onupdate)),	//버튼추가	//수정해야
+	                            $("<td>").html($("<button type='button'>").text("삭제").click(ondelete))				//됩니다
 	                        )
 	                    );
 	                    $("#replycontent").val("");
-					}
 				}
-			})
+			});
 		});
 	
-	});
+	 //수정 버튼누르면		//계속눌러도 하나만 나오게 수정해야됨 20190827
+    function onupdate() {
+        var cno = $(this).parent().parent().attr("id");		// input태그 일때 .val()로읽어오고 아닐땐 그냥 이런식으로쓰면됨 
+   	 	console.log(cno);
+	   	 if ($(this).parent().parent().eq(0).next())
+	         $.ajax({
+	             url: requestPage+"/replyUpdateGet.do",
+	             data: {
+	                cno: cno
+	             },		//변경하기위한 데이터를얻어와야함
+	             dataType: "json",
+	             success: function (result) {
+	             	console.log(result);
+	             	if($("#" + cno).next().attr("id") != null){	//댓글수정폼 하나만나오게
+		                 $("#" + cno).after(
+		                     $("<tr>").append(
+			                    $("<td colspan='4'>").html($("<input>").val(result[0].reply)),	//한건이지만 배열타입이라서 result[0]
+			                    $("<td>").html($("<button type='button' id='up'>").text("댓글수정").click(updateRow))
+		                     )
+		                 );
+	           		  }
+	             }
+	         });
+    	}
 	
-//	function onupdate(n){
-//		console.log("update");
-//		alert("fdsg");
-//	}
-//	
-//	function ondelete(){
-//		
-//	}
+	function ondelete(){
+		
+	}
+	
+	function updateRow(){		//댓글수정 버튼 누르면 업데이트되고 그 행은 삭제  20190827 곽동우
+		 var id = $(this).parent().parent().prev().children().eq(1).text();
+         var content = $(this).parent().parent().children().eq(0).children().eq(0).val();
+         var cno = $(this).parent().parent().prev().attr("id");
+         
+         $.ajax({
+             url: requestPage+"/replyUpdate.do",
+             method : "post",
+             data: {
+                 cno : cno,
+                 id : id,
+                 content: content
+             },success: function () {		//변경 성공? 하면 버튼 조상의 조상(<tr>) 삭제 //위에 아이디 추가해줬음 <button id='up'>
+                 console.log($("#up"));	//   && 수정한 내용 바로 반영되게
+                 console.log(content);
+                 $("#" + cno).children().eq(1).text(id);
+                 $("#" + cno).children().eq(2).text(content);
+                 $("#up").parent().parent().remove();
+             }
+         })
+    }
+	
+	});	// (document).ready 끝
+	
+	/*----------------------------------------
+	//텍스트에어리어 길이체크 
+	---------------------------------------------*/
+	function fnChkByte(obj, maxByte)			
+	{
+	    var str = obj.value;
+	    var str_len = str.length;
+
+
+	    var rbyte = 0;
+	    var rlen = 0;
+	    var one_char = "";
+	    var str2 = "";
+
+
+	    for(var i=0; i<str_len; i++)
+	    {
+	        one_char = str.charAt(i);
+	        if(escape(one_char).length > 4)
+	        {
+	            rbyte += 3;               //윈도우3Byte  리눅스2Byte          //한글2Byte
+	        }
+	        else
+	        {
+	            rbyte++;                                            //영문 등 나머지 1Byte
+	        }
+
+
+	        if(rbyte <= maxByte)
+	        {
+	            rlen = i+1;                                          //return할 문자열 갯수
+	        }
+	     }
+
+
+	     if(rbyte > maxByte)
+	     {
+	  // alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
+	  alert("메세지는 최대 " + maxByte + "byte를 초과할 수 없습니다.")
+	  str2 = str.substr(0,rlen);                                  //문자열 자르기
+	  obj.value = str2;
+	  fnChkByte(obj, maxByte);
+	     }
+	     else
+	     {
+	        document.getElementById('byteInfo').innerText = rbyte;
+	     }
+	}
+	
+	
+	
+	
 	
 	
 	
 	window.onload = function(){		//db읽어온 텍스트 \n  -> <br> 바꿈
 			var text = document.getElementById("content");
-			var result = text.value.replace(/(\n|\r\n)/g, '<br>');
+			var result = text.value.replace(/(\n|\r\n)/g, '<br>');	//value말고 innerHTML하면 다른데?적용
 			document.getElementById("content1").innerHTML = result
 	};
 	
@@ -148,7 +230,7 @@
 				<h3>댓글표현</h3>
 			</div>
 			
-			<textarea id="replycontent" name="replycontent" rows="2" cols="10" placeholder="댓글"></textarea>
+			<textarea id="replycontent" name="replycontent" rows="2" cols="10" onKeyUp="javascript:fnChkByte(this,'200')" ></textarea>
 			<button type="button" id="replyInsert">댓글달기</button><br>
 		
 			<button type="button" onclick="qnaUpdate(${dto.bno})">수정</button>
