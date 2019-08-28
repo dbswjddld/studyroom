@@ -10,8 +10,7 @@
 
 <div class="pagination">
 <ul>
-<c:if test="${paging.startPage>1}">
-	<li><a href="javascript:${jsfunc}(${paging.startPage-1})">이전</a>
+<c:if test="${paging.startPage>sfunc}(${paging.startPage-1})">이전</a>
 </c:if>
 
 <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i">
