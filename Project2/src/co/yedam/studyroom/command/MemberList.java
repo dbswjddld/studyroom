@@ -16,6 +16,7 @@ public class MemberList implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
 		MemberDao dao = new MemberDao();
 		List<MemberDto> list = dao.getMemberList();
 		

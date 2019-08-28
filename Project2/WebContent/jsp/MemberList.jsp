@@ -51,36 +51,45 @@
 		</select>
 	</form> -->
 	<div class = "contentboxRight">
-	<form method="post">
-		<select name="subjects" style = "width:100px;">
-			<option value="id">아이디</option>
-			<option value="email">이메일</option>
-			<option value="tel">연락처</option>
-			<option value="all">전체</option>
-		<input type="text" size="20" name="subjects" style = "width:300px;">
-		</select>&nbsp;
-		<input type="submit" value="검색">
+	<form action = "DeptListPagingServ" method="post">
+			<input type="hidden" name="action" value="list"/>
+		    <input type="hidden" name="p" value="1"/>
+			아이디<input type="text" name="memberId" style = "width:100px;">
+			이메일<input type="text" name="memberEmail" style = "width:100px;">
+			연락처<input type="text" name="memberTel" style = "width:100px;">
+			등급<input type="text" name="memberGrant" style = "width:100px;">
+			<input type="submit" value="검색"/><br/>
 	</form><br>
 	</div>
 	<div class = "contentbox" align = "center">
-		<form name="frm" id="frm" action="">
+		<form name="frm" id="frm" action="DeptListPagingServ">
 			<input type="hidden" name="list">
 			<table id="list" border="1">
 				<tr>
-					<td width="10%">아이디</td><th width="50%" align="center">이메일</th><th width="20%">연락처</th><th width="20%">등급</th>
+					<th width="20%">아이디</th>
+					<th width="20%">이메일</th>
+					<th width="20%">연락처</th>
+					<th width="10%">등급</th>
 				</tr>
-				<c:forEach items="${list }" var="dto">
-					<tr align="center" onmouseover="this.style.background='#bbbb'"
-					onmouseout="this.style.background='white'"
-					onclick="formSubmit(${dto.bno})">
-						<td>${dto.id }</td>
-						<td>${dto.email }</td>
-						<td>${dto.tel }</td>
-						<td>${dto.mgrant }</td>
-					</tr>
+				<c:forEach items="${list}" var="dto">
+				<tr>
+					<th>${dto.getId()}</th>
+					<th>${dto.getEmail()}</th>
+					<th>${dto.getTel()}</th>
+					<th>${dto.getGrant()}</th>
+				</tr>
 				</c:forEach>
 			</table>
 			<div></div>
 			</form>
+			</div>
+			
+	<my:paging jsfunc="doList" paging="${paging}"/>
+	<script>
+	function doList(p) {
+		document.searchFrm.p.value = p;
+		document.searchFrm.submit();
+	}
+	</script>
 </body>
 </html>
