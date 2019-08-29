@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.yedam.studyroom.command.AdminRoomDel;
 import co.yedam.studyroom.command.AdminRoomEditPage;
 import co.yedam.studyroom.command.AdminRoomInsert;
 import co.yedam.studyroom.command.AdminRoomInsertPage;
@@ -118,7 +119,8 @@ public class FController extends HttpServlet {
 		map.put("/AdminRoomInsert.do", new AdminRoomInsert());			//관리자 - 스터디룸관리 - 스터디룸등록페이지- 스터디룸등록	// 0829 곽동우 
 		map.put("/adminRoomEditPage.do", new AdminRoomEditPage());	//관리자 - 스터디룸수정페이지	// 0829 곽동우 
 		map.put("/AdminRoomUpdate.do", new AdminRoomUpdate());	//관리자 - 스터디룸수정! //0829 곽동우
-		
+		map.put("/AdminRoomDel.do", new AdminRoomDel());	//관리자 - 스터디룸삭제! //0829 곽동우
+	
 		
 	}
 

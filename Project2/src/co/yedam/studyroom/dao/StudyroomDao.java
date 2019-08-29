@@ -40,7 +40,7 @@ public class StudyroomDao {
 	// [윤정 0823] '예약하기' 페이지에서 방 정보 보여주기
 	public ArrayList<StudyroomDto> search() {
 		ArrayList<StudyroomDto> list = new ArrayList<StudyroomDto>();
-		String sql = "SELECT * FROM studyroom";
+		String sql = "SELECT * FROM studyroom order by rnum";
 		try {
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
@@ -65,11 +65,12 @@ public class StudyroomDao {
 	//스터디룸 입력 0829 곽동우
 	public int insertRoom(StudyroomDto dto) {
 		int n = 0;
-		String sql = "insert into studyroom values(?, ?, (select max(rnum)+1 as rnum from studyroom))";
+		String sql = "insert into studyroom values(?, ?, ?)";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, dto.getRname());
 			psmt.setString(2, dto.getRinfo());
+			psmt.setInt(3, dto.getRnum());
 			n = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -102,11 +103,12 @@ public class StudyroomDao {
 	//스터디룸 수정0829 곽동우
 	public int updateRoom(StudyroomDto dto) {
 		int n = 0;
-		String sql = "update studyroom set rname=? rinfo=? where rnum=?";
+		String sql = "update studyroom set rname=?, rinfo=? where rnum=?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, dto.getRname());
 			psmt.setString(2, dto.getRinfo());
+			psmt.setInt(3, dto.getRnum());
 			n = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -129,10 +131,22 @@ public class StudyroomDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			DAO.close(conn, psmt, rs);
 		}
 		return max;
+	}
+
+	public void deleteRoom(int rnum) {
+		String sql = "delete studyroom where rnum = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, rnum);
+			psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DAO.close(conn, psmt, rs);
+		}
+		
 	}
 	
 	
