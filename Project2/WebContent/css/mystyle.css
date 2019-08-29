@@ -55,7 +55,7 @@ nav>ul>li:hover>a {
 .submenu {
 	display : none;
 	position :absolute;
-	background-color : rgba(255,255,255,0.5);
+	background-color : #FFFFFF;
 	z-index :99;
 }
 .submenu>li>a {
@@ -64,7 +64,9 @@ nav>ul>li:hover>a {
 	font-size :18px;
 }
 .submenu>li>a:hover {
-	color :#629DD1;
+	/* color :#629DD1; */
+	color : #FFFFFF;
+	background-color : #629DD1;
 }
 
 /* Header */
