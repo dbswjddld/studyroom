@@ -133,6 +133,7 @@
 			<c:forEach items="${room}" var="room">
 				<div class = "roomlist" onclick = "select(${room.rnum}, '${room.rname}')">
 					<h2>${room.rname}</h2>
+					<span>${room.rinfo}</span>
 				</div>
 			</c:forEach>
 			</div>
