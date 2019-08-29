@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix='c' %>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,15 +22,9 @@
 	.contentboxLeft > .sidemenu>ul>li {
 		width :100%;
 	}
-	.myResList{
-		padding :10px;
-	}
-	</style>
-	<style>
-	.myResList{
-		width : 500px; height : 150px;
-		border : solid 1px black;
-		cursor : pointer;
+	select {width : 200px;}
+	td,th {
+		padding :10px 30px;
 	}
 	</style>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -44,16 +39,52 @@
 			alert("예약 취소에 실패했습니다.");
 		}
 		
-		// 검색해서 이 페이지로 왔을때, 해당 검색 select option이 selected되게
+		$("#btn").on("click", submitFunc);
+		optionChange();
+		
+		// n건씩 출력 세팅
+		var printNum = "${printNum}";
+		if(printNum == 25){
+			$("#print").find("option:eq(1)").prop("selected", true);
+		} else if(printNum == 50){
+			$("#print").find("option:eq(2)").prop("selected", true);
+		} else {
+			$("#print").find("option:eq(0)").prop("selected", true);
+		}
+		
+		// 검색값 세팅
+		var searchVal = "${searchVal}"
+		$("#show").children().eq(0).val(searchVal);
+		
+		// 검색조건 세팅
 		var searchOpt = "${searchOpt}";
-		if(searchOpt.length > 0)
-			$("[value='" + searchOpt + "']").prop("selected", true);
+		if(searchOpt == 'usedate'){
+			$("#searchOpt").find("option:eq(2)").prop("selected", true);
+			$("#show").html($("<input type = 'date' value = '" + searchVal + "'>"));
+		} else if(searchOpt == 'rname'){
+			$("#searchOpt").find("option:eq(1)").prop("selected", true);
+		} else{
+			$("#searchOpt").find("option:eq(0)").prop("selected", true);
+		}
 	});
 	
-	// select로 검색 옵션 선택
-	function listSearch(){
-		$("#frm").submit();
-		
+	// 검색조건을 바꾸었을 때 실행할 함수
+	function optionChange(){
+		var option = $("#searchOpt").val();
+		if (option == 'usedate'){
+			$("#show").html($("<input type = 'date'>").val(new Date().toISOString().substring(0, 10)));
+		} else if (option == 'rname'){
+			$("#show").html($("<input type = 'text'>").attr("placeholder", "검색할 방 이름 입력"));
+		} else {
+			$("#show").html($("<input type = 'text'>").attr("placeholder", "검색할 예약 상태 입력"));
+		}
+	}
+	
+	function submitFunc(){
+		$("#printVal").val($("#print").val()); // 출력개수
+		var value = $("#show").children().eq(0).val();
+		$("#searchVal").val(value); // 검색값
+		$("#searchFrm").submit(); // 제출
 	}
 	</script>
 </head>
@@ -72,27 +103,62 @@
 			</ul>
 		</nav>
 	</div>
-	<div class = "contentboxRight">
-			클릭시 세부정보를 확인할 수 있습니다.
-			<form name = "frm" id = "frm" method = "post" action = "MyReservationSearch.do">
+	<div class = "contentboxRight" align = "center">
+		<form name = "searchFrm" id = "searchFrm" method = "post" method = "post" action = "MyReservation.do">
+			<input type = "hidden" name = "printVal" id = "printVal">
+			<input type = "hidden" id = "p" name = "p"> <!-- 페이지 번호 -->
+			<input type = "hidden" name = "searchVal" id = "searchVal"> <!-- 검색 내용 -->
 			<input type = "hidden" name = "id" value = "${mid}">
-			<select name = "search" id = "search" onchange = "listSearch()">
-				<option value = "전체">전체</option>
-				<option value = "예약완료">예약 완료</option>
-				<option value = "예약취소">예약 취소</option>
-				<option value = "이용완료">이용 완료</option>
+			<select name = "print " id = "print" onchange = "submitFunc()">
+				<option value = "10">10건씩 보기</option>
+				<option value = "25">25건씩 보기</option>
+				<option value = "50">50건씩 보기</option>
 			</select>
-			</form>
-			<br>
+			<div style = "display:inline-block; width : 80px"></div>
+			검색 조건 :  <!-- 검색 옵션 -->
+			<select name = "searchOpt" id = "searchOpt" onchange = "optionChange()">
+				<option value = "status">예약상태</option>
+				<option value = "rname">스터디룸</option>
+				<option value = "usedate">이용날짜</option>
+			</select>
+			<div id = "show"></div>
+			<input type = "submit" value = "검색" id = "btn">
+		</form>
+		<br>
+		클릭시 세부정보를 확인할 수 있습니다.
+		<table border = "1">
+			<tr>
+				<th>예약번호</th>
+				<th>이용 날짜</th>
+				<th>시간</th>
+				<th>방 이름</th>
+				<th>상태</th>
+			</tr>
+			
 			<c:forEach items="${list}" var="dto">
-				<div class = "myResList" onclick = "location.href='ReservationContents.do?rno=${dto.rno}'">
-					<h3>${dto.rname}</h3>
-					${dto.usedate}<br>
-					${dto.starttime}~${dto.endtime}<br>
-					${dto.status}
-				</div>
-				<br>
+			<tr onclick = "location.href='ReservationContents.do?rno=${dto.rno}'">
+				<td>${dto.rno}</td>
+				<td>${dto.usedate}</td>
+				<td>${dto.starttime} ~ ${dto.endtime}</td>
+				<td>${dto.rname}</td>
+				<td>${dto.status}</td>
+			</tr>
 			</c:forEach>
-			</div>
+		</table>
+		<br><br>
+		
+			<!-- 페이징 -->
+		<my:yjPaging jsfunc="doList" paging="${paging}"/>
+		<script>
+		function doList(p) {
+			$("#p").val(p); // 검색폼에 페이지 값 넣기
+			submitFunc();
+		}
+		</script>
+	</div>
 </body>
+<style>
+select { width : 100px; }
+#show { width :200px; display : inline-block; }
+</style>
 </html>

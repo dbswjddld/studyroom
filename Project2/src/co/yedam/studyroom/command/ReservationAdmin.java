@@ -45,7 +45,7 @@ public class ReservationAdmin implements Command {
 		request.setAttribute("searchVal", searchVal);
 		//System.out.println(searchOpt);
 		//System.out.println(searchVal);
-		if(searchVal!= null && searchOpt.equals("usedate"))
+		if(searchVal!= null && searchOpt.equals("usedate") && searchVal.length() == 10)
 			searchVal = searchVal.substring(2,4) + "/" + searchVal.substring(5,7) + "/" + searchVal.substring(8,10);
 			// 날짜를 검색하는경우, 날짜 양식을 맞춰야한다.
 			//select * from reservation where usedate like '%19/08/29%';

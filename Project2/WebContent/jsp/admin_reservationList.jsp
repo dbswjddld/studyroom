@@ -106,7 +106,7 @@
 			</ul>
 		</nav>
 	</div>
-	<div class = "contentboxRight" align = "center">
+	<div 	align = "center">
 		<!-- 검색 폼 -->
 		<form name = "searchFrm" id = "searchFrm" action = "ReservationAdmin.do" method = "post">
 			<input type = "hidden" name = "printVal" id = "printVal">
