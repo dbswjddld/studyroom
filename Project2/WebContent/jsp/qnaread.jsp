@@ -66,7 +66,7 @@
 			success: function(result){
 					console.log(result);
 					$("#commentstb").prepend(	//처음위치에추가
-	                        $("<tr>").append(
+	                        $("<tr>").attr("id", result[0].cno).append(
 	                            $("<td>").text(result[0].cno),
 	                            $("<td>").text(result[0].id),
 	                            $("<td>").text(result[0].reply),		//dao에서 sysdate받아와야?
