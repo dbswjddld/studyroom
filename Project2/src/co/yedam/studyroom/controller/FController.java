@@ -24,6 +24,7 @@ import co.yedam.studyroom.command.MemberListPage;
 import co.yedam.studyroom.command.MemberLogin;
 import co.yedam.studyroom.command.MemberLoginOk;
 import co.yedam.studyroom.command.MemberWithdrawal;
+import co.yedam.studyroom.command.MyQna;
 import co.yedam.studyroom.command.MyReservation;
 import co.yedam.studyroom.command.MyReservationSearch;
 import co.yedam.studyroom.command.Qna;
@@ -33,10 +34,12 @@ import co.yedam.studyroom.command.QnaUpdate;
 import co.yedam.studyroom.command.QnaUpdatePage;
 import co.yedam.studyroom.command.QnaWrite;
 import co.yedam.studyroom.command.QnaWritePage;
+import co.yedam.studyroom.command.ReplyDelete;
 import co.yedam.studyroom.command.ReplyInsert;
 import co.yedam.studyroom.command.ReplyUpdate;
 import co.yedam.studyroom.command.ReplyUpdateGet;
 import co.yedam.studyroom.command.ReservationPage;
+import co.yedam.studyroom.command.Studyroom;
 import co.yedam.studyroom.command.ReservationAdmin;
 import co.yedam.studyroom.command.ReservationCancel;
 import co.yedam.studyroom.command.ReservationCancelAdmin;
@@ -103,7 +106,9 @@ public class FController extends HttpServlet {
 		map.put("/ReplyInsert.do", new ReplyInsert());	//댓글달기 	//20190826 곽동우
 		map.put("/replyUpdateGet.do", new ReplyUpdateGet()); //댓글창에 (수정)누르면 내용불러옴  //20190827 곽동우
 		map.put("/replyUpdate.do", new ReplyUpdate());	//    (댓글수정) 버튼 누르면 업데이트됨 //20190827 곽동우
-		
+		map.put("/replyDelete.do", new ReplyDelete());	// 댓글삭제함		//0828 곽동우
+		map.put("/MyQna.do", new MyQna());	//내문의게시판 첫화면	//0828 곽동우
+		map.put("/Studyroom.do", new Studyroom());	//관리자 - 스터디룸 관리  //0828 곽동우
 		
 		
 		

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import co.yedam.studyroom.common.Command;
 import co.yedam.studyroom.common.HttpRes;
@@ -13,8 +14,9 @@ import co.yedam.studyroom.common.Paging_old;
 import co.yedam.studyroom.dao.BoardDao;
 import co.yedam.studyroom.dto.BoardDto;
 
-public class Qna implements Command {
-
+public class MyQna implements Command {
+	
+	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// TODO Auto-generated method stub
@@ -22,6 +24,14 @@ public class Qna implements Command {
 		//20190820 10:11  곽동우 //qna화면 리스트를위한 커맨드
 		ArrayList<BoardDto> list = new ArrayList<BoardDto>();
 		BoardDao dao = new BoardDao();
+		
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("mid");
+		
+		if(id == null || id.equals("")) {		//주소창으로 들어오는거 막는다
+			response.sendRedirect("Qna.do");
+			return;
+		}
 		
 		///////////////////////////////////페이지테스트중  190825 
 		Paging_old p = new Paging_old();
@@ -31,9 +41,8 @@ public class Qna implements Command {
 		}else {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-//		System.out.println(request.getParameter("page"));
+
 		int countList = 0;
-		//게시글 몇개 보일건지 확인
 		
 		//null 오면 기본설정된 페이지수(10)만큼 보여줌
 		if(request.getParameter("countList") == null) {
@@ -44,18 +53,15 @@ public class Qna implements Command {
 		
 		p.setPage(page); //헌재페이지
 		p.setCountList(countList);	// 게시글 set
-	//	p.run(dao.boardCount());	//총게시글수
 		
 		int endbno = p.getPage()*p.getCountList();		//끝게시글
 		int startbno = endbno-(p.getCountList()-1);		//시작게시글
 //		System.out.println(endbno + "끝게시글");
 //		System.out.println(startbno + "처음게시글");
 		
+		p.run(dao.boardCount(id));	//내아이디꺼만 찾게
 		
-//		System.out.println(p.getCountList());
-		p.run(dao.boardCount());
-		
-		list = dao.curPageBoard(startbno,endbno);
+		list = dao.curPageBoard(startbno,endbno,id);
 		
 //		System.out.println("현재페이지"+p.getPage());
 //		System.out.println("총페이지"+p.getTotalPage()); //총페이지
@@ -72,8 +78,9 @@ public class Qna implements Command {
 		
 		//list = dao.boardList();
 		request.setAttribute("list", list);
-		String viewPage = "jsp/qna.jsp";	//바꿔야함 test중
+		String viewPage = "jsp/my_qna.jsp";
 		HttpRes.forward(request, response, viewPage);
 	}
+
 
 }

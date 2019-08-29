@@ -6,6 +6,32 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.contentboxLeft {
+		float :left;
+		width : 200px; /* 왼쪽 사이드바 너비 */
+		padding :10px;
+	}
+	.contentboxRight {
+		float :left;
+		width : 1000px; /* 본문 너비 */
+		padding :15px;
+	}
+	/* 왼쪽 사이드바와 본문 너비의 합은 1200이 되어야 한다 */
+	.contentboxLeft > .sidemenu>ul>li {
+		width :100%;
+	}
+	.myResList{
+		padding :10px;
+	}
+	</style>
+	<style>
+	.myResList{
+		width : 500px; height : 150px;
+		border : solid 1px black;
+		cursor : pointer;
+	}
+	</style>
 
 <!-- 20190820   11:14  > 20190822
 	   곽동우
@@ -38,9 +64,19 @@
 <body>
 	<jsp:include page = "new_menuTop.jsp"></jsp:include>
 	<header>
-		<h1>문의게시판</h1>
+		<h1>마이페이지</h1>
+		<h3>내 문의내역</h3>
 	</header>
-	<div class = "contentbox" align = "center">
+	<div class = "contentboxLeft">
+		<nav class = "sidemenu">
+			<ul>
+				<li><a href="MyReservation.do">예약 내역</a></li>
+				<li><a href="MyQna.do">내 문의 내역</a></li>
+				<li><a href="MemberEditLogin.do">회원 정보 수정</a></li>
+			</ul>
+		</nav>
+	</div>
+	<div class = "contentboxRight">
 		<form name="frm" id="frm" action="QnaRead.do">
 			<input type="hidden" name="bno">
 			<table id="list" border="1">
@@ -62,7 +98,8 @@
 			</form>	<!-- 개선? -->
 			
 			<!-- 페이지목록 -->
-			<form name="pagebtn" id="pagebtn" action="Qna.do">
+			<div align="center">
+			<form name="pagebtn" id="pagebtn" action="MyQna.do">
 				<c:if test= "${page gt countPage}" >
 					<button id="page" name="page" type="submit" onclick="form.submit()" value="${startPage-1}">이전</button>
 				</c:if>
@@ -77,9 +114,10 @@
 			</form>
 			
 			<form name="btn" id="btn">
-				<button type="button" id="wb" name="wb" onclick="qnaWrite()">글쓰기</button>	<!-- sid 는 세션id -->
+				<button type="button" id="wb" name="wb" onclick="qnaWrite('${mid }')">글쓰기</button>	<!-- sid 는 세션id -->
 				<input type="hidden" id="sid" name="sid">
 			</form>
+			</div>
 		
 	</div>
 </body>

@@ -1,7 +1,17 @@
 ===========2019.08.28=============
 할 일
 1 예약리스트 페이징
+2 (완료)예약성공하면 alert 띄우고 my-예약리스트 화면으로 넘기기
 
+페이징 SQL
+SELECT b.*
+FROM (
+  SELECT rownum no, a.*
+  FROM (
+    SELECT * FROM reservation !!!조건절!!! ORDER BY usedate desc
+    ) a
+  ) b
+WHERE no BETWEEN 11 AND 15;
 ===========2019.08.27==============
 ReservationDto Date, Time 타입 -> String 타입 변경
 
