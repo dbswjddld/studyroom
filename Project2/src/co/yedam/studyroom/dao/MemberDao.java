@@ -308,6 +308,7 @@ public class MemberDao {
 		}
 		return cnt;
 	}
+	
 }
 
 //	public int (String id) { //회원 삭제
