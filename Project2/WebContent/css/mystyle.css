@@ -87,6 +87,7 @@ header {
 		border : 1px solid #555f66;
 		border-radius : 3px;
 		padding : 5px 8px;
+		margin : 1px;
 	}
 	
 	button[class='special'] {
