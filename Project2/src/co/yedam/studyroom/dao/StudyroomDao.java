@@ -79,5 +79,61 @@ public class StudyroomDao {
 		return n;
 	}
 	
+	//스터디룸 하나가져옴 0829 곽동우
+	public StudyroomDto getRoom(int rnum) {
+		String sql = "select * from studyroom where rnum= ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, rnum);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				dto = new StudyroomDto();
+				dto.setRnum(rs.getInt("rnum"));
+				dto.setRname(rs.getString("rname"));
+				dto.setRinfo(rs.getString("rinfo"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			
+		return dto;
+	}
+	
+	//스터디룸 수정0829 곽동우
+	public int updateRoom(StudyroomDto dto) {
+		int n = 0;
+		String sql = "update studyroom set rname=? rinfo=? where rnum=?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dto.getRname());
+			psmt.setString(2, dto.getRinfo());
+			n = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DAO.close(conn, psmt, rs);
+		}
+		return n;
+	}
+	
+	///번호가져오기
+	public int getMaxNum() {
+		int max = 0;
+		String sql = "select max(rnum)+1 as rnum from studyroom";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				max = rs.getInt("rnum");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DAO.close(conn, psmt, rs);
+		}
+		return max;
+	}
+	
 	
 }
