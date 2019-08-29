@@ -69,7 +69,7 @@
 		} else {
 			$("#rnum").val(num);
 			$("#rname").val(name);
-			$(".show").text(name);
+			$(".show").html("<h2>" + name + "</h2>");
 			select2();
 		}
 	}
@@ -123,7 +123,7 @@
 			이용할 스터디룸 선택 →
 			</font>
 	</div>
-	<div class = "contentboxRight">
+	<div class = "contentboxRight" align = "center">
 			<!-- 선택한 날짜 출력 -->
 			<div class = "date_select" align = "center"></div>
 			<hr>
@@ -142,9 +142,13 @@
 			<div class = "time_select">
 				<div class = "show"></div>
 				시작 시간 : <select id = "start" onchange = "select_end()"></select><br>
-				종료 시간 : <select id = "end"></select><br>
+				종료 시간 : <select id = "end"></select><br><br>
 				<input type = "button" value = "이전 화면으로" onclick = "select1()">
 				<input type = "button" value = "예약하기" onclick = "submitFunc()">
 			</div>
 	</div>
+</body>
+<style>
+select { width : 200px}
+</style>
 </html>

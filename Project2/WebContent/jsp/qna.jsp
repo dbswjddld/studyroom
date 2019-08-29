@@ -11,15 +11,10 @@
 	   곽동우
 	  문의게시판 -->
 	<script>
-		function formSubmit(n,id){
-			if(id=='${mid}' || 'A' == '${mgrant}'){	
-				var form = document.frm;
-				form.bno.value = n;
-				form.submit();
-			}else{
-				alert("비밀글입니다.")
-				return;
-			}
+		function formSubmit(n){
+			var form = document.frm;
+			form.bno.value = n;
+			form.submit();
 		}
 		
 		function qnaWrite(){
@@ -55,7 +50,7 @@
 				<c:forEach items="${list }" var="dto">
 					<tr align="center" onmouseover="this.style.background='#bbbb'"
 					onmouseout="this.style.background='white'"
-					onclick="formSubmit(${dto.bno},'${dto.id}')">
+					onclick="formSubmit(${dto.bno})">
 						<td>${dto.bno }</td>
 						<td>${dto.subject }</td>
 						<td>${dto.id }</td>
@@ -71,7 +66,7 @@
 				<c:if test= "${page gt countPage}" >
 					<button id="page" name="page" type="submit" onclick="form.submit()" value="${startPage-1}">이전</button>
 				</c:if>
-				<c:forEach  begin="${startPage }" end="${endPage }" step="1" varStatus="page" >
+				<c:forEach  begin="${startPage }" end="${endPage }" step="1" varStatus="page">
 					<button id="page" name="page" type="submit" value="${page.current}" onclick="form.submit()">&nbsp;&nbsp;${page.current }&nbsp;&nbsp;</button>
 				</c:forEach>
 				
