@@ -68,6 +68,29 @@ public class MemberDao {
 		}
 		return output;
 	}
+	
+	//전체 리스트
+	public ArrayList<MemberDto>select(){
+		ArrayList<MemberDto> list = new ArrayList<MemberDto>();
+		String sql = "select * from member";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+		while(rs.next()) {
+			dto = new MemberDto();
+			dto.setId(rs.getString("id"));
+			dto.setEmail(rs.getString("email"));
+			dto.setTel(rs.getString("tel"));
+			dto.setGrant(rs.getString("mgrant"));
+			list.add(dto);
+		}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return list;
+	}
 
 	// 회원가입
 	public int insert(MemberDto dto) {
@@ -199,13 +222,12 @@ public class MemberDao {
 			whereCondition += " and tel = ? ";
 		}
 		if (dto.getGrant() != null && !dto.getGrant().equals("")) {
-			whereCondition += " and grant = ? ";
+			whereCondition += " and mgrant = ? ";
 		}
 		try {
 			conn = ConnectionManager.connect();
-			String sql = "select b.*  from( select a.*, rownum rn  from ( "
-					+ "SELECT department_id, department_name, manager_id, location_id " + "  FROM departments"
-					+ whereCondition + " ORDER BY department_id " + " ) a   ) b  where rn between ? and ?	";
+			String sql = "select b.*  from(select rownum rnum, a.* from(select * from member " 
+					+ whereCondition + " order by id )a )b where rnum between ? and ?";
 			psmt = conn.prepareStatement(sql);
 			int pos = 1;
 			if (dto.getId() != null && !dto.getId().equals("")) {
@@ -222,7 +244,7 @@ public class MemberDao {
 			}
 			psmt.setInt(pos++, dto.getStart());
 			psmt.setInt(pos++, dto.getEnd());
-			ResultSet rs = psmt.executeQuery();
+			rs = psmt.executeQuery();
 			while (rs.next()) {
 				dto = new MemberDto();
 				dto.setId(rs.getString("id"));
@@ -256,12 +278,12 @@ public class MemberDao {
 				whereCondition += " and tel = ? ";
 			}
 			if (dto.getGrant() != null && !dto.getGrant().equals("")) {
-				whereCondition += " and grant = ? ";
+				whereCondition += " and mgrant = ? ";
 			}
 
-			String sql = "select count(*) from departments" + whereCondition;
+			String sql = "select count(*) from member" + whereCondition;
 			psmt = conn.prepareStatement(sql);
-
+			
 			// 조건값 셋팅
 			int pos = 1;
 			if (dto.getId() != null && !dto.getId().equals("")) {
@@ -276,7 +298,7 @@ public class MemberDao {
 			if (dto.getGrant() != null && !dto.getGrant().equals("")) {
 				psmt.setString(pos++, dto.getGrant());
 			}
-			ResultSet rs = psmt.executeQuery();
+			rs = psmt.executeQuery();
 			rs.next();
 			cnt = rs.getInt(1);
 		} catch (Exception e) {
