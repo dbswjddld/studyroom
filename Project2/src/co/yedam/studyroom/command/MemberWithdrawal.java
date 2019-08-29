@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import co.yedam.studyroom.common.Command;
 import co.yedam.studyroom.common.HttpRes;
@@ -20,7 +21,8 @@ public class MemberWithdrawal implements Command {
 		
 		MemberDao dao = new MemberDao();
 		int result = dao.Withdrawal(dto);
-		
+		HttpSession session = request.getSession();
+		session.invalidate();
 		request.setAttribute("result", result);
 		String viewPage = "jsp/MemberWithdrawal.jsp";
 		HttpRes.forward(request, response, viewPage);
