@@ -19,16 +19,18 @@ public class AdminRoomInsert implements Command {
 		StudyroomDao dao = new StudyroomDao();
 		StudyroomDto dto = new StudyroomDto();
 		
+		int num = dao.getMaxNum();
 		String rname = request.getParameter("rname");
 		String rinfo = request.getParameter("rinfo");
+		dto.setRnum(num);
 		dto.setRname(rname);
 		dto.setRinfo(rinfo);
 		
 		dao.insertRoom(dto);
-		
+
 		String viewPage = "Studyroom.do";
 		
-		HttpRes.forward(request, response, viewPage);
+		response.sendRedirect(viewPage);
 	}
 
 }
