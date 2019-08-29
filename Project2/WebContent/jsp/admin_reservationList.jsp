@@ -152,7 +152,7 @@
 			</c:forEach>
 		</table>
 		
-		<br><br>
+		<br>
 		
 		<!-- 페이징 -->
 		<my:yjPaging jsfunc="doList" paging="${paging}"/>

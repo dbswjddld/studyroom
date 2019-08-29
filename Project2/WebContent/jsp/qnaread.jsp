@@ -126,7 +126,6 @@
 		if("${mid}" == id){		// 댓글삭제 조건  자기댓글or관리자계정 관리자조건추가
 			var check = confirm("정말 삭제하시겠습니까?");
 			if(check){
-				alert("삭제됨");
 				$.ajax({
 					url: requestPage+"/replyDelete.do",
 					method : "post",
@@ -137,7 +136,7 @@
 				})
 				
 			}else{
-				alert("삭제안됨");
+				
 			}
 		}else{
 			alert("사용자다릅니다");
@@ -148,7 +147,10 @@
 	/*------------------------------
 	//댓글수정 버튼 누르면 업데이트되고 그 행은 삭제  20190827 곽동우
 	-------------------------------*/
-	    function updateRow(){		
+	    function updateRow(){
+	    	if(!(confirm("정말 수정하시겠습니까?"))){
+	    		return;
+	    	}
 			 var id = $(this).parent().parent().prev().children().eq(1).text();
 	         var content = $(this).parent().parent().children().eq(0).children().eq(0).val();
 	         var cno = $(this).parent().parent().prev().attr("id");

@@ -66,7 +66,7 @@
 				<c:if test= "${page gt countPage}" >
 					<button id="page" name="page" type="submit" onclick="form.submit()" value="${startPage-1}">이전</button>
 				</c:if>
-				<c:forEach  begin="${startPage }" end="${endPage }" step="1" varStatus="page" >
+				<c:forEach  begin="${startPage }" end="${endPage }" step="1" varStatus="page">
 					<button id="page" name="page" type="submit" value="${page.current}" onclick="form.submit()">&nbsp;&nbsp;${page.current }&nbsp;&nbsp;</button>
 				</c:forEach>
 				
