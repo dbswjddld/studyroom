@@ -86,7 +86,15 @@ header {
 		color : #555f66;
 		border : 1px solid #555f66;
 		border-radius : 3px;
-		padding : 3px;
+		padding : 5px 8px;
+	}
+	
+	button[class='special'] {
+		background : #629DD1;
+		color : #FFFFFF;
+		border : none;
+		border-radius : 3px;
+		padding : 6px 9px;
 	}
 
 	input[type="text"],
