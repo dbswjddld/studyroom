@@ -22,19 +22,34 @@ public class ReservationAdmin implements Command {
 		// 입력한 페이지 받아오기 
 		String p = request.getParameter("p");
 		int pageNum = 1;
-		if(p != null & !p.equals("")) {
+		if(p != null && !p.equals("")) {
 			pageNum = Integer.parseInt(p);
 		}
 		
-		// 검색용
+		// n건씩 출력
+		String print = request.getParameter("print");
+		int printNum;
+		if(print != null && !print.equals("")) {
+			printNum = Integer.parseInt(p);
+		} else {
+			printNum = 10;
+		}
+		
+		// 검색
 		ReservationDto search = new ReservationDto();
-		// search.set** 해서 검색조건 넣으면 된다
+		String searchOpt = request.getParameter("searchOpt");
+		String searchVal = request.getParameter("searchVal");
+		String where ;
+		if (searchVal == null || searchVal.equals("") || searchVal.equals("[object Object]")) // 검색내용을 작성하지 않은 경우
+			where = " where 1 = 1 ";
+		else // 검색내용을 작성한 경우
+			where = " where " + searchOpt + " like '%" + searchVal + "%' ";
 		
 		// PagingReservation 정보 저장
 		PagingReservation paging = new PagingReservation();
-		paging.setPageUnit(2); // 한 페이지에 출력할 레코드
-		paging.setPage(pageNum);
-		paging.setTotalRecord(dao.count(search));
+		paging.setPageUnit(printNum); // 한 페이지에 출력할 레코드
+		paging.setPage(10);
+		paging.setTotalRecord(dao.count(search, where));
 		
 		// 페이지에 출력할 레코드 (몇번째부터 몇번째까지)
 		search.setStart(paging.getFirst());
@@ -43,23 +58,16 @@ public class ReservationAdmin implements Command {
 		// start, end :첫번째, 마지막 레코드 (검색할때 쓸것임)
 		
 		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
-		list = dao.ResvPaging(search);
+		list = dao.ResvPaging(search, where);
 		
-		
-		
-		
-		
-		list = dao.adminList();
-
 		request.setAttribute("list", list);
-
+		request.setAttribute("paging", paging);
+		
 		String viewPage = "jsp/admin_reservationList.jsp";	// 기존 방식
 
 		
 //		String viewPage = "jsp/admin_reservaion_datatables.jsp"; // DataTables 이용 (잘 안됨..)
 		
-		
-		System.out.println(viewPage);
 		HttpRes.forward(request, response, viewPage);
 
 	}

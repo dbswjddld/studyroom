@@ -1,14 +1,14 @@
 ===========2019.08.28=============
 할 일
 1 예약리스트 페이징
-2 다른사람이 예약한 시간대 예약 못하게
+2 (완료)예약성공하면 alert 띄우고 my-예약리스트 화면으로 넘기기
 
 페이징 SQL
 SELECT b.*
 FROM (
   SELECT rownum no, a.*
   FROM (
-    SELECT * FROM reservation ORDER BY usedate desc
+    SELECT * FROM reservation !!!조건절!!! ORDER BY usedate desc
     ) a
   ) b
 WHERE no BETWEEN 11 AND 15;
