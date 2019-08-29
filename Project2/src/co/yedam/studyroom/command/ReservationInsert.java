@@ -33,6 +33,10 @@ public class ReservationInsert implements Command {
 		dto.setEndtime(endtime);
 		
 		ReservationDao dao = new ReservationDao();
+		
+		// 예약번호 세팅
+		int rno = dao.getRno();
+		dto.setRno(rno);
 		int result = dao.insert(dto);
 		
 		request.setAttribute("result", result);

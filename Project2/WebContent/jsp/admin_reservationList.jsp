@@ -33,7 +33,7 @@
 	<script src = "js/jquery-3.4.1.js"></script>
 	<script>
 	$(function(){
-		$("#btn").on("click", search);
+		$("#btn").on("click", submitFunc);
 		optionChange();
 		
 		
@@ -48,10 +48,16 @@
 			$("#print").find("option:eq(0)").prop("selected", true);
 		}
 		
-		// 검색조건과 검색값 세팅
+		// 검색값 세팅
+		var searchVal = "${searchVal}"
+		$("#show").children().eq(0).val(searchVal);
+		console.log(searchVal);
+		
+		// 검색조건 세팅
 		var searchOpt = "${searchOpt}";
 		if(searchOpt == 'usedate'){
 			$("#searchOpt").find("option:eq(1)").prop("selected", true);
+			$("#show").html($("<input type = 'date' value = '" + searchVal + "'>"));
 		} else if(searchOpt == 'status'){
 			$("#searchOpt").find("option:eq(3)").prop("selected", true);
 		} else if(searchOpt == 'rname'){
@@ -60,8 +66,7 @@
 			$("#searchOpt").find("option:eq(0)").prop("selected", true);
 		}
 		
-		var searchVal = "${searchVal}"
-		$("#show").children().eq(0).val(searchVal);
+		
 	});
 	
 	// 검색조건을 바꾸었을 때 실행할 함수
@@ -78,20 +83,11 @@
 		}
 	}
 	
-	// 검색 버튼 클릭
-	function search(){
+	function submitFunc(){
+		$("#printVal").val($("#print").val()); // 출력개수
 		var value = $("#show").children().eq(0).val();
-		$("#searchVal").val(value);
-		$("#printVal").val($("#print").val());
-		$("#searchFrm").submit();
-	}
-	
-	// n건씩 출력 바꿨을때 제출하기
-	function printChange(){
-		$("#printVal").val($("#print").val()); // printNum의 값을 선택한select option으로 세팅
-		var value = $("#show").children().eq(0).val();
-		$("#searchVal").val(value);
-		$("#searchFrm").submit();
+		$("#searchVal").val(value); // 검색값
+		$("#searchFrm").submit(); // 제출
 	}
 	</script>
 </head>
@@ -114,12 +110,12 @@
 		<!-- 검색 폼 -->
 		<form name = "searchFrm" id = "searchFrm" action = "ReservationAdmin.do" method = "post">
 			<input type = "hidden" name = "printVal" id = "printVal">
-			<select name = "print " id = "print" onchange = "printChange()">
+			<select name = "print " id = "print" onchange = "submitFunc()">
 				<option value = "10">10건씩 보기</option>
 				<option value = "25">25건씩 보기</option>
 				<option value = "50">50건씩 보기</option>
 			</select>
-			
+			<div style = "display:inline-block; width : 300px"></div>
 			<input type = "hidden" name = "searchVal" id = "searchVal"> <!-- 검색 내용 -->
 			<input type = "hidden" id = "p" name = "p"> <!-- 페이지 번호 -->
 			검색 조건 : 
@@ -162,11 +158,8 @@
 		<my:yjPaging jsfunc="doList" paging="${paging}"/>
 		<script>
 		function doList(p) {
-			var value = $("#show").children().eq(0).val();
-			$("#searchVal").val(value);
 			$("#p").val(p); // 검색폼에 페이지 값 넣기
-			$("#printVal").val($("#print").val());
-			$("#searchFrm").submit(); // 검색폼 실행 (DeptListPagingServ)
+			submitFunc();
 		}
 		</script>
 	</div>

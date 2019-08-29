@@ -175,13 +175,14 @@ public class ReservationDao {
 				+ " to_date('" + dto.getUsedate() + "','YYYY-MM-DD'),"
 				+ " to_timestamp('" + dto.getUsedate() + " " + dto.getStarttime() + "','YYYY-MM-DD HH24'),"
 				+ " to_timestamp('" + dto.getUsedate() + " " + dto.getEndtime() + "','YYYY-MM-DD HH24'), " 
-				+ " (select max(rno) from reservation)+1 , '예약완료', sysdate)";
+				+ " ? , '예약완료', sysdate)";
 		
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, dto.getRnum());
 			psmt.setString(2, dto.getRname());
 			psmt.setString(3, dto.getId());
+			psmt.setInt(4, dto.getRno());
 			result = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -244,5 +245,21 @@ public class ReservationDao {
 			close();
 		}
 		return list;
+	}
+	
+	// [윤정 0829] 예약번호 가져옥
+	public int getRno() {
+		int result = 1;
+		String sql = "SELECT max(rno) + 1 as rno FROM reservation";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			if(rs.next())
+				result = rs.getInt("rno");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		return result;
 	}
 }
