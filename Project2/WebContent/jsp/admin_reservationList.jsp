@@ -33,8 +33,40 @@
 	<script src = "js/jquery-3.4.1.js"></script>
 	<script>
 	$(function(){
-		$("#btn").on("click", search);
+		$("#btn").on("click", submitFunc);
 		optionChange();
+		
+		
+		// n건씩 출력 세팅
+		var printNum = "${printNum}";
+		console.log(printNum);
+		if(printNum == 25){
+			$("#print").find("option:eq(1)").prop("selected", true);
+		} else if(printNum == 50){
+			$("#print").find("option:eq(2)").prop("selected", true);
+		} else {
+			$("#print").find("option:eq(0)").prop("selected", true);
+		}
+		
+		// 검색값 세팅
+		var searchVal = "${searchVal}"
+		$("#show").children().eq(0).val(searchVal);
+		console.log(searchVal);
+		
+		// 검색조건 세팅
+		var searchOpt = "${searchOpt}";
+		if(searchOpt == 'usedate'){
+			$("#searchOpt").find("option:eq(1)").prop("selected", true);
+			$("#show").html($("<input type = 'date' value = '" + searchVal + "'>"));
+		} else if(searchOpt == 'status'){
+			$("#searchOpt").find("option:eq(3)").prop("selected", true);
+		} else if(searchOpt == 'rname'){
+			$("#searchOpt").find("option:eq(2)").prop("selected", true);
+		} else {
+			$("#searchOpt").find("option:eq(0)").prop("selected", true);
+		}
+		
+		
 	});
 	
 	// 검색조건을 바꾸었을 때 실행할 함수
@@ -51,15 +83,11 @@
 		}
 	}
 	
-	// 검색 버튼 클릭
-	function search(){
-		var value = $("#show").children().eq(0).val()
-		if($("#searchOpt").val() == 'usedate')
-			var value = value.substr(2,2) + "/" + value.substr(5,2) + "/" + value.substr(8,2);
-			// 날짜를 검색하는경우, 날짜 양식을 맞춰야한다.
-			//select * from reservation where usedate like '%19/08/29%';
-		$("#searchVal").val(value);
-		$("#searchFrm").submit();
+	function submitFunc(){
+		$("#printVal").val($("#print").val()); // 출력개수
+		var value = $("#show").children().eq(0).val();
+		$("#searchVal").val(value); // 검색값
+		$("#searchFrm").submit(); // 제출
 	}
 	</script>
 </head>
@@ -78,9 +106,16 @@
 			</ul>
 		</nav>
 	</div>
-	<div class = "contentboxRight" align = "center">
+	<div class = "contentboxRight"	align = "center">
 		<!-- 검색 폼 -->
 		<form name = "searchFrm" id = "searchFrm" action = "ReservationAdmin.do" method = "post">
+			<input type = "hidden" name = "printVal" id = "printVal">
+			<select name = "print " id = "print" onchange = "submitFunc()">
+				<option value = "10">10건씩 보기</option>
+				<option value = "25">25건씩 보기</option>
+				<option value = "50">50건씩 보기</option>
+			</select>
+			<div style = "display:inline-block; width : 300px"></div>
 			<input type = "hidden" name = "searchVal" id = "searchVal"> <!-- 검색 내용 -->
 			<input type = "hidden" id = "p" name = "p"> <!-- 페이지 번호 -->
 			검색 조건 : 
@@ -124,8 +159,7 @@
 		<script>
 		function doList(p) {
 			$("#p").val(p); // 검색폼에 페이지 값 넣기
-			$("#searchVal").val($("#show").children().eq(0).val("")); // 검색값 ""으로 세팅
-			$("#searchFrm").submit(); // 검색폼 실행 (DeptListPagingServ)
+			submitFunc();
 		}
 		</script>
 	</div>

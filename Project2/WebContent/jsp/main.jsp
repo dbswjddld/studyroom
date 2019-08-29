@@ -9,6 +9,7 @@
 <body>
 	<jsp:include page = "new_menuTop.jsp"></jsp:include>
 	<div class = "contentbox">
+		<img src = "image/main1.jpg" style = "margin:50px 0px;">
 	</div>
 </body>
 </html>

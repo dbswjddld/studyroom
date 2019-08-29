@@ -22,16 +22,21 @@ public class DeptListPagingServ extends HttpServlet {
 			pageNum = Integer.parseInt(p);
 		}		
 		MemberDto dto = new MemberDto();
+		dto.setId(request.getParameter("id"));
+		dto.setEmail(request.getParameter("email"));
+		dto.setTel(request.getParameter("tel"));
+		dto.setGrant(request.getParameter("grant"));
 		//paging 정보 저장
 		Paging paging = new Paging();
-		paging.setPage(pageNum);	
+		paging.setPageUnit(5);
 		paging.setTotalRecord(MemberDao.getInstance().count(dto));
-		//부서목록
+		paging.setPage(pageNum);	
+		//회원목록
 		dto.setStart(paging.getFirst());
 		dto.setEnd(paging.getLast());
 		request.setAttribute("list", MemberDao.getInstance().getMemberList(dto));
 		request.setAttribute("paging", paging);
-		request.getRequestDispatcher("MemberList.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/MemberList.jsp").forward(request, response);
 	}
 
 	/**
