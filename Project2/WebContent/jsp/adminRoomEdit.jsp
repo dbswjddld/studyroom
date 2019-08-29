@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>관리자 - (스터디룸수정)</title>
 	<style>
 	.contentboxLeft {
 		float :left;
@@ -23,32 +22,12 @@
 	}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script>
-	$(function (){
-		$("#roominsert").click(roominsert)
-		
-		function roominsert(){
-			location.href = "adminRoomInsertPage.do"
-		}
-	});
-	
-	
-	/*------------
-	방 눌렀을때
-	------------*/
-	function formSubmit(n){
-		var form = document.frm;
-		form.rnum.value = n;
-		form.submit();
-	}
-	
-	</script>
 </head>
 <body>
 	<jsp:include page = "new_menuTop.jsp"></jsp:include>
 	<header>
 		<h1>관리자 페이지</h1>
-		<h3>스터디룸관리</h3>
+		<h3>스터디룸 수정</h3>
 	</header>
 	<div class = "contentboxLeft">
 		<nav class = "sidemenu">
@@ -60,22 +39,14 @@
 		</nav>
 	</div>
 	<div class = "contentboxRight" align = "center">
-		<h3>스터디룸목록</h3>
-		<form id="frm" name="frm" action="adminRoomEditPage.do">
-			<input type="hidden" name="rnum">
-			<table>
-				<c:forEach items="${list }" var="dto">
-					<tr align="center" onmouseover="this.style.background='#bbbb'"
-						onmouseout="this.style.background='white'"
-						onclick="formSubmit(${dto.rnum})">
-							<td>${dto.rnum}</td>
-							<td>${dto.rname }</td>
-							<td>${dto.rinfo }</td>
-					</tr>
-				</c:forEach>
+		<form id="roominfo" name="roominfo" action="AdminRoomInsert.do">
+			<table id="roominfotb">
+				<tr><td>이름</td><td><input id="rname" name="rname" type="text" placeholder="방이름을 적어주세요"></td></tr>
+				<tr><td>첨부파일(보류)</td><td><input type="file" accept=".jpg, .png"></td></tr>
+				<tr><td>설명</td><td><textarea id="rinfo" name="rinfo" placeholder="방에대한 설명을 적어주세요(한글100글자 이내)"></textarea></td></tr>
 			</table>
+			<button type="submit">등록</button>
 		</form>
-		<button id="roominsert">스터디룸등록하기</button>
 	</div>
 </body>
 </html>

@@ -31,7 +31,7 @@
                    			 $("<td>").text(r.reply),
                   			 $("<td>").text(r.cdate)
                			 )
-                	if(r.id == "${mid}")
+                	if(r.id == "${mid}" || "${mgrant}" == "A")		//관리자 이거나 본인이면 수정 삭제버튼 보임
 					     $tr.append(
 				    		$("<td>").html($("<button type='button'>").text("수정").click(onupdate)),	//버튼추가	//수정해야		//밖으로 아이디조건
                     		$("<td>").html($("<button type='button'>").text("삭제").click(ondelete)));
@@ -49,6 +49,12 @@
 			alert("로그인해야 이용할수있습니다");
 			return;		//ajax로안넘어감
 		}
+		
+		if($("#replycontent").val() == null || $("#replycontent").val() == ""){
+			alert("댓글내용을 입력해주세요");
+			return;		//ajax로안넘어감
+		}
+		
 		$.ajax({
 			url: requestPage+"/ReplyInsert.do",
 			data: {
@@ -287,10 +293,9 @@
 				</table>
 			</div>
 			
-			<textarea id="replycontent" name="replycontent" rows="2" cols="10" onKeyUp="javascript:fnChkByte(this,'200')" ></textarea>
+			<textarea id="replycontent" name="replycontent" rows="2" cols="10" onKeyUp="javascript:fnChkByte(this,'200')" placeholder="내용을 입력하세요(한글 최대70자)"></textarea>
 			<button type="button" id="replyInsert">댓글달기</button><br>
-			
-			<c:if test="${dto.id == mid }">
+			<c:if test="${dto.id == mid || mgrant == 'A' }">	<!-- 관리자 이거나 본인이면 수정 삭제버튼 보임 -->
 				<button type="button" onclick="qnaUpdate(${dto.bno})">수정</button>
 				<button type="button" onclick="qnaDel(${dto.bno})">삭제</button>
 			</c:if>
