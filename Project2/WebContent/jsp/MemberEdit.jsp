@@ -50,7 +50,7 @@
 			</ul>
 		</nav>
 	</div>
-	<div class = "contentboxRight" align = "lift">
+	<div class = "contentboxRight" align = "center">
 	<form action = "MemberEdit.do" method="post" name = "frm">
 		<table border = "1" cellpadding = "5">
 			<tr>
