@@ -225,7 +225,7 @@ public class BoardDao {
 		
 		
 		
-		//0825 현재 페이지 게시글만
+		//0825 내문의 게시글 가져오기
 		public ArrayList<BoardDto> curPageBoard(int startbno, int endbno, String id) {
 			String sql =    "select *\r\n" + 
 					"  from\r\n" + 
