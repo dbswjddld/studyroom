@@ -32,7 +32,7 @@
 <body id="top">
         <header id="header" class="skel-layers-fixed">
             <h1><a href="Index.do">HOME</a></h1>
-            <nav id="topMenu">
+            <nav id="topMenu" class = "mainmenu">
                 <ul>
                     <li class="topMenuLi"><a href="ReservationPage.do">예약하기</a></li>
                     
