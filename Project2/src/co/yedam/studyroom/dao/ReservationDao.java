@@ -175,7 +175,7 @@ public class ReservationDao {
 				+ " to_date('" + dto.getUsedate() + "','YYYY-MM-DD'),"
 				+ " to_timestamp('" + dto.getUsedate() + " " + dto.getStarttime() + "','YYYY-MM-DD HH24'),"
 				+ " to_timestamp('" + dto.getUsedate() + " " + dto.getEndtime() + "','YYYY-MM-DD HH24'), " 
-				+ " r_seq.nextval , '예약완료', sysdate)";
+				+ " (select max(rno) from reservation)+1 , '예약완료', sysdate)";
 		
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -213,7 +213,7 @@ public class ReservationDao {
 		
 		String sql = "SELECT b.* FROM ( SELECT rownum no, a.* FROM ( SELECT * FROM reservation "
 				+ where
-				+ "ORDER BY usedate desc ) a ) b WHERE no BETWEEN ? AND ?";
+				+ " ORDER BY usedate desc ) a ) b WHERE no BETWEEN ? AND ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			
@@ -223,6 +223,8 @@ public class ReservationDao {
 			// BETWEEN ? AND ?
 			psmt.setInt(pos++, search.getStart());
 			psmt.setInt(pos++, search.getEnd());
+			//System.out.println("start : " +search.getStart());
+			//System.out.println("end : " + search.getEnd());
 			
 			rs = psmt.executeQuery();
 			while(rs.next()) {
