@@ -81,6 +81,14 @@ header {
 }
 
 /* form */
+	button {
+		background : #629DD1;
+		color : #FFFFFF;
+		border : none;
+		border-radius : 3px;
+		padding : 2px;
+	}
+
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
