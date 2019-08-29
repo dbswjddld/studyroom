@@ -82,11 +82,11 @@ header {
 
 /* form */
 	button {
-		background : #629DD1;
-		color : #FFFFFF;
-		border : none;
+		background : #FFFFFF;
+		color : #629DD1;
+		border : 1px solid #629DD1;
 		border-radius : 3px;
-		padding : 2px;
+		padding : 3px;
 	}
 
 	input[type="text"],
