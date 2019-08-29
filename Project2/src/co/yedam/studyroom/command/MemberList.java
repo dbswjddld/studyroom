@@ -1,6 +1,7 @@
 package co.yedam.studyroom.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,10 +18,11 @@ public class MemberList implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
+		List<MemberDto> list = new ArrayList<MemberDto>();
 		MemberDao dao = new MemberDao();
-		List<MemberDto> list = dao.getMemberList();
-		
+		list = dao.select();
 		request.setAttribute("list", list);
+		System.out.println(list.size());
 		String viewPage = "jsp/MemberList.jsp";
 		HttpRes.forward(request, response, viewPage);
 		

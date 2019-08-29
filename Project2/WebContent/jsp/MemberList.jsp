@@ -1,6 +1,8 @@
+<%@page import="co.yedam.studyroom.dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,16 +54,14 @@
 	</form> -->
 	<div class = "contentboxRight">
 	<form action = "DeptListPagingServ" method="post">
-			<input type="hidden" name="action" value="list"/>
-		    <input type="hidden" name="p" value="1"/>
-			아이디<input type="text" name="memberId" style = "width:100px;">
-			이메일<input type="text" name="memberEmail" style = "width:100px;">
-			연락처<input type="text" name="memberTel" style = "width:100px;">
-			등급<input type="text" name="memberGrant" style = "width:100px;">
+			아이디<input type="text" name="id" style = "width:100px;">
+			이메일<input type="text" name="email" style = "width:100px;">
+			연락처<input type="text" name="tel" style = "width:100px;">
+			등급<input type="text" name="grant" style = "width:100px;">
 			<input type="submit" value="검색"/><br/>
 	</form><br>
-	</div>
-	<div class = "contentbox" align = "center">
+	
+		
 		<form name="frm" id="frm" action="DeptListPagingServ">
 			<input type="hidden" name="list">
 			<table id="list" border="1">
@@ -82,14 +82,15 @@
 			</table>
 			<div></div>
 			</form>
-			</div>
 			
-	<my:paging jsfunc="doList" paging="${paging}"/>
+	<!-- 페이징 -->
+			<my:paging jsfunc="doList" paging="${paging}"/>
 	<script>
 	function doList(p) {
 		document.searchFrm.p.value = p;
 		document.searchFrm.submit();
 	}
 	</script>
+	</div>
 </body>
 </html>
