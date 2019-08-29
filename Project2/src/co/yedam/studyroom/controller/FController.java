@@ -22,7 +22,7 @@ import co.yedam.studyroom.command.MemberEditLogin;
 import co.yedam.studyroom.command.MemberEditUpdate;
 import co.yedam.studyroom.command.MemberJoin;
 import co.yedam.studyroom.command.MemberJoinOk;
-import co.yedam.studyroom.command.MemberListPage;
+import co.yedam.studyroom.command.MemberList;
 import co.yedam.studyroom.command.MemberLogin;
 import co.yedam.studyroom.command.MemberLoginOk;
 import co.yedam.studyroom.command.MemberWithdrawal;
@@ -89,7 +89,7 @@ public class FController extends HttpServlet {
 		map.put("/MemberEditFrm.do", new MemberEdit()); //회원정보수정 페이지 보내기
 		map.put("/MemberEdit.do", new MemberEditUpdate()); //회원정보수정완료
 		map.put("/MemberWithdrawal.do", new MemberWithdrawal()); //회원정보 탈퇴 페이지 
-		map.put("/MemberList.do", new MemberListPage()); 
+		map.put("/MemberList.do", new MemberList()); 
 		
 		
 		
