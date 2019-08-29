@@ -278,12 +278,12 @@ public class MemberDao {
 				whereCondition += " and tel = ? ";
 			}
 			if (dto.getGrant() != null && !dto.getGrant().equals("")) {
-				whereCondition += " and grant = ? ";
+				whereCondition += " and mgrant = ? ";
 			}
 
 			String sql = "select count(*) from member" + whereCondition;
 			psmt = conn.prepareStatement(sql);
-
+			
 			// 조건값 셋팅
 			int pos = 1;
 			if (dto.getId() != null && !dto.getId().equals("")) {

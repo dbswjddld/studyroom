@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.yedam.studyroom.command.DeptListPagingServ;
 import co.yedam.studyroom.command.GetReply;
 import co.yedam.studyroom.command.Index;
 import co.yedam.studyroom.command.Logout;
@@ -83,8 +84,7 @@ public class FController extends HttpServlet {
 		map.put("/MemberEditFrm.do", new MemberEdit()); //회원정보수정 페이지 보내기
 		map.put("/MemberEdit.do", new MemberEditUpdate()); //회원정보수정완료
 		map.put("/MemberWithdrawal.do", new MemberWithdrawal()); //회원정보 탈퇴 페이지 
-		map.put("/MemberList.do", new MemberList()); 
-		
+		map.put("/MemberList.do", new MemberList());  //회원정보리스트
 		
 		
 		
