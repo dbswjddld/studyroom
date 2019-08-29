@@ -30,11 +30,10 @@ nav {
 	width : 100%;
 	height :60px;
 	background-color:#629DD1;
-	color : #ffffff;
 }
 nav>ul {
-	margin :5px 0px;
 	position :absolute;
+	height : 100%;
 }
 nav>.right{
 	right :0;
@@ -49,6 +48,7 @@ nav>ul>li>a {
 	padding :5px 0px;
 	width :100%;
 	font-size : 18px;
+	color : #ffffff;
 }
 nav>ul>li:hover>a {
 	color :#629DD1;
