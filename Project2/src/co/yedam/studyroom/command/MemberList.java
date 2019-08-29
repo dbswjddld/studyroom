@@ -48,6 +48,7 @@ public class MemberList implements Command {
 				dto.setEnd(paging.getLast());
 				request.setAttribute("list", MemberDao.getInstance().getMemberList(dto));
 				request.setAttribute("paging", paging);
+				request.setAttribute("dto", dto); // 검색값을 페이지에 넘겨주기
 				request.getRequestDispatcher("jsp/MemberList.jsp").forward(request, response);
 			}
 	}

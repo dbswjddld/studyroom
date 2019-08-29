@@ -44,13 +44,13 @@
 		</nav>
 	</div>
 	
-	<div class="contentboxRight">
+	<div class="contentboxRight" align = "center">
 		<!-- 검색폼 -->
 		<form action="MemberList.do" name ="frm" method="post">
-			아이디<input type="text" name="id" style="width: 100px;"> 
-			이메일<input type="text" name="email" style="width: 100px;"> 
-			연락처<input type="text" name="tel" style="width: 100px;"> 
-			등급<input type="text" name="grant" style="width: 100px;"> 
+			아이디<input type="text" name="id" style="width: 100px;" value = "${dto.id}"> &nbsp;
+			이메일<input type="text" name="email" style="width: 100px;" value = "${dto.email}"> &nbsp;
+			연락처<input type="text" name="tel" style="width: 100px;" value = "${dto.tel}"> &nbsp;
+			등급<input type="text" name="grant" style="width: 100px;" value = "${dto.grant}"> &nbsp;&nbsp;
 			<input type="submit" value="검색" /><br /> 
 			<input type="hidden" name="p" value="1" />
 		</form>
