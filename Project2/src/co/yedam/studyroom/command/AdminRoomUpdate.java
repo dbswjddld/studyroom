@@ -11,21 +11,24 @@ import co.yedam.studyroom.common.HttpRes;
 import co.yedam.studyroom.dao.StudyroomDao;
 import co.yedam.studyroom.dto.StudyroomDto;
 
-public class AdminRoomEditPage implements Command {
+public class AdminRoomUpdate implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		int rnum = Integer.parseInt(request.getParameter("rnum"));
 		StudyroomDao dao = new StudyroomDao();
 		StudyroomDto dto = new StudyroomDto();
 		
-		dto = dao.getRoom(rnum);
-		request.setAttribute("dto", dto);
-		String viewPage = "jsp/adminRoomEdit.jsp";
+		String rname = request.getParameter("rname");
+		String rinfo = request.getParameter("rinfo");
+		dto.setRname(rname);
+		dto.setRinfo(rinfo);
+		
+		dao.insertRoom(dto);
+		
+		String viewPage = "Studyroom.do";
 		
 		HttpRes.forward(request, response, viewPage);
-		
 	}
 
 }

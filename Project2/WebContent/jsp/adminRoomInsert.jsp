@@ -46,6 +46,7 @@
 				<tr><td>설명</td><td><textarea id="rinfo" name="rinfo" placeholder="방에대한 설명을 적어주세요(한글100글자 이내)"></textarea></td></tr>
 			</table>
 			<button type="submit">등록</button>
+			<button onclick="location.href='Studyroom.do'">취소</button>
 		</form>
 	</div>
 </body>
