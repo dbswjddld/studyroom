@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import co.yedam.studyroom.command.DeptListPagingServ;
+import co.yedam.studyroom.command.AdminRoomEditPage;
+import co.yedam.studyroom.command.AdminRoomInsert;
+import co.yedam.studyroom.command.AdminRoomInsertPage;
 import co.yedam.studyroom.command.GetReply;
+import co.yedam.studyroom.command.GetStudyroom;
 import co.yedam.studyroom.command.Index;
 import co.yedam.studyroom.command.Logout;
 import co.yedam.studyroom.command.MemberEdit;
@@ -19,7 +22,6 @@ import co.yedam.studyroom.command.MemberEditLogin;
 import co.yedam.studyroom.command.MemberEditUpdate;
 import co.yedam.studyroom.command.MemberJoin;
 import co.yedam.studyroom.command.MemberJoinOk;
-import co.yedam.studyroom.command.MemberList;
 import co.yedam.studyroom.command.MemberListPage;
 import co.yedam.studyroom.command.MemberLogin;
 import co.yedam.studyroom.command.MemberLoginOk;
@@ -66,7 +68,7 @@ public class FController extends HttpServlet {
 		map.put("/ReservationContentsAdmin.do", new ReservationContentsAdmin()); // 관리자 - 예약관리 - 컨텐츠
 		map.put("/ReservationCancelAdmin.do", new ReservationCancelAdmin()); // 관리자 - 예약관리 - 컨텐츠 - 예약취소 눌렀을 때
 		map.put("/MyReservation.do", new MyReservation());	// 마이페이지 - 예약내역 - 전체 페이지로 이동
-		map.put("/MyReservationSearch.do", new MyReservationSearch()); // 마이페이지 - 예약내역 - 검색 (안씀)
+		map.put("/MyReservationSearch.do", new MyReservationSearch()); // 마이페이지 - 예약내역 - 검색
 		map.put("/ReservationContents.do", new ReservationContents()); // 마이페이지 - 예약 상세보기
 		map.put("/ReservationCancel.do", new ReservationCancel()); // 마이페이지 - 예약 취소하기
 		map.put("/ReservationPage.do", new ReservationPage()); // 예약하기 페이지로 이동
@@ -87,7 +89,8 @@ public class FController extends HttpServlet {
 		map.put("/MemberEditFrm.do", new MemberEdit()); //회원정보수정 페이지 보내기
 		map.put("/MemberEdit.do", new MemberEditUpdate()); //회원정보수정완료
 		map.put("/MemberWithdrawal.do", new MemberWithdrawal()); //회원정보 탈퇴 페이지 
-		map.put("/MemberList.do", new MemberList());  //회원정보리스트
+		map.put("/MemberList.do", new MemberListPage()); 
+		
 		
 		
 		
@@ -109,7 +112,10 @@ public class FController extends HttpServlet {
 		map.put("/replyDelete.do", new ReplyDelete());	// 댓글삭제함		//0828 곽동우
 		map.put("/MyQna.do", new MyQna());	//내문의게시판 첫화면	//0828 곽동우
 		map.put("/Studyroom.do", new Studyroom());	//관리자 - 스터디룸 관리  //0828 곽동우
-		
+		map.put("/GetStudyroom.do", new GetStudyroom());	//관리자 - 스터디룸 목록가져옴 	// 0829 곽동우
+		map.put("/adminRoomInsertPage.do", new AdminRoomInsertPage());	//관리자 - 스터디룸관리 - 스터디룸등록페이지 이동	// 0829 곽동우
+		map.put("/AdminRoomInsert.do", new AdminRoomInsert());			//관리자 - 스터디룸관리 - 스터디룸등록페이지- 스터디룸등록	// 0829 곽동우 
+		map.put("/adminRoomEditPage.do", new AdminRoomEditPage());	//관리자 - 스터디룸수정	// 0829 곽동우 
 		
 		
 	}

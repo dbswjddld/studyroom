@@ -69,7 +69,6 @@ public class Qna implements Command {
 		request.setAttribute("totalPage", p.getTotalPage());	
 		
 ///////////////////////////////////페이지테스트중 end
-		
 		//list = dao.boardList();
 		request.setAttribute("list", list);
 		String viewPage = "jsp/qna.jsp";	//바꿔야함 test중

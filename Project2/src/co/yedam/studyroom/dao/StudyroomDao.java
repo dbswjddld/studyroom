@@ -58,5 +58,26 @@ public class StudyroomDao {
 		}
 		return list;
 	}
-
+	
+	//0829  스터디룸 리스트 가져옴 곽동우
+	//위에꺼씀
+	
+	//스터디룸 입력 0829 곽동우
+	public int insertRoom(StudyroomDto dto) {
+		int n = 0;
+		String sql = "insert into studyroom values(?, ?, (select max(rnum)+1 as rnum from studyroom))";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dto.getRname());
+			psmt.setString(2, dto.getRinfo());
+			n = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DAO.close(conn, psmt, rs);
+		}
+		return n;
+	}
+	
+	
 }
