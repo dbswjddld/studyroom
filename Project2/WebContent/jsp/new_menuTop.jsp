@@ -18,6 +18,11 @@
         });
     });
     </script>
+    <style>
+    nav[id='topMenu']{
+    	background-color:#e8f2fa;
+    }
+    </style>
 </head>
 <body>
     <nav id="topMenu">

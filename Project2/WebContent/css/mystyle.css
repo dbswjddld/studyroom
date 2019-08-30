@@ -60,13 +60,14 @@ nav>ul>li:hover>a {
 .submenu {
 	display : none;
 	position :absolute;
-	background-color : #FFFFFF;
 	z-index :99;
 }
 .submenu>li>a {
 	display :inline-block;
 	width :150px;
 	font-size :18px;
+	color : #ffffff;
+	background-color : #629DD1;
 }
 .submenu>li>a:hover {
 	/* color :#629DD1; */

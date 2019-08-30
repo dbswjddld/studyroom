@@ -7,6 +7,8 @@
 
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<meta charset="UTF-8">
 	<title>study room reservation</title>
 	<style>
@@ -131,10 +133,18 @@
 			<!-- 방 정보 출력 -->
 			<div class = "roominfo">
 			<c:forEach items="${room}" var="room">
-				<div class = "roomlist" onclick = "select(${room.rnum}, '${room.rname}')">
+				<div class="card" style="width: 18rem;">
+  					<div class="card-body">
+    					<h5 class="card-title">${room.rname}</h5>
+    					<p class="card-text">${room.rinfo}</p>
+    					<a href="#" class="btn btn-dark" onclick = "select(${room.rnum}, '${room.rname}')">예약하기</a>
+  					</div>
+				</div>
+			
+				<%-- <div class = "roomlist" onclick = "select(${room.rnum}, '${room.rname}')">
 					<h2>${room.rname}</h2>
 					<span>${room.rinfo}</span>
-				</div>
+				</div> --%>
 			</c:forEach>
 			</div>
 			
