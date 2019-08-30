@@ -78,7 +78,7 @@
 				<td width = "500">
 					<input type = "text" name = "id" value = "${result.id }" readonly="readonly">
 					<input type = "hidden" name = "chk" >
-					<input type = "hidden" id = "pwChkResult" value = "false"> <!-- 비밀번호 확인 값 저장 -->
+					<input type = "hidden" id = "pwChkResult" value = "true"> <!-- 비밀번호 확인 값 저장 -->
 				</td>
 			</tr>
 			<tr>
