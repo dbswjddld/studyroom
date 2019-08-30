@@ -54,7 +54,7 @@
 			<input type="hidden" id="rnum" name="rnum" value="${dto.rnum}">
 			<table id="roominfotb">
 				<tr><td>이름</td><td><input id="rname" name="rname" type="text" placeholder="방이름을 적어주세요" value="${dto.rname}"></td></tr>
-				<tr><td>첨부파일(보류)</td><td><input type="file" accept=".jpg, .png"></td></tr>
+				<!-- <tr><td>첨부파일(보류)</td><td><input type="file" accept=".jpg, .png"></td></tr> -->
 				<tr><td>설명</td><td><textarea id="rinfo" name="rinfo" placeholder="방에대한 설명을 적어주세요(한글100글자 이내)">${dto.rinfo}</textarea></td></tr>
 			</table>
 			<button type="submit">&nbsp;수정&nbsp;</button>
