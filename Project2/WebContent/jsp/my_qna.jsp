@@ -109,7 +109,7 @@
 				</c:forEach>
 				
 				<!--  수정해야딤  -->
-				<c:if test= "${(totalPage-1)/5*5 ge page}" >
+				<c:if test= "${endPage<totalPage}" >
 					<button id="page" name="page" type="submit" onclick="form.submit()" value="${endPage+1}">다음</button>
 				</c:if>
 			</form>
