@@ -11,10 +11,14 @@
 	   곽동우
 	  문의게시판 -->
 	<script>
-		function formSubmit(n){
-			var form = document.frm;
-			form.bno.value = n;
-			form.submit();
+		function formSubmit(n,id){
+			if('${mid}' == id || '${mgrant}' == 'A'){
+				var form = document.frm;
+				form.bno.value = n;
+				form.submit();
+			}else{
+				alert("작성자만 확인할수있습니다")
+			}
 		}
 		
 		function qnaWrite(){
@@ -50,7 +54,7 @@
 				<c:forEach items="${list }" var="dto">
 					<tr align="center" onmouseover="this.style.background='#bbbb'"
 					onmouseout="this.style.background='white'"
-					onclick="formSubmit(${dto.bno})">
+					onclick="formSubmit(${dto.bno},'${dto.id}')">
 						<td>${dto.bno }</td>
 						<td>${dto.subject }</td>
 						<td>${dto.id }</td>
@@ -71,7 +75,7 @@
 				</c:forEach>
 				
 				<!--  수정해야딤  -->
-				<c:if test= "${(totalPage-1)/5*5 ge page}" >
+				<c:if test= "${endPage<totalPage}" >
 					<button id="page" name="page" type="submit" onclick="form.submit()" value="${endPage+1}">다음</button>
 				</c:if>
 			</form>
