@@ -62,13 +62,9 @@ nav>ul>li:hover>a {
 	position :absolute;
 	z-index :99;
 }
-.submenu>li {
-	height : 80px;
-}
 .submenu>li>a {
 	display :inline-block;
 	width :150px;
-	height : 100%
 	font-size :18px;
 	color : #ffffff;
 	background-color : #629DD1;
