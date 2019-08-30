@@ -91,8 +91,7 @@ public class FController extends HttpServlet {
 		map.put("/MemberEditFrm.do", new MemberEdit()); //회원정보수정 페이지 보내기
 		map.put("/MemberEdit.do", new MemberEditUpdate()); //회원정보수정완료
 		map.put("/MemberWithdrawal.do", new MemberWithdrawal()); //회원정보 탈퇴 페이지 
-		map.put("/MemberList.do", new MemberList()); 
-		
+		map.put("/MemberList.do", new MemberList()); //회원정보보기 
 		
 		
 		

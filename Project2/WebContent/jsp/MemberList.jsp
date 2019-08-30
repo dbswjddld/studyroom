@@ -74,6 +74,7 @@
 				</tr>
 			</c:forEach>
 		</table>
+		
 		</div>
 		<!-- 페이징 -->
 		<my:paging jsfunc="doList" paging="${paging}" />

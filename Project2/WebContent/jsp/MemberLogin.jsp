@@ -12,8 +12,9 @@
 	function fail(result){
 		
 		if (result!=null)
-			alert('아이디 또는 비밀번호가 틀렸습니다');
+			alert('아이디 또는 비밀번호가 틀렸습니다.');
 	}
+
 	</script>
 </head>
 <body>
