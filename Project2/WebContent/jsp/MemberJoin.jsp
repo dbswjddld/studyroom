@@ -48,11 +48,11 @@
 			</tr>
 			<tr>
 				<th>비밀번호 *</th>
-				<td><input type = "text" name = "pw" required></td>
+				<td><input type = "password" name = "pw" required></td>
 			</tr>
 			<tr>
 				<th>비밀번호 확인 *</th>
-				<td><input type = "text" name = "pw" required></td>
+				<td><input type = "password" name = "pw" required></td>
 			</tr>			
 			<tr>
 				<th>이메일 *</th>
