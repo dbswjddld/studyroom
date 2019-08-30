@@ -66,7 +66,6 @@ public class CommentsDao {
 				psmt.setString(3, comments.getId());
 				psmt.setString(4, comments.getReply());
 				r = psmt.executeUpdate();
-				System.out.println(r + " row inserted.");
 
 			} catch (SQLException e) {
 				e.printStackTrace();

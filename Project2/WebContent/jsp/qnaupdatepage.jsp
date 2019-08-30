@@ -31,6 +31,61 @@
 	    return false;
 	}
 
+	
+	
+	/*----------------------------------------
+	//텍스트에어리어 길이체크 
+	---------------------------------------------*/
+	function fnChkByte(obj, maxByte)			
+	{
+	    var str = obj.value;
+	    var str_len = str.length;
+
+
+	    var rbyte = 0;
+	    var rlen = 0;
+	    var one_char = "";
+	    var str2 = "";
+
+
+	    for(var i=0; i<str_len; i++)
+	    {
+	        one_char = str.charAt(i);
+	        if(escape(one_char).length > 4)
+	        {
+	            rbyte += 3;               //윈도우3Byte  리눅스2Byte          //한글2Byte
+	        }
+	        else
+	        {
+	            rbyte++;                                            //영문 등 나머지 1Byte
+	        }
+
+
+	        if(rbyte <= maxByte)
+	        {
+	            rlen = i+1;                                          //return할 문자열 갯수
+	        }
+	     }
+
+
+	     if(rbyte > maxByte)
+	     {
+	  // alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
+	  alert("메세지는 최대 " + maxByte + "byte를 초과할 수 없습니다.")
+	  str2 = str.substr(0,rlen);                                  //문자열 자르기
+	  obj.value = str2;
+	  fnChkByte(obj, maxByte);
+	     }
+	     else
+	     {
+	        document.getElementById('byteInfo').innerText = rbyte;
+	     }
+	}
+	
+	
+	
+	
+	
 
 </script>
 </head>
@@ -46,7 +101,7 @@
 			<input type="hidden" id="id" name="id" value="${dto.id }">
 			<input type="hidden" name="bno" id="bno" value="${dto.bno }">
 			<input type="text" name="subject" id="subject" onkeydown="return captureReturnKey(event)" value="${dto.subject }" placeholder="제목을 입력해주세요">
-			<textarea name="content" id="content" rows="10" placeholder="내용을 입력해주세요">${dto.content }</textarea>
+			<textarea name="content" id="content" rows="10" onKeyUp="javascript:fnChkByte(this,'1000')" placeholder="내용을 입력하세요(한글 최대300자)">${dto.content }</textarea>
 			<button type="button" onclick="bWrite()">등록</button>
 			<button type="button" onclick="location.href='Qna.do'">취소</button>
 		</form>

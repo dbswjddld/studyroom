@@ -6,9 +6,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- 20190819 17:50 곽동우 문의게시판 첫화면 -->
+<title>문의${dto.bno}-${dto.subject }</title>
+<!-- 20190819 17:50 곽동우 문의게시판 읽기화면 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<style>
+	.replytd {
+			  width:450px;
+			  word-break:break-all;
+		     }
+	</style>
 	<script>
 	
 	$(document).ready(function () {
@@ -28,7 +35,7 @@
                 $tr = $("<tr>").attr("id", r.cno).append(
                    			 $("<td>").text(r.cno),
                    			 $("<td>").text(r.id),
-                   			 $("<td>").text(r.reply),
+                   			 $("<td class='replytd'>").text(r.reply),
                   			 $("<td>").text(r.cdate)
                			 )
                 	if(r.id == "${mid}" || "${mgrant}" == "A")		//관리자 이거나 본인이면 수정 삭제버튼 보임
@@ -50,6 +57,8 @@
 			return;		//ajax로안넘어감
 		}
 		
+		$('[name="replyupdate"]').remove();		//0830 12:42  댓글달면 수정사라짐
+		
 		if($("#replycontent").val() == null || $("#replycontent").val() == ""){
 			alert("댓글내용을 입력해주세요");
 			return;		//ajax로안넘어감
@@ -69,7 +78,7 @@
 	                        $("<tr>").attr("id", result[0].cno).append(
 	                            $("<td>").text(result[0].cno),
 	                            $("<td>").text(result[0].id),
-	                            $("<td>").text(result[0].reply),		//dao에서 sysdate받아와야?
+	                            $("<td class='replytd'>").text(result[0].reply),		//dao에서 sysdate받아와야?
 	                            $("<td>").text(result[0].cdate)
 	                        )
 	                    );
@@ -105,14 +114,15 @@
 	             dataType: "json",
 	             success: function (result) {
 	             	console.log(result);
-	             	if($("#" + cno).next().attr("id") != null){	//댓글수정폼 하나만나오게
+	             	//if($("#" + cno).next().attr("id") != null){	//댓글수정폼 하나만나오게    if($("#" + cno).next().attr("id") != null){
+	             		$('[name="replyupdate"]').remove();
 		                 $("#" + cno).after(
-		                     $("<tr>").append(
+		                     $("<tr name='replyupdate'>").append(
 			                    $("<td colspan='4'>").html($("<input>").val(result[0].reply)),	//한건이지만 배열타입이라서 result[0]
 			                    $("<td>").html($("<button type='button' id='up' >").text("댓글수정").click(updateRow))
 		                     )
 		                 );
-	           		  }	//if end
+	           		  //}	//if end
 	             }
 	         });
     	}
@@ -133,6 +143,7 @@
 					
 				}).done(function(data){
 					$("#"+cno).remove();
+					$('[name="replyupdate"]').remove();
 				})
 				
 			}else{
@@ -273,27 +284,31 @@
 		<jsp:include page = "new_menuTop.jsp"></jsp:include>
 
 	<header class="major"></header>
-	<div align="center">
+	<div class = "contentboxRight">
 		<form id="frm" name="frm">
-			<h2 id="title">제목 :${dto.subject }
-				<input type="hidden" name="subject" id="subject" value="${dto.subject }">
-				<font size="3">문의번호:${dto.bno }</font></h2>
-				<input type="hidden" name="bno" id="bno" value="${dto.bno }">	
 			<h4>작성자:${dto.id }</h4>
+			<font size="3">작성일:<fmt:formatDate value="${dto.bdate}" pattern="yyyy.MM.dd HH:mm:ss" />&nbsp;문의번호:${dto.bno }</font>
+				<input type="hidden" name="subject" id="subject" value="${dto.subject }">
+				<input type="hidden" name="bno" id="bno" value="${dto.bno }">	
+				<br><br>
+			
+			<h4 id="title">제목 :${dto.subject }</h4>
 			<input type="hidden" name="id" id="id" value="${dto.id }">
-			<h6>작성일:<fmt:formatDate value="${dto.bdate}" pattern="yyyy.MM.dd HH:mm:ss" /></h6>
+			
 			<div>
 				<hr align="center" width="30%">
 				<h4 id="content1">${dto.content }</h4>
 				<input type="hidden" name="content" id="content" value="${dto.content }">
 			</div>
-			
-			<!-- 댓글추가 --><hr>댓글자리<br>
+			<br><br>
+			<!-- 댓글추가 --><hr width="30%">
+			<br><br>
 			<div id="reply">
 			</div>
-			
-			<textarea id="replycontent" name="replycontent" rows="2" cols="10" onKeyUp="javascript:fnChkByte(this,'200')" placeholder="내용을 입력하세요(한글 최대70자)"></textarea>
-			<button type="button" id="replyInsert">댓글달기</button><br>
+			<div class="form-group">
+				<textarea class="form-control" id="replycontent" name="replycontent" rows="2" style="width :40%" onKeyUp="javascript:fnChkByte(this,'200')" placeholder="내용을 입력하세요(한글 최대70자)"></textarea>
+				<button type="button" id="replyInsert">댓글달기</button><br>
+			</div>
 			<c:if test="${dto.id == mid || mgrant == 'A' }">	<!-- 관리자 이거나 본인이면 수정 삭제버튼 보임 -->
 				<button type="button" onclick="qnaUpdate(${dto.bno})">수정</button>
 				<button type="button" onclick="qnaDel(${dto.bno})">삭제</button>
