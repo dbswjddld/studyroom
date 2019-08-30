@@ -31,7 +31,6 @@ import co.yedam.studyroom.command.MemberLoginOk;
 import co.yedam.studyroom.command.MemberWithdrawal;
 import co.yedam.studyroom.command.MyQna;
 import co.yedam.studyroom.command.MyReservation;
-import co.yedam.studyroom.command.MyReservationSearch;
 import co.yedam.studyroom.command.Qna;
 import co.yedam.studyroom.command.QnaDel;
 import co.yedam.studyroom.command.QnaRead;
@@ -52,6 +51,7 @@ import co.yedam.studyroom.command.ReservationContents;
 import co.yedam.studyroom.command.ReservationContentsAdmin;
 import co.yedam.studyroom.command.ReservationInsert;
 import co.yedam.studyroom.common.Command;
+
 @WebServlet("/FController")
 public class FController extends HttpServlet {
 	private HashMap<String, Command> map;
@@ -71,12 +71,12 @@ public class FController extends HttpServlet {
 		map.put("/ReservationContentsAdmin.do", new ReservationContentsAdmin()); // 관리자 - 예약관리 - 컨텐츠
 		map.put("/ReservationCancelAdmin.do", new ReservationCancelAdmin()); // 관리자 - 예약관리 - 컨텐츠 - 예약취소 눌렀을 때
 		map.put("/MyReservation.do", new MyReservation());	// 마이페이지 - 예약내역 - 전체 페이지로 이동
-		map.put("/MyReservationSearch.do", new MyReservationSearch()); // 마이페이지 - 예약내역 - 검색(이제 안씀)
 		map.put("/ReservationContents.do", new ReservationContents()); // 마이페이지 - 예약 상세보기
 		map.put("/ReservationCancel.do", new ReservationCancel()); // 마이페이지 - 예약 취소하기
 		map.put("/ReservationPage.do", new ReservationPage()); // 예약하기 페이지로 이동
 		map.put("/ReservationInsert.do", new ReservationInsert()); // 예약하기 DB처리하기
 		map.put("/Information.do", new Information()); // 이용안내 페이지로 이동
+		
 		
 		
 		

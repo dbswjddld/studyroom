@@ -28,6 +28,11 @@
 		padding :10px 30px;
 	}
 	select {width : 200px;}
+	
+	/* 테이블에 마우스 올리면 색상 바뀌게 */
+	.list:hover{
+		background-color : #e8f2fa;
+	}
 	</style>
 	
 	<script src = "js/jquery-3.4.1.js"></script>
@@ -141,7 +146,7 @@
 			</tr>
 			
 			<c:forEach items="${list}" var="dto">
-			<tr onclick = "location.href='ReservationContentsAdmin.do?rno=${dto.rno}'">
+			<tr onclick = "location.href='ReservationContentsAdmin.do?rno=${dto.rno}'" class = "list"> 
 				<td>${dto.rno}</td>
 				<td>${dto.id}</td>
 				<td>${dto.usedate}</td>
