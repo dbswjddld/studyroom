@@ -6,7 +6,22 @@
 	<link href = "css/tableStyle.css" rel = "stylesheet">
 	<meta charset="UTF-8">
 	<title>^-^</title>
+	<script src = "https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script>
+	$(function(){
+		// 비밀번호 입력 확인 [윤정 0830]
+		$("#pwChk,#pw").keyup(function(){
+			if($("#pw").val() == $("#pwChk").val()) { // 둘 다 똑같이 입력했으면
+				$("#pwChkMsg").html("비밀번호가 일치합니다.").css("color", "green");
+				$("#pwChkResult").val("true");
+			} else { // 다르게 입력했으면
+				$("#pwChkMsg").html("비밀번호가 일치하지 않습니다.").css("color", "red");
+				$("#pwChkResult").val("false");
+			}
+			console.log($("#pwChkResult").val());
+		});
+	});
+	
 	// id 중복확인 눌렀을 때
 	function idChk(){
 		var cid = document.frm.id;
@@ -27,6 +42,10 @@
 			alert("ID 중복확인 하세요!");
 			return false;
 		}
+		if($("#pwChkResult").val() == "false") {
+			alert("비밀번호를 확인하세요!");
+			return false;
+		}
 	}
 	</script>
 </head>
@@ -44,15 +63,18 @@
 					<input type = "text" name = "id" required>
 					<input type = "button" value = "ID 중복확인" onclick = "idChk()">
 					<input type = "hidden" name = "chk" value="">
+					<input type = "hidden" id = "pwChkResult" value = "false"> <!-- 비밀번호 확인 값 저장 -->
 				</td>
 			</tr>
 			<tr>
 				<th>비밀번호 *</th>
-				<td><input type = "text" name = "pw" required></td>
+				<td><input type = "password" name = "pw" id = "pw" required></td>
 			</tr>
 			<tr>
 				<th>비밀번호 확인 *</th>
-				<td><input type = "text" name = "pw" required></td>
+				<td height = "80px"><input type = "password" name = "pwChk" id = "pwChk" required>
+					<span id = "pwChkMsg"> </span>
+				</td>
 			</tr>			
 			<tr>
 				<th>이메일 *</th>
