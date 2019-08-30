@@ -76,6 +76,7 @@
 					</c:if>
 					<c:forEach  begin="${startPage }" end="${endPage }" step="1" varStatus="page">
 						<button class="btn-primary" id="page" name="page" type="submit" value="${page.current}" onclick="form.submit()">&nbsp;&nbsp;${page.current }&nbsp;&nbsp;</button>
+						
 					</c:forEach>
 					
 					<!--  수정해야딤  -->

@@ -297,7 +297,7 @@
 			
 			<div style="height: auto; max-width: 800px; word-wrap:break-word;">
 				<hr align="center" width="30%">
-				<font size="5">${dto.content }</font>
+				<font size="5" id="content1">${dto.content }</font>
 				<input type="hidden" name="content" id="content" value="${dto.content }">
 			</div>
 			<br><br>
