@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 	<meta charset="UTF-8">
 	<title>^-^</title>
 	<link href = "css/tableStyle.css" rel = "stylesheet">
@@ -12,8 +15,9 @@
 	function fail(result){
 		
 		if (result!=null)
-			alert('아이디 또는 비밀번호가 틀렸습니다');
+			alert('아이디 또는 비밀번호가 틀렸습니다.');
 	}
+
 	</script>
 </head>
 <body>
@@ -38,8 +42,8 @@
 			</tr>
 		</table>
 		<br>
-		<input type = "submit" value = "로그인"> &nbsp;&nbsp;
-		<input type = "button" value = "취소" onclick = "location.href='index.jsp'">
+		<input type = "submit" class="btn btn-outline-primary" value = "로그인"> &nbsp;&nbsp;
+		<input type = "button" class="btn btn-outline-primary" value = "취소" onclick = "location.href='index.jsp'">
 	</form>
 	</c:if>
 	</div>

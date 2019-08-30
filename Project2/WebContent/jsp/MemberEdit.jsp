@@ -32,7 +32,27 @@
       } else {
     	  $("#goodno").attr("checked", true);
       }
+
+		// 비밀번호 입력 확인 [윤정 0830]
+		$("#pw,#pwChk").keyup(function(){
+			if($("#pw").val() == $("#pwChk").val()) { // 둘 다 똑같이 입력했으면
+				$("#pwChkMsg").html("비밀번호가 일치합니다.").css("color", "green");
+				$("#pwChkResult").val("true");
+			} else { // 다르게 입력했으면
+				$("#pwChkMsg").html("비밀번호가 일치하지 않습니다.").css("color", "red");
+				$("#pwChkResult").val("false");
+			}
+		});
+      
    });
+   
+   // 전송
+   function formCheck(){
+	   if($("#pwChkResult").val() == "false") {
+			alert("비밀번호를 확인하세요!");
+			return false;
+		}
+   }
    </script>
 </head>
 <body>
@@ -51,22 +71,24 @@
 		</nav>
 	</div>
 	<div class = "contentboxRight" align = "center">
-	<form action = "MemberEdit.do" method="post" name = "frm">
+	<form action = "MemberEdit.do" method="post" name = "frm" onsubmit = "return formCheck()">
 		<table border = "1" cellpadding = "5">
 			<tr>
 				<th width = "280">아이디 *</th>
 				<td width = "500">
 					<input type = "text" name = "id" value = "${result.id }" readonly="readonly">
 					<input type = "hidden" name = "chk" >
+					<input type = "hidden" id = "pwChkResult" value = "true"> <!-- 비밀번호 확인 값 저장 -->
 				</td>
 			</tr>
 			<tr>
 				<th>새로운 비밀번호 *</th>
-				<td><input type = "password" name = "pw" value = "${result.pw }"></td>
+				<td><input type = "password" name = "pw" id = "pw" value = "${result.pw }"></td>
 			</tr>
 			<tr>
 				<th>새로운 비밀번호 확인 *</th>
-				<td><input type = "password" name = "pw" value = "${result.pw }"></td>
+				<td><input type = "password" name = "pwChk" id = "pwChk" value = "${result.pw }">
+					<span id = "pwChkMsg"> </span></td>
 			</tr>			
 			<tr>
 				<th>이메일 *</th>

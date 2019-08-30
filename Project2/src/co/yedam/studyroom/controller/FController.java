@@ -18,6 +18,7 @@ import co.yedam.studyroom.command.AdminRoomUpdate;
 import co.yedam.studyroom.command.GetReply;
 import co.yedam.studyroom.command.GetStudyroom;
 import co.yedam.studyroom.command.Index;
+import co.yedam.studyroom.command.Information;
 import co.yedam.studyroom.command.Logout;
 import co.yedam.studyroom.command.MemberEdit;
 import co.yedam.studyroom.command.MemberEditLogin;
@@ -70,12 +71,12 @@ public class FController extends HttpServlet {
 		map.put("/ReservationContentsAdmin.do", new ReservationContentsAdmin()); // 관리자 - 예약관리 - 컨텐츠
 		map.put("/ReservationCancelAdmin.do", new ReservationCancelAdmin()); // 관리자 - 예약관리 - 컨텐츠 - 예약취소 눌렀을 때
 		map.put("/MyReservation.do", new MyReservation());	// 마이페이지 - 예약내역 - 전체 페이지로 이동
-		map.put("/MyReservationSearch.do", new MyReservationSearch()); // 마이페이지 - 예약내역 - 검색
+		map.put("/MyReservationSearch.do", new MyReservationSearch()); // 마이페이지 - 예약내역 - 검색(이제 안씀)
 		map.put("/ReservationContents.do", new ReservationContents()); // 마이페이지 - 예약 상세보기
 		map.put("/ReservationCancel.do", new ReservationCancel()); // 마이페이지 - 예약 취소하기
 		map.put("/ReservationPage.do", new ReservationPage()); // 예약하기 페이지로 이동
 		map.put("/ReservationInsert.do", new ReservationInsert()); // 예약하기 DB처리하기
-		
+		map.put("/Information.do", new Information()); // 이용안내 페이지로 이동
 		
 		
 		
@@ -91,8 +92,7 @@ public class FController extends HttpServlet {
 		map.put("/MemberEditFrm.do", new MemberEdit()); //회원정보수정 페이지 보내기
 		map.put("/MemberEdit.do", new MemberEditUpdate()); //회원정보수정완료
 		map.put("/MemberWithdrawal.do", new MemberWithdrawal()); //회원정보 탈퇴 페이지 
-		map.put("/MemberList.do", new MemberList()); 
-		
+		map.put("/MemberList.do", new MemberList()); //회원정보보기 
 		
 		
 		
