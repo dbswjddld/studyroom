@@ -42,7 +42,7 @@
             </li>
             </c:if>
                     
-            <li><a href="#">이용안내</a></li>
+            <li><a href="Information.do">이용안내</a></li>
                     
             <!-- [190822 윤정] 관리자만 관리자메뉴 볼 수 있게-->
             <c:if test = "${mgrant == 'A'}">
