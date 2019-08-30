@@ -56,7 +56,7 @@
 			</ul>
 		</nav>
 	</div>
-	<div class = "contentboxRight">
+	<div class = "contentboxRight" align = "center">
 		<div class = "resContents">
 				
 			<font size = "6">${dto.rname}</font><br>

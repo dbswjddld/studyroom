@@ -77,7 +77,7 @@
 			</ul>
 		</nav>
 	</div>
-	<div class = "contentboxRight">
+	<div class = "contentboxRight" align = "center">
 		<form name="frm" id="frm" action="QnaRead.do">
 			<input type="hidden" name="bno">
 			<table id="list">
