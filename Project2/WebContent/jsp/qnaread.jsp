@@ -290,9 +290,6 @@
 			
 			<!-- 댓글추가 --><hr>댓글자리<br>
 			<div id="reply">
-				<table border = "1">
-					<tr><td></td><td></td><td></td><td></td><td></td></tr>
-				</table>
 			</div>
 			
 			<textarea id="replycontent" name="replycontent" rows="2" cols="10" onKeyUp="javascript:fnChkByte(this,'200')" placeholder="내용을 입력하세요(한글 최대70자)"></textarea>

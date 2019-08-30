@@ -21,12 +21,14 @@ public class AdminRoomUpdate implements Command {
 		
 		String rname = request.getParameter("rname");
 		String rinfo = request.getParameter("rinfo");
+		int rnum = Integer.parseInt(request.getParameter("rnum"));
 		dto.setRname(rname);
 		dto.setRinfo(rinfo);
+		dto.setRnum(rnum);
 		
-		dao.insertRoom(dto);
+		dao.updateRoom(dto);
 		
-		String viewPage = "Studyroom.do";
+		String viewPage = "/Studyroom.do";
 		
 		HttpRes.forward(request, response, viewPage);
 	}

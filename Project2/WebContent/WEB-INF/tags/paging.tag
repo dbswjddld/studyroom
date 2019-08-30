@@ -11,29 +11,29 @@
 <div class="pagination">
 <ul>
 <c:if test="${paging.page>=paging.startPage&&paging.page>paging.pageSize}">
-   <a href="javascript:${jsfunc}(${paging.startPage-1})">
-   <button class = "special">이전</button>
-   </a>
-   &nbsp;&nbsp;
+	<a href="javascript:${jsfunc}(${paging.startPage-1})">
+	<button> 이전 </button>
+	</a>
+	&nbsp;&nbsp;
 </c:if>
 
 <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i">
-   <c:if test="${i != paging.page}">
-      <!--paging.page :현재 페이지
-         현재 페이지가 아닌 부분 링크걸기-->
-      <a href="javascript:${jsfunc}(${i})"><button>${i}</button></a>
-   </c:if>
-   <c:if test="${i == paging.page}">
-      <button class = "special">${i}</button>
-   </c:if>
-   &nbsp;
+	<c:if test="${i != paging.page}">
+		<!--paging.page :현재 페이지
+			현재 페이지가 아닌 부분 링크걸기-->
+		<a href="javascript:${jsfunc}(${i})"><button> &nbsp;${i}&nbsp; </button></a>
+	</c:if>
+	<c:if test="${i == paging.page}">
+		<button class = "special"> &nbsp;${i}&nbsp; </button>
+	</c:if>
+	&nbsp;
 </c:forEach>
 
 <c:if test="${paging.endPage<paging.totalPageCount}">
-   &nbsp;&nbsp;
-   <a href="javascript:${jsfunc}(${paging.endPage+1})">
-   <button class = "special">다음</button>
-   </a>
+	&nbsp;&nbsp;
+	<a href="javascript:${jsfunc}(${paging.endPage+1})">
+	<button> 다음 </button>
+	</a>
 </c:if>
 </ul>
 </div>
