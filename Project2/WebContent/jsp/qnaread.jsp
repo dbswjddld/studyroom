@@ -295,9 +295,9 @@
 			<h4 id="title">제목 :${dto.subject }</h4>
 			<input type="hidden" name="id" id="id" value="${dto.id }">
 			
-			<div>
+			<div style="height: auto; max-width: 800px; word-wrap:break-word;">
 				<hr align="center" width="30%">
-				<h4 id="content1">${dto.content }</h4>
+				<font size="5">${dto.content }</font>
 				<input type="hidden" name="content" id="content" value="${dto.content }">
 			</div>
 			<br><br>
