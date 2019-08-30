@@ -37,85 +37,85 @@ public class ReservationDao {
 
 	///////////////// 메소드 ///////////////////////
 	// [윤정 190818] 관리자메뉴 - 예약내역 리스트 ------ResvPaging으로 대체
-	public ArrayList<ReservationDto> adminList() {
-		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
-		String sql = "SELECT id, usedate, starttime, endtime, rname, status, rno FROM reservation ORDER BY usedate DESC";
-		try {
-			System.out.println(conn);
-			psmt = conn.prepareStatement(sql);
-			rs = psmt.executeQuery();
-			while(rs.next()) {
-				dto = new ReservationDto();
-				dto.setId(rs.getString(1));
-				dto.setUsedate(rs.getString(2).substring(0,10));
-				dto.setStarttime(rs.getString(3).substring(11,16));
-				dto.setEndtime(rs.getString(4).substring(11,16));
-				dto.setRname(rs.getString(5));
-				dto.setStatus(rs.getString(6));
-				dto.setRno(rs.getInt(7)); // 예약번호
-				list.add(dto);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-		return list;
-	}
+//	public ArrayList<ReservationDto> adminList() {
+//		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
+//		String sql = "SELECT id, usedate, starttime, endtime, rname, status, rno FROM reservation ORDER BY usedate DESC";
+//		try {
+//			System.out.println(conn);
+//			psmt = conn.prepareStatement(sql);
+//			rs = psmt.executeQuery();
+//			while(rs.next()) {
+//				dto = new ReservationDto();
+//				dto.setId(rs.getString(1));
+//				dto.setUsedate(rs.getString(2).substring(0,10));
+//				dto.setStarttime(rs.getString(3).substring(11,16));
+//				dto.setEndtime(rs.getString(4).substring(11,16));
+//				dto.setRname(rs.getString(5));
+//				dto.setStatus(rs.getString(6));
+//				dto.setRno(rs.getInt(7)); // 예약번호
+//				list.add(dto);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close();
+//		}
+//		return list;
+//	}
 
-	// [윤정 190819] 마이페이지 - 예약 내역 (전체)
-	public ArrayList<ReservationDto> myList(String id) {
-		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
-		String sql = "SELECT usedate, starttime, endtime, rname, status, rno FROM reservation WHERE id = ? ORDER BY usedate DESC";
-		try {
-			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, id);
-			rs = psmt.executeQuery();
-			while(rs.next()) {
-				dto = new ReservationDto();
-				dto.setUsedate(rs.getString(1).substring(0,10));
-				dto.setStarttime(rs.getString(2).substring(11,16));
-				dto.setEndtime(rs.getString(3).substring(11,16));
-				dto.setRname(rs.getString(4));
-				dto.setStatus(rs.getString(5));
-				dto.setRno(rs.getInt(6));
-				list.add(dto);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-		return list;
-	}
+	// [윤정 190819] 마이페이지 - 예약 내역 (전체)------ResvPaging으로 대체
+//	public ArrayList<ReservationDto> myList(String id) {
+//		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
+//		String sql = "SELECT usedate, starttime, endtime, rname, status, rno FROM reservation WHERE id = ? ORDER BY usedate DESC";
+//		try {
+//			psmt = conn.prepareStatement(sql);
+//			psmt.setString(1, id);
+//			rs = psmt.executeQuery();
+//			while(rs.next()) {
+//				dto = new ReservationDto();
+//				dto.setUsedate(rs.getString(1).substring(0,10));
+//				dto.setStarttime(rs.getString(2).substring(11,16));
+//				dto.setEndtime(rs.getString(3).substring(11,16));
+//				dto.setRname(rs.getString(4));
+//				dto.setStatus(rs.getString(5));
+//				dto.setRno(rs.getInt(6));
+//				list.add(dto);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close();
+//		}
+//		return list;
+//	}
 
-	// [윤정 190819] 마이페이지 - 예약 내역 - 검색옵션 (취소, 이용 완료, 예약 완료)
-	public ArrayList<ReservationDto> myListSearch(String id, String search) {
-		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
-		String sql = "SELECT usedate, starttime, endtime, rname, status, rno FROM reservation WHERE id = ? AND status = ? ORDER BY usedate DESC";
-		
-		try {
-			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, id);
-			psmt.setString(2, search);
-			rs = psmt.executeQuery();
-			while(rs.next()) {
-				dto = new ReservationDto();
-				dto.setUsedate(rs.getString(1).substring(0,10));
-				dto.setStarttime(rs.getString(2).substring(11,16));
-				dto.setEndtime(rs.getString(3).substring(11,16));
-				dto.setRname(rs.getString(4));
-				dto.setStatus(rs.getString(5));
-				dto.setRno(rs.getInt(6));
-				list.add(dto);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-		return list;
-	}
+	// [윤정 190819] 마이페이지 - 예약 내역 - 검색옵션 (취소, 이용 완료, 예약 완료)------ResvPaging으로 대체
+//	public ArrayList<ReservationDto> myListSearch(String id, String search) {
+//		ArrayList<ReservationDto> list = new ArrayList<ReservationDto>();
+//		String sql = "SELECT usedate, starttime, endtime, rname, status, rno FROM reservation WHERE id = ? AND status = ? ORDER BY usedate DESC";
+//		
+//		try {
+//			psmt = conn.prepareStatement(sql);
+//			psmt.setString(1, id);
+//			psmt.setString(2, search);
+//			rs = psmt.executeQuery();
+//			while(rs.next()) {
+//				dto = new ReservationDto();
+//				dto.setUsedate(rs.getString(1).substring(0,10));
+//				dto.setStarttime(rs.getString(2).substring(11,16));
+//				dto.setEndtime(rs.getString(3).substring(11,16));
+//				dto.setRname(rs.getString(4));
+//				dto.setStatus(rs.getString(5));
+//				dto.setRno(rs.getInt(6));
+//				list.add(dto);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close();
+//		}
+//		return list;
+//	}
 
 	// [윤정 190819] 예약 세부내용 보기
 	public ReservationDto contents (int rno) {
@@ -247,7 +247,7 @@ public class ReservationDao {
 		return list;
 	}
 	
-	// [윤정 0829] 예약번호 가져옥
+	// [윤정 0829] 예약번호 가져오기
 	public int getRno() {
 		int result = 1;
 		String sql = "SELECT max(rno) + 1 as rno FROM reservation";
