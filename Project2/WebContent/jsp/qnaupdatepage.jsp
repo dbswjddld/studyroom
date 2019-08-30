@@ -92,7 +92,7 @@
 <body>
 	<jsp:include page = "new_menuTop.jsp"></jsp:include>
 	<header>
-		이곳은 문의 게시글 <b>수정</b> 페이지
+		문의 게시글 <b>수정</b> 페이지
 		<h3>작성자:${dto.id } 작성번호:${dto.bno }</h3>
 	</header>
 	<div class = "contentbox">
